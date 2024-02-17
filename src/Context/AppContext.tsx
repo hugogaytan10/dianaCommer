@@ -15,12 +15,15 @@ const AppProvider: React.FC<Props> = ({ children }) => {
     description: '',
     tallas: [''],
   });
+  const [cart, setCart] = useState(0);
   const memoizedValue = useMemo(
     () => ({
       card: card,
       setCard: setCard,
+      cart: cart,
+      setCart: setCart,
     }),
-    [card, setCard]
+    [card, setCard, cart, setCart]
   );
   return (
     <AppContext.Provider value={memoizedValue}>{children}</AppContext.Provider>

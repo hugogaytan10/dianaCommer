@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import flecha from "../assets/arrow-back.svg";
 import "./cart.css";
 export const Cart = () => {
   const [cart, setCart] = useState();
-  const [count, setCount] = useState(1);
+  const navigate = useNavigate();
   const UpdateAmount = (id, talla, accion) => {
     if (accion === 1) {
       const newCart = cart.map((item) => {
@@ -40,16 +41,21 @@ export const Cart = () => {
   return (
     <div>
       <div className="bg-primary p-2">
-        <NavLink to={"/"} className="bg-white rounded-md p-2 font-semibold">
-          Inicio
-        </NavLink>
+        <div className="bg-primary p-2">
+          <NavLink
+            onClick={() => navigate(-1)}
+            className="bg-white  p-2 font-semibold w-10 h-10 flex items-center rounded-full"
+          >
+            <img alt="regresar" src={flecha} className="h-10 w-10" />
+          </NavLink>
+        </div>
       </div>
-      <div className="flex flex-wrap h-96 overflow-auto">
+      <div className="flex flex-wrap contenedor-cart overflow-auto bg-white">
         {cart?.map((item) => {
           return (
             <div
-              key={item.id}
-              className="w-11/12 h-40 p-2 flex flex-wrap justify-around carrito"
+              key={`item-${item.title}`}
+              className="w-11/12 h-40 p-2 flex flex-wrap justify-around carrito text-black"
             >
               <img
                 src={item.img}
@@ -95,19 +101,21 @@ export const Cart = () => {
         })}
       </div>
 
-      <div className="modal-abajo">
-        <div className="flex w-full justify-around mt-8">
+      <div className="modal-abajo text-black">
+        <div className="flex w-full justify-around mt-4">
           <p className="font-semibold">Total:</p>
           <p className="font-semibold">
             ${cart?.reduce((acc, item) => acc + item.price * item.count, 0)} MXN
           </p>
         </div>
-        <NavLink
-          to={"/profile"}
-          className="mt-8 m-auto w-2/4 p-1 block bg-primary text-center text-gray-50 font-semibold rounded-sm"
-        >
-          Pedir
-        </NavLink>
+        {cart?.length > 0 && (
+          <NavLink
+            to={"/profile"}
+            className="mt-2 m-auto w-2/4 p-1 block bg-primary text-center text-gray-50 font-semibold rounded-sm"
+          >
+            Pedir
+          </NavLink>
+        )}
       </div>
     </div>
   );

@@ -11,3 +11,9 @@ body{
 body::-webkit-scrollbar {
     width: 0.5em;
 }
+
+.active-link {
+    background-color: rgb(244, 244, 244); /* Color de fondo para el enlace activo */
+    color: rgb(0, 0, 0); /* Color de texto para el enlace activo */
+  }
+  

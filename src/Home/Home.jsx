@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import buscador from "../assets/search.svg";
-import carrito from "../assets/cart-outline.svg";
 import "./Home.css";
 import { Card } from "./card/Card";
 
@@ -9,8 +8,9 @@ import nikeMujer from "./assetsHome/nikeMujer/nike.jpg";
 import reebok from "./assetsHome/reebok/reebok.jpg";
 import vans from "./assetsHome/vans/vans.jpg";
 import { NavLink } from "react-router-dom";
+import { AppContext } from "../Context/AppContext";
 export const Home = () => {
-  const [cart, setCart] = useState(0);
+  const contexto = useContext(AppContext);
   const [cards, setCards] = useState([
     {
       id: 1,
@@ -98,7 +98,7 @@ export const Home = () => {
   };
   useEffect(() => {
     const itemsCart = JSON.parse(localStorage.getItem("items")) || [];
-    setCart(itemsCart.length);
+    contexto.setCart(itemsCart.length);
   }, []);
   return (
     <div className="block min-h-screen w-full bg-white">
@@ -114,12 +114,7 @@ export const Home = () => {
           />
           <img src={buscador} alt="buscador" />
         </div>
-        <div className="contenedor-carrito">
-          <span>{cart}</span>
-          <NavLink to={'/cart'}>
-            <img src={carrito} alt="carrito" />
-          </NavLink>
-        </div>
+       
       </div>
 
       <div className="w-full flex flex-wrap gap-1 justify-between p-2">
@@ -128,7 +123,7 @@ export const Home = () => {
             <div
               key={`tennis-home-${card.id}`}
               className={`contenedor-card ${
-                card.id % 2 == 0 ? "mt-4" : "mt-0"
+                card.id % 2 == 0 ? "mt-8" : "mt-0"
               }`}
             >
               <Card
