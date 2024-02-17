@@ -1,0 +1,8 @@
+.datos{
+    border: 1px solid rgba(8, 20, 65, 0.8);
+    border-radius: 4px;
+}
+.datos:focus{
+    border: 1px solid rgba(8, 20, 65, 0.8);
+    box-shadow: 0 0 0 0.1rem rgba(8, 20, 65, 0.25);
+}
