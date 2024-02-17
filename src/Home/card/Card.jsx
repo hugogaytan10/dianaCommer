@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import carritoAzul from "../../assets/cart-outline-blue.svg";
 import { NavLink } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 export const Card = (props) => {
   const { title, price, img, description, tallas } = props;
+  const [loaded, setLoaded] = useState(false);
   const contexto = useContext(AppContext);
   const NewStateContext = () => {
     contexto.setCard({ img, title, price, description, tallas });
@@ -18,7 +19,21 @@ export const Card = (props) => {
           }}
           className="h-full w-full"
         >
-          <img src={img} alt="Shoes" className="object-cover h-full w-full" />
+          <img
+            src={img}
+            alt="Shoes"
+            className="object-cover h-full w-full"
+            onLoad={() => setLoaded(true)}
+            style={{ display: loaded ? "block" : "none" }}
+          />
+          {!loaded && (
+            <div className="flex flex-col gap-4 w-52">
+              <div className="skeleton h-32 w-full"></div>
+              <div className="skeleton h-4 w-28"></div>
+              <div className="skeleton h-4 w-full"></div>
+              <div className="skeleton h-4 w-full"></div>
+            </div>
+          )}
         </NavLink>
       </figure>
       <div className="card-body p-1">
@@ -27,9 +42,12 @@ export const Card = (props) => {
         </h2>
         <div className="card-actions flex justify-between items-end w-full mt-2 ">
           <p className="text-gray-400 font-thin text-sm">{price} MXN</p>
-          <NavLink to={'/item'} onClick={()=>{
-            NewStateContext();
-          }}>
+          <NavLink
+            to={"/item"}
+            onClick={() => {
+              NewStateContext();
+            }}
+          >
             <img src={carritoAzul} alt="carrito" />
           </NavLink>
         </div>

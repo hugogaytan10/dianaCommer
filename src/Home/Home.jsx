@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import buscador from "../assets/search.svg";
 import "./Home.css";
 import { Card } from "./card/Card";
-
+import perrito from "../assets/Perrito.webp";
 import af1 from "./assetsHome/Af1/AF1.jpeg";
 import nikeMujer from "./assetsHome/nikeMujer/nike.jpg";
 import reebok from "./assetsHome/reebok/reebok.jpg";
@@ -28,7 +28,7 @@ export const Home = () => {
       img: nikeMujer,
       description:
         "Tennis Nike para mujer, color negro. Sube de nivel tu estilo con estos nuevos snickers!",
-      tallas: ['23.5', '24', '24.5', '25', '25.5', '26.5'],
+      tallas: ["23.5", "24", "24.5", "25", "25.5", "26.5"],
     },
     {
       id: 3,
@@ -37,7 +37,7 @@ export const Home = () => {
       img: reebok,
       description:
         "Tennis Reebok color blanco con franja negra. Unos tennis casuales para cualquier reunión",
-      tallas: ['24', '24.5', '25', '25.5', '25', '26.5'],
+      tallas: ["24", "24.5", "25", "25.5", "25", "26.5"],
     },
     {
       id: 4,
@@ -45,7 +45,7 @@ export const Home = () => {
       price: 280,
       img: vans,
       description: "Vans clásicos para un estilo urbano y juvenil",
-      tallas: ['26', '26.5', '27'],
+      tallas: ["26", "26.5", "27"],
     },
   ]);
   const [cardFilter, setCardFilter] = useState([
@@ -65,7 +65,7 @@ export const Home = () => {
       img: nikeMujer,
       description:
         "Tennis Nike para mujer, color negro. Sube de nivel tu estilo con estos nuevos snickers!",
-      tallas: ['23.5', '24', '24.5', '25', '25.5', '26.5'],
+      tallas: ["23.5", "24", "24.5", "25", "25.5", "26.5"],
     },
     {
       id: 3,
@@ -74,7 +74,7 @@ export const Home = () => {
       img: reebok,
       description:
         "Tennis Reebok color blanco con franja negra. Unos tennis casuales para cualquier reunión",
-      tallas: ['24', '24.5', '25', '25.5', '25', '26.5'],
+      tallas: ["24", "24.5", "25", "25.5", "25", "26.5"],
     },
     {
       id: 4,
@@ -82,7 +82,7 @@ export const Home = () => {
       price: 280,
       img: vans,
       description: "Vans clásicos para un estilo urbano y juvenil",
-      tallas: ['26', '26.5', '27'],
+      tallas: ["26", "26.5", "27"],
     },
   ]);
 
@@ -114,28 +114,35 @@ export const Home = () => {
           />
           <img src={buscador} alt="buscador" />
         </div>
-       
       </div>
 
       <div className="w-full flex flex-wrap gap-1 justify-between p-2">
-        {cardFilter.map((card) => {
-          return (
-            <div
-              key={`tennis-home-${card.id}`}
-              className={`contenedor-card ${
-                card.id % 2 == 0 ? "mt-8" : "mt-0"
-              }`}
-            >
-              <Card
-                title={card.title}
-                price={card.price}
-                img={card.img}
-                description={card.description}
-                tallas={card.tallas}
-              />
-            </div>
-          );
-        })}
+        {cardFilter.length > 0 ? (
+          cardFilter.map((card) => {
+            return (
+              <div
+                key={`tennis-home-${card.id}`}
+                className={`contenedor-card ${
+                  card.id % 2 == 0 ? "mt-8" : "mt-0"
+                }`}
+              >
+                <Card
+                  title={card.title}
+                  price={card.price}
+                  img={card.img}
+                  description={card.description}
+                  tallas={card.tallas}
+                />
+              </div>
+            );
+          })
+        ) : (
+          <div className="w-full flex flex-wrap justify-center items-center mt-8">
+            <h3 className="w-full text-center font-extrabold text-xl text-gray-400">No se encontraron resultados</h3>
+            <img src={perrito} alt="imagen" className="w-3/4 h-96 object-contain"/>
+            <p className="text-gray-400 font-thin">Con cada par que compres un perrito será alimentado con croquetas</p>
+          </div>
+        )}
       </div>
     </div>
   );

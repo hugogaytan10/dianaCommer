@@ -38,7 +38,7 @@ export const Rutas = () => {
                 </label>
               </div>
               <div className=" flex-1 px-2 mx-2 text-gray-50 font-bold justify-center md:justify-start">
-                <NavLink to={"/"}>DIANA ZAPATOS Y ACCESORIOS</NavLink>
+                <NavLink to={"/"}>DIAZ ZAPATOS Y ACCESORIOS</NavLink>
               </div>
               <div className="contenedor-carrito">
                 <span className="mt-1">{contexto.cart}</span>
