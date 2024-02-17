@@ -7,6 +7,7 @@ import menu from "../assets/menu.svg";
 import carrito from "../assets/cart-outline.svg";
 import { useContext, useEffect } from "react";
 import { AppContext } from "../Context/AppContext";
+import { Ubication } from "../Ubication/Ubication";
 export const Rutas = () => {
   const contexto = useContext(AppContext);
 
@@ -52,14 +53,27 @@ export const Rutas = () => {
                   <li>
                     <NavLink
                       className={({ isActive }) =>
-                        isActive ? "active-link text-lg bg-primary text-white" : "text-white text-lg "
+                        isActive
+                          ? "active-link text-lg bg-primary text-white"
+                          : "text-white text-lg "
                       }
                       to="/"
                     >
                       Inicio
                     </NavLink>
                   </li>
-                 
+                  <li>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive
+                          ? "active-link text-lg bg-primary text-white"
+                          : "text-white text-lg "
+                      }
+                      to="/"
+                    >
+                      Ubicación
+                    </NavLink>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -70,6 +84,7 @@ export const Rutas = () => {
               <Route path="/item" element={<Item />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/ubication" element={<Ubication />} />
             </Routes>
           </div>
 
@@ -105,6 +120,16 @@ export const Rutas = () => {
                   }}
                 >
                   Carrito
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "active-link text-lg" : "text-white text-lg"
+                  }
+                  to="/ubication"
+                >
+                  Ubicación
                 </NavLink>
               </li>
             </ul>
