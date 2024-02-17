@@ -55,12 +55,12 @@ export const Cart = () => {
           return (
             <div
               key={`item-${item.title}`}
-              className="w-11/12 h-40 p-2 flex flex-wrap justify-around carrito text-black"
+              className="w-11/12 h-40 p-2 flex flex-wrap justify-around carrito text-black overflow-hidden"
             >
               <img
                 src={item.img}
                 alt="shoes"
-                className="h-20 w-20 rounded-sm object-fill self-center"
+                className="h-20 w-20 rounded-sm object-cover self-center md:h-40 md:w-40"
               />
               <div className="w-1/4 flex flex-wrap justify-around items-center flex-col ">
                 <p className="font-semibold">{item.title}</p>

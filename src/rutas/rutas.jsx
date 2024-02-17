@@ -52,7 +52,7 @@ export const Rutas = () => {
                   <li>
                     <NavLink
                       className={({ isActive }) =>
-                        isActive ? "active-link text-lg" : "text-white text-lg"
+                        isActive ? "active-link text-lg bg-primary text-white" : "text-white text-lg "
                       }
                       to="/"
                     >

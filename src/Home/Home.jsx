@@ -7,6 +7,7 @@ import af1 from "./assetsHome/Af1/AF1.jpeg";
 import nikeMujer from "./assetsHome/nikeMujer/nike.jpg";
 import reebok from "./assetsHome/reebok/reebok.jpg";
 import vans from "./assetsHome/vans/vans.jpg";
+import adidas from "./assetsHome/Adidas/adidas.jpg";
 import { NavLink } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 export const Home = () => {
@@ -47,6 +48,14 @@ export const Home = () => {
       description: "Vans clásicos para un estilo urbano y juvenil",
       tallas: ["26", "26.5", "27"],
     },
+    {
+      id: 5,
+      title: "Adidas",
+      price: 285,
+      img: adidas,
+      description: "Listo para cualquier ocasión y outfit en mente con estos nuevos tennis",
+      tallas: ["23", "24.5", "25", "25.5"],
+    },
   ]);
   const [cardFilter, setCardFilter] = useState([
     {
@@ -83,6 +92,14 @@ export const Home = () => {
       img: vans,
       description: "Vans clásicos para un estilo urbano y juvenil",
       tallas: ["26", "26.5", "27"],
+    },
+    {
+      id: 5,
+      title: "Adidas",
+      price: 285,
+      img: adidas,
+      description: "Listo para cualquier ocasión y outfit en mente con estos nuevos tennis",
+      tallas: ["23", "24.5", "25", "25.5"],
     },
   ]);
 

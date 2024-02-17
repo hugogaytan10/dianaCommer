@@ -80,7 +80,7 @@ export const Item = () => {
       <img src={contexto.card.img} alt="shoes" className="w-full object-cover md:h-96 md:w-1/2 md:m-auto"/>
 
       <div className="p-2 bg-white md:w-1/2 md:m-auto">
-        <h2 className="text-pink-500 font-bold">Diana Zapatos y Accesorios</h2>
+        <h2 className="text-pink-500 font-bold">Díaz Zapatos y Accesorios</h2>
         <p className="font-extrabold text-xl ml-4 mt-4 text-black">
           {contexto.card.title}
         </p>
@@ -112,7 +112,7 @@ export const Item = () => {
                     talla === tallaMap
                       ? "bg-black text-gray-200"
                       : "bg-white text-black"
-                  } w-8 h-8 text-center rounded-full border-black  talla text-black`}
+                  } w-8 h-8 text-center rounded-full border-black text-xs  talla text-black`}
                 >
                   {tallaMap}
                 </button>
