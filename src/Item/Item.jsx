@@ -79,7 +79,7 @@ export const Item = () => {
         <img
           src={contexto.card.img}
           alt="shoes"
-          className="w-full object-cover md:h-96 md:w-1/2 md:m-auto "
+          className="w-full object-cover md:h-96 md:w-1/2 md:m-auto bg-white"
         />
       </div>
 
@@ -103,7 +103,7 @@ export const Item = () => {
         </div>
 
         <p className="mt-4 ml-4">Talla</p>
-        <div className="flex flex-wrap gap-2 ml-4 w-full overflow-x-auto">
+        <div className="flex flex-wrap gap-2  w-full overflow-x-auto">
           {contexto.card.tallas.length > 0 &&
             contexto.card.tallas.map((tallaMap, index) => {
               return (

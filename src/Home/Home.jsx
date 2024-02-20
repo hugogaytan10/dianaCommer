@@ -101,7 +101,7 @@ export const Home = () => {
           <input
             type="text"
             className="inputBuscador"
-            placeholder="Tennis AF1"
+            placeholder="AF1"
             onChange={(e) => {
               Buscador(e.target.value);
             }}
