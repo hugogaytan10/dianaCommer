@@ -19,10 +19,10 @@ export const Rutas = () => {
   return (
     <div>
       <BrowserRouter>
-        <div className="drawer">
+        <div className="drawer ">
           <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
 
-          <div className="drawer-content flex flex-col">
+          <div className="drawer-content flex flex-col h-full min-w-full">
             <div className="w-full navbar bg-primary">
               <div className="flex-none lg:hidden">
                 <label
@@ -88,7 +88,7 @@ export const Rutas = () => {
             </Routes>
           </div>
 
-          <div className="drawer-side">
+          <div className="drawer-side z-30">
             <label
               htmlFor="my-drawer-3"
               aria-label="close sidebar"
@@ -128,6 +128,9 @@ export const Rutas = () => {
                     isActive ? "active-link text-lg" : "text-white text-lg"
                   }
                   to="/ubication"
+                  onClick={() => {
+                    document.getElementById("my-drawer-3").checked = false;
+                  }}
                 >
                   Ubicación
                 </NavLink>

@@ -66,18 +66,22 @@ export const Item = () => {
 
   return (
     <div>
-      <div className="bg-black flex flex-wrap justify-between p-2 items-center">
-        <div className="p-2">
-          <NavLink
-            to={"/"}
-            className="bg-white  p-2 font-semibold w-10 h-10 flex items-center rounded-full"
-          >
-            <img alt="regresar" src={flecha} className="h-10 w-10" />
-          </NavLink>
-        </div>
+      <div className="p-2 absolute z-10">
+        <NavLink
+          to={"/"}
+          className="bg-black  p-2 font-semibold w-10 h-10 flex items-center rounded-full"
+        >
+          <img alt="regresar" src={flecha} className="h-10 w-10" />
+        </NavLink>
       </div>
 
-      <img src={contexto.card.img} alt="shoes" className="w-full object-cover md:h-96 md:w-1/2 md:m-auto"/>
+      <div className="image-container">
+        <img
+          src={contexto.card.img}
+          alt="shoes"
+          className="w-full object-cover md:h-96 md:w-1/2 md:m-auto "
+        />
+      </div>
 
       <div className="p-2 bg-white md:w-1/2 md:m-auto">
         <h2 className="text-pink-500 font-bold">Díaz Zapatos y Accesorios</h2>
@@ -143,7 +147,10 @@ export const Item = () => {
           </div>
         </div>
 
-        <button onClick={AddToCart} className="agregar-al-carrito mb-10 mt-3 md:w-1/2">
+        <button
+          onClick={AddToCart}
+          className="agregar-al-carrito mb-10 mt-3 md:w-1/2"
+        >
           Agregar Al carrito
         </button>
       </div>

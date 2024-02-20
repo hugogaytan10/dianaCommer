@@ -40,15 +40,13 @@ export const Cart = () => {
   }, []);
   return (
     <div>
-      <div className="bg-primary p-2">
-        <div className="bg-primary p-2">
-          <NavLink
-            onClick={() => navigate(-1)}
-            className="bg-white  p-2 font-semibold w-10 h-10 flex items-center rounded-full"
-          >
-            <img alt="regresar" src={flecha} className="h-10 w-10" />
-          </NavLink>
-        </div>
+      <div className="bg-white p-2">
+        <NavLink
+          onClick={() => navigate(-1)}
+          className="bg-black  p-2 font-semibold w-10 h-10 flex items-center rounded-full"
+        >
+          <img alt="regresar" src={flecha} className="h-10 w-10" />
+        </NavLink>
       </div>
       <div className="flex flex-wrap contenedor-cart overflow-auto bg-white">
         {cart?.map((item) => {

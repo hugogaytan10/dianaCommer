@@ -42,3 +42,19 @@
 .mostrar{
     transform: translateX(0);
 }
+
+.image-container {
+    position: relative;
+    display: inline-block; /* O 'block', según tu layout */
+  }
+  
+  .image-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.05); /* Cambia el color y la opacidad según necesites */
+    z-index: 2;
+  }

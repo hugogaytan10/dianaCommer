@@ -15,6 +15,6 @@
     border: 1px solid rgba(8, 20, 65, 0.7);
     position: fixed;
     bottom: 0;
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
 }

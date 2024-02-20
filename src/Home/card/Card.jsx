@@ -10,7 +10,7 @@ export const Card = (props) => {
     contexto.setCard({ img, title, price, description, tallas });
   };
   return (
-    <div className="card bg-white shadow-sm">
+    <div className="card rounded-none bg-white shadow-sm">
       <figure className="h-3/4">
         <NavLink
           to={"/item"}

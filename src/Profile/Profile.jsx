@@ -62,15 +62,14 @@ export const Profile = () => {
   };
   return (
     <div>
-      <div className="bg-primary p-2">
+      <div className="bg-white p-2">
         <NavLink
           onClick={() => navigate(-1)}
-          className="bg-white  p-2 font-semibold w-10 h-10 flex items-center rounded-full"
+          className="bg-black  p-2 font-semibold w-10 h-10 flex items-center rounded-full"
         >
-          <img alt='regresar' src={flecha} className="h-10 w-10"/>
+          <img alt="regresar" src={flecha} className="h-10 w-10" />
         </NavLink>
       </div>
-
       <div className="flex flex-wrap flex-col gap-3  w-full justify-center items-center bg-white text-black">
         <label className="form-control w-10/12">
           <div className="label font-semibold text-primary">
@@ -79,7 +78,7 @@ export const Profile = () => {
           <input
             type="text"
             placeholder="Diana"
-            className="input input-bordered w-10/12 datos p-2 ml-4 bg-white"
+            className="w-10/12 datos p-2 ml-4 bg-white"
             onChange={(e) => setNombre(e.target.value)}
           />
         </label>
@@ -91,7 +90,7 @@ export const Profile = () => {
           <input
             type="text"
             placeholder="Díaz"
-            className="input input-bordered w-10/12 datos p-2 ml-4 bg-white"
+            className="w-10/12 datos p-2 ml-4 bg-white"
             onChange={(e) => setApellido(e.target.value)}
           />
         </label>
@@ -103,7 +102,7 @@ export const Profile = () => {
           <input
             type="text"
             placeholder="4451701133"
-            className="input input-bordered w-10/12 datos p-2 ml-4 bg-white"
+            className="w-10/12 datos p-2 ml-4 bg-white"
             onChange={(e) => setTelefono(e.target.value)}
           />
         </label>
@@ -115,7 +114,7 @@ export const Profile = () => {
           <textarea
             type="text"
             placeholder="Calle pipila #123, Moroleón, Guanajuto, en frente de una tienda de abarrotes"
-            className="bg-white min-h-32 input input-bordered w-10/12 datos p-2 ml-4"
+            className="bg-white min-h-32  w-10/12 datos p-2 ml-4"
             onChange={(e) => setDireccion(e.target.value)}
           />
         </label>
