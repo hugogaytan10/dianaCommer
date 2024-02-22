@@ -69,7 +69,7 @@ export const Rutas = () => {
                           ? "active-link text-lg bg-primary text-white"
                           : "text-white text-lg "
                       }
-                      to="/"
+                      to="/ubication"
                     >
                       Ubicación
                     </NavLink>
