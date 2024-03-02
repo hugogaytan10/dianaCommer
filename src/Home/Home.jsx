@@ -10,6 +10,7 @@ import vans from "./assetsHome/vans/vans.jpg";
 import adidas from "./assetsHome/Adidas/adidas.jpg";
 import af1Negro from "./assetsHome/Af1Negro/af1Negros.jpg";
 import nikeMujerBota from "./assetsHome/nikeMujerBota/nikeMujerBota.jpg";
+import nikeCafe from "./assetsHome/NikeCafe/nikeCafe.jpg";
 import { NavLink } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 export const Home = () => {
@@ -18,51 +19,51 @@ export const Home = () => {
     {
       id: 1,
       title: "Nike AF1",
-      price: 300,
+      price: 270,
       img: af1,
       description:
         "Tennis Nike Air Force 1, color blanco. Sube de nivel tu estilo con estos nuevos snickers!",
-      tallas: ["23", "23.5", "24", "24.5", "25", "25.5", "26"],
+      tallas: ["22", "23", "23.5", "24", "24.5", "25", "26", "26.5", "27", "27.5", "28"],
     },
     {
       id: 2,
       title: "Nike AF1 Negro",
-      price: 300,
+      price: 270,
       img: af1Negro,
       description:
         "Tennis Nike Air Force 1, color Negro. Sube de nivel tu estilo con estos nuevos snickers!",
-      tallas: ["23", "23.5", "24", "24.5", "25", "25.5", "26"],
+      tallas: ["25", "27"],
     },
     {
       id: 3,
       title: "Nike Air Max 90",
-      price: 280,
+      price: 250,
       img: nikeMujer,
       description:
         "Presentamos el icónico Nike Air Max 90, una verdadera joya en la corona del calzado deportivo. Este modelo clásico, conocido por su durabilidad y diseño estilizado, ofrece una combinación perfecta de tradición y tecnología. ",
-      tallas: ["23.5", "24", "24.5", "25", "25.5", "26.5"],
+      tallas: ["23.5", "24.5", "25", "25.5", "26.5"],
     },
     {
       id: 4,
       title: "Reebok Classic",
-      price: 285,
+      price: 270,
       img: reebok,
       description:
         "Tennis Reebok color blanco con franja negra. Unos tennis casuales para cualquier reunión",
-      tallas: ["24", "24.5", "25", "25.5", "26.5"],
+      tallas: ["24", "25", "25.5"],
     },
     {
       id: 5,
       title: "Vans Old Skool",
-      price: 280,
+      price: 270,
       img: vans,
       description: "Explora las calles con estilo con el icónico Vans Old Skool, un verdadero clásico en el mundo del skate y la moda urbana. Estos tenis representan la esencia de la cultura skate, combinando funcionalidad y moda de una manera única. ",
-      tallas: ["26", "26.5", "27"],
+      tallas: ["26.5"],
     },
     {
       id: 6,
       title: "Adidas Grand Court",
-      price: 285,
+      price: 270,
       img: adidas,
       description:
         "Revive el espíritu del tenis clásico con las Adidas Grand Court, una fusión perfecta de patrimonio y moda moderna. Inspiradas en el icónico calzado de tenis de décadas pasadas, estas zapatillas traen un toque de nostalgia a tu colección de calzado con su diseño atemporal.",
@@ -71,11 +72,20 @@ export const Home = () => {
     {
       id: 7,
       title: "Nike Air Force 1 Mid",
-      price: 300,
+      price: 270,
       img: nikeMujerBota,
       description:
         "Este modelo es conocido por su diseño icónico de corte medio, su correa ajustable en el tobillo para un ajuste seguro y su clásico logotipo de Nike Swoosh en los lados.",
-        tallas: ["23", "23.5", "24", "24.5", "25", "25.5", "26"],
+        tallas: ["23",  "25", "25.5", "26.5"],
+    },
+    {
+      id: 8,
+      title: "Nike Air Force 1 with Supreme",
+      price: 270,
+      img: nikeCafe,
+      description:
+        "Estas zapatillas Nike Air Force 1 destacan por su diseño elegante y contemporáneo, perfectas para amantes del estilo urbano. Con acabados de alta calidad y una comodidad inigualable, se adaptan perfectamente a cualquier ocasión. La colaboración con marcas icónicas añade un toque exclusivo y distintivo. Ideales para quienes buscan combinar moda y funcionalidad en su calzado diario.",
+        tallas: ["26", "26.5", "27", "27.5", "28"],
     },
   ]);
   const [cardFilter, setCardFilter] = useState(cards);
