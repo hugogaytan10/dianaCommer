@@ -62,6 +62,8 @@ export const Item = () => {
     setOldPrice(oldPriceCalculate);
     const cart = JSON.parse(localStorage.getItem("items")) || [];
     contexto.setCart(cart.length);
+    //UBICATE ON THE TOP OF THE SCREEN
+    window.scrollTo(0, 0);
   }, []);
 
   return (
