@@ -50,7 +50,7 @@ export const Home = () => {
       img: reebok,
       description:
         "Tennis Reebok color blanco con franja negra. Unos tennis casuales para cualquier reunión",
-      tallas: ["24", "25", "25.5"],
+      tallas: ["24", "25.5"],
     },
     {
       id: 5,
