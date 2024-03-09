@@ -11,7 +11,11 @@ import adidas from "./assetsHome/Adidas/adidas.jpg";
 import af1Negro from "./assetsHome/Af1Negro/af1Negros.jpg";
 import nikeMujerBota from "./assetsHome/nikeMujerBota/nikeMujerBota.jpg";
 import nikeCafe from "./assetsHome/NikeCafe/nikeCafe.jpg";
-import { NavLink } from "react-router-dom";
+import nikeNina from "./assetsHome/NikeNina/nikeNina.jpg";
+import nikeForceRojos from "./assetsHome/NikeForceRojos/NikeForceRojos.jpg";
+import nikeForceRojosNino from "./assetsHome/NikeForceRojosNino/nikeNino.jpg";
+import nikeForceAzules from "./assetsHome/NikeForceAzules/NikeForceAzules.jpg";
+import pumaMujer from "./assetsHome/PumaMujer/pumaMujer.jpg";
 import { AppContext } from "../Context/AppContext";
 export const Home = () => {
   const contexto = useContext(AppContext);
@@ -32,7 +36,7 @@ export const Home = () => {
       img: af1Negro,
       description:
         "Tennis Nike Air Force 1, color Negro. Sube de nivel tu estilo con estos nuevos snickers!",
-      tallas: ["25", "27"],
+      tallas: [ "25", "26", "26.5", "27", "27.5", "28", "28.5"],
     },
     {
       id: 3,
@@ -85,7 +89,52 @@ export const Home = () => {
       img: nikeCafe,
       description:
         "Estas zapatillas Nike Air Force 1 destacan por su diseño elegante y contemporáneo, perfectas para amantes del estilo urbano. Con acabados de alta calidad y una comodidad inigualable, se adaptan perfectamente a cualquier ocasión. La colaboración con marcas icónicas añade un toque exclusivo y distintivo. Ideales para quienes buscan combinar moda y funcionalidad en su calzado diario.",
-        tallas: ["26", "26.5", "27", "27.5", "28"],
+        tallas: [ "26.5", "27", "27.5", "28"],
+    },
+    {
+      id: 9,
+      title: "Nike Air Force Negros Infantil",
+      price: 200,
+      img: nikeNina,
+      description:
+        "Estas zapatillas Nike destacan por su diseño elegante y contemporáneo, perfectas para amantes del estilo urbano. Con acabados de alta calidad y una comodidad inigualable, se adaptan perfectamente a cualquier ocasión. La colaboración con marcas icónicas añade un toque exclusivo y distintivo. Ideales para quienes buscan combinar moda y funcionalidad en su calzado diario.",
+        tallas: ["18", "18.5", "19.5", "20", "20.5", "21.5"]
+    },
+    {
+      id: 10,
+      title: "Nike Air Force Rojos Infantil",
+      price: 200,
+      img: nikeForceRojosNino,
+      description:
+        "Estas zapatillas Nike destacan por su diseño elegante y contemporáneo, perfectas para amantes del estilo urbano. Con acabados de alta calidad y una comodidad inigualable, se adaptan perfectamente a cualquier ocasión. La colaboración con marcas icónicas añade un toque exclusivo y distintivo. Ideales para quienes buscan combinar moda y funcionalidad en su calzado diario.",
+        tallas: ["15", "15.5", "16", "16.5", "17", "17.5"]
+    },
+    {
+      id: 11,
+      title: "Puma",
+      price: 270,
+      img: pumaMujer,
+      description:
+        "Sumérgete en el equilibrio perfecto entre estilo y confort con nuestras Zapatillas Deportivas Puma Clásicas en colores blanco y negro. Diseñadas para aquellos que aprecian tanto la moda como la funcionalidad, estas zapatillas ofrecen una estética atemporal que no pasará desapercibida.",
+        tallas: ["23", "24", "24.5", "25", "25.5", "26"]
+    },
+    {
+      id: 12,
+      title: "Nike Force Azules",
+      price: 270,
+      img: nikeForceAzules,
+      description:
+        "Estas zapatillas Nike destacan por su diseño elegante y contemporáneo, perfectas para amantes del estilo urbano. Con acabados de alta calidad y una comodidad inigualable, se adaptan perfectamente a cualquier ocasión. La colaboración con marcas icónicas añade un toque exclusivo y distintivo. Ideales para quienes buscan combinar moda y funcionalidad en su calzado diario.",
+        tallas: ["23", "24", "24.5", "25", "25.5", "26"]
+    },
+    {
+      id: 13,
+      title: "Nike Air Force Rojos",
+      price: 270,
+      img: nikeForceRojos,
+      description:
+        "Estas zapatillas Nike destacan por su diseño elegante y contemporáneo, perfectas para amantes del estilo urbano. Con acabados de alta calidad y una comodidad inigualable, se adaptan perfectamente a cualquier ocasión. La colaboración con marcas icónicas añade un toque exclusivo y distintivo. Ideales para quienes buscan combinar moda y funcionalidad en su calzado diario.",
+        tallas: ["25", "26", "26.5", "26.5", "27", "27.5", "28"]
     },
   ]);
   const [cardFilter, setCardFilter] = useState(cards);
