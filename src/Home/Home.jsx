@@ -182,8 +182,12 @@ export const Home = () => {
           <img src={buscador} alt="buscador" />
         </div>
       </div>
-      <div className="banner">
+      {
+        /**
+        <div className="banner">
       </div>
+         */
+      }
       <h1 className="text-center font-thin m-4 text-gray-500 text-xl">
         Zapatos y accesorios{" "}
       </h1>
