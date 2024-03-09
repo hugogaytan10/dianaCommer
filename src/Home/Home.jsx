@@ -184,7 +184,7 @@ export const Home = () => {
       </div>
       {
         /**
-        <div className="banner">
+         * <div className="banner">
       </div>
          */
       }
@@ -197,9 +197,10 @@ export const Home = () => {
             return (
               <div
                 key={`tennis-home-${card.id}`}
-                className={`contenedor-card rounded-none ${
-                  card.id % 2 == 0 ? "mt-8" : "mt-0"
-                }`}
+                className={`contenedor-card rounded-none scroll-content ${
+                  card.id % 2 == 0 ? "mt-8" : "mt-0"}
+                  ${card.id > 4 ? "fadeRight" : ""}
+                  `}
               >
                 <Card
                   title={card.title}
