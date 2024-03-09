@@ -18,3 +18,26 @@ body::-webkit-scrollbar {
     color: rgb(0, 0, 0); /* Color de texto para el enlace activo */
   }
   
+.fadeTop {
+    visibility: hidden;
+    transform: translate(0, 10vh);
+    transition: all 1s;
+
+}
+
+.fadeRight {
+    visibility: hidden;
+    transform: translate(10vh, 0vh);
+    transition: all 1.4s;
+}
+
+.fadeLeft {
+    visibility: hidden;
+    transform: translate(-10vh, 0vh);
+    transition: all 1.4s;
+}
+
+.visible {
+    visibility: visible;
+    transform: translate(0, 0);
+}

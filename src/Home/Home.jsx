@@ -3,6 +3,7 @@ import buscador from "../assets/search.svg";
 import "./Home.css";
 import { Card } from "./card/Card";
 import perrito from "../assets/Perrito.webp";
+import Banner from "../assets/bannerDiana.png";
 import af1 from "./assetsHome/Af1/AF1.jpg";
 import nikeMujer from "./assetsHome/nikeMujer/nike.jpg";
 import reebok from "./assetsHome/reebok/reebok.jpg";
@@ -27,7 +28,19 @@ export const Home = () => {
       img: af1,
       description:
         "Tennis Nike Air Force 1, color blanco. Sube de nivel tu estilo con estos nuevos snickers!",
-      tallas: ["22", "23", "23.5", "24", "24.5", "25", "26", "26.5", "27", "27.5", "28"],
+      tallas: [
+        "22",
+        "23",
+        "23.5",
+        "24",
+        "24.5",
+        "25",
+        "26",
+        "26.5",
+        "27",
+        "27.5",
+        "28",
+      ],
     },
     {
       id: 2,
@@ -36,7 +49,7 @@ export const Home = () => {
       img: af1Negro,
       description:
         "Tennis Nike Air Force 1, color Negro. Sube de nivel tu estilo con estos nuevos snickers!",
-      tallas: [ "25", "26", "26.5", "27", "27.5", "28", "28.5"],
+      tallas: ["25", "26", "26.5", "27", "27.5", "28", "28.5"],
     },
     {
       id: 3,
@@ -61,7 +74,8 @@ export const Home = () => {
       title: "Vans Old Skool",
       price: 270,
       img: vans,
-      description: "Explora las calles con estilo con el icónico Vans Old Skool, un verdadero clásico en el mundo del skate y la moda urbana. Estos tenis representan la esencia de la cultura skate, combinando funcionalidad y moda de una manera única. ",
+      description:
+        "Explora las calles con estilo con el icónico Vans Old Skool, un verdadero clásico en el mundo del skate y la moda urbana. Estos tenis representan la esencia de la cultura skate, combinando funcionalidad y moda de una manera única. ",
       tallas: ["26.5"],
     },
     {
@@ -80,7 +94,7 @@ export const Home = () => {
       img: nikeMujerBota,
       description:
         "Este modelo es conocido por su diseño icónico de corte medio, su correa ajustable en el tobillo para un ajuste seguro y su clásico logotipo de Nike Swoosh en los lados.",
-        tallas: ["23",  "25", "25.5", "26.5"],
+      tallas: ["23", "25", "25.5", "26.5"],
     },
     {
       id: 8,
@@ -89,7 +103,7 @@ export const Home = () => {
       img: nikeCafe,
       description:
         "Estas zapatillas Nike Air Force 1 destacan por su diseño elegante y contemporáneo, perfectas para amantes del estilo urbano. Con acabados de alta calidad y una comodidad inigualable, se adaptan perfectamente a cualquier ocasión. La colaboración con marcas icónicas añade un toque exclusivo y distintivo. Ideales para quienes buscan combinar moda y funcionalidad en su calzado diario.",
-        tallas: [ "26.5", "27", "27.5", "28"],
+      tallas: ["26.5", "27", "27.5", "28"],
     },
     {
       id: 9,
@@ -98,7 +112,7 @@ export const Home = () => {
       img: nikeNina,
       description:
         "Estas zapatillas Nike destacan por su diseño elegante y contemporáneo, perfectas para amantes del estilo urbano. Con acabados de alta calidad y una comodidad inigualable, se adaptan perfectamente a cualquier ocasión. La colaboración con marcas icónicas añade un toque exclusivo y distintivo. Ideales para quienes buscan combinar moda y funcionalidad en su calzado diario.",
-        tallas: ["18", "18.5", "19.5", "20", "20.5", "21.5"]
+      tallas: ["18", "18.5", "19.5", "20", "20.5", "21.5"],
     },
     {
       id: 10,
@@ -107,7 +121,7 @@ export const Home = () => {
       img: nikeForceRojosNino,
       description:
         "Estas zapatillas Nike destacan por su diseño elegante y contemporáneo, perfectas para amantes del estilo urbano. Con acabados de alta calidad y una comodidad inigualable, se adaptan perfectamente a cualquier ocasión. La colaboración con marcas icónicas añade un toque exclusivo y distintivo. Ideales para quienes buscan combinar moda y funcionalidad en su calzado diario.",
-        tallas: ["15", "15.5", "16", "16.5", "17", "17.5"]
+      tallas: ["15", "15.5", "16", "16.5", "17", "17.5"],
     },
     {
       id: 11,
@@ -116,7 +130,7 @@ export const Home = () => {
       img: pumaMujer,
       description:
         "Sumérgete en el equilibrio perfecto entre estilo y confort con nuestras Zapatillas Deportivas Puma Clásicas en colores blanco y negro. Diseñadas para aquellos que aprecian tanto la moda como la funcionalidad, estas zapatillas ofrecen una estética atemporal que no pasará desapercibida.",
-        tallas: ["23", "24", "24.5", "25", "25.5", "26"]
+      tallas: ["23", "24", "24.5", "25", "25.5", "26"],
     },
     {
       id: 12,
@@ -125,7 +139,7 @@ export const Home = () => {
       img: nikeForceAzules,
       description:
         "Estas zapatillas Nike destacan por su diseño elegante y contemporáneo, perfectas para amantes del estilo urbano. Con acabados de alta calidad y una comodidad inigualable, se adaptan perfectamente a cualquier ocasión. La colaboración con marcas icónicas añade un toque exclusivo y distintivo. Ideales para quienes buscan combinar moda y funcionalidad en su calzado diario.",
-        tallas: ["23", "24", "24.5", "25", "25.5", "26"]
+      tallas: ["23", "24", "24.5", "25", "25.5", "26"],
     },
     {
       id: 13,
@@ -134,7 +148,7 @@ export const Home = () => {
       img: nikeForceRojos,
       description:
         "Estas zapatillas Nike destacan por su diseño elegante y contemporáneo, perfectas para amantes del estilo urbano. Con acabados de alta calidad y una comodidad inigualable, se adaptan perfectamente a cualquier ocasión. La colaboración con marcas icónicas añade un toque exclusivo y distintivo. Ideales para quienes buscan combinar moda y funcionalidad en su calzado diario.",
-        tallas: ["25", "26", "26.5", "26.5", "27", "27.5", "28"]
+      tallas: ["25", "26", "26.5", "26.5", "27", "27.5", "28"],
     },
   ]);
   const [cardFilter, setCardFilter] = useState(cards);
@@ -168,8 +182,12 @@ export const Home = () => {
           <img src={buscador} alt="buscador" />
         </div>
       </div>
-            <h1 className="text-center font-thin m-4 text-gray-500">Zapatos y accesorios </h1>
-      <div className="w-full flex flex-wrap gap-1 justify-between p-2">
+      <div className="banner">
+      </div>
+      <h1 className="text-center font-thin m-4 text-gray-500 text-xl">
+        Zapatos y accesorios{" "}
+      </h1>
+      <div className="w-11/12 flex flex-wrap justify-between p-2 items-center m-auto">
         {cardFilter.length > 0 ? (
           cardFilter.map((card) => {
             return (
