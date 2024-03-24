@@ -14,7 +14,7 @@ export const Card = (props) => {
           <img
             src={img}
             alt="Shoes"
-            className="object-contain h-full w-full"
+            className="object-cover h-full w-full"
             onLoad={() => setLoaded(true)}
             style={{ display: loaded ? "block" : "none" }}
           />
