@@ -31,12 +31,12 @@ export const CarruselItem = (props) => {
 
   return (
     <div className="carrusel">
-    <div id="carrusel" className="container_item justify-center ">
+    <div id="carrusel" className="container_item justify-center bg-white h-96">
       
       <img
         src={images[currentImage]}
         alt="carrusel__item"
-        className="relative object-cover h-full"
+        className="relative object-contain h-full w-full"
         
       />
     </div>
@@ -44,13 +44,13 @@ export const CarruselItem = (props) => {
       onClick={handlePrevious}
       className="carrusel-button left-button z-20"
     >
-      Anterior
+      {'<'}
     </button>
     <button
       onClick={handleNext}
-      className="carrusel-button right-button z-20"
+      className="carrusel-button right-button z-20 text-bold"
     >
-      Siguiente
+      {'>'}
     </button>
   </div>
   );

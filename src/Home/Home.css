@@ -76,10 +76,11 @@
     font-size: 14px;
 }
 .contenedor-card{
-    width: 45%;
+    width: 48%;
 }
 .card{
     width: 100%;
+ 
     overflow: hidden;
     transition: all 0.3s ease-in-out;
 }
