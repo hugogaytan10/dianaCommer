@@ -6,7 +6,7 @@ export const Card = (props) => {
   const [loaded, setLoaded] = useState(false);
   return (
     <div className={`card rounded-none bg-white shadow-sm `}>
-      <figure className="h-1/4">
+      <figure className="h-1/4 h-96">
         <NavLink
           to={"/item"}
           className="h-full w-full"
@@ -14,7 +14,7 @@ export const Card = (props) => {
           <img
             src={img}
             alt="Shoes"
-            className="object-contain h-full w-full"
+            className="object-contain h-full w-full md:object-cover"
             onLoad={() => setLoaded(true)}
             style={{ display: loaded ? "block" : "none" }}
           />
