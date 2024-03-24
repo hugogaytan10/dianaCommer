@@ -44,13 +44,13 @@ export const CarruselItem = (props) => {
       onClick={handlePrevious}
       className="carrusel-button left-button z-20"
     >
-      <
+      {'<'}
     </button>
     <button
       onClick={handleNext}
       className="carrusel-button right-button z-20 text-bold"
     >
-      >
+      {'>'}
     </button>
   </div>
   );
