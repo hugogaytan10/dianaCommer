@@ -36,7 +36,7 @@ export const CarruselItem = (props) => {
       <img
         src={images[currentImage]}
         alt="carrusel__item"
-        className="relative object-cover h-full"
+        className="relative object-contain h-full"
         
       />
     </div>
