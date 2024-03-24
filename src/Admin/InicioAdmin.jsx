@@ -253,7 +253,8 @@ export const InicioAdmin = () => {
     ) {
       document.getElementById("modal_agregar").close();
       Reset();
-      const url = "https://back-diana-production.up.railway.app/api/producto/agregar";
+      const url =
+        "https://back-diana-production.up.railway.app/api/producto/agregar";
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -291,7 +292,8 @@ export const InicioAdmin = () => {
       banner3 != image
     ) {
       document.getElementById("modal_editar").close();
-      const url = "https://back-diana-production.up.railway.app/api/producto/actualizar";
+      const url =
+        "https://back-diana-production.up.railway.app/api/producto/actualizar";
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -361,10 +363,11 @@ export const InicioAdmin = () => {
       method: "PUT",
     });
     document.getElementById("my_eliminar").close();
-  }
+  };
   useEffect(() => {
     const getProductos = async () => {
-      const url = "https://back-diana-production.up.railway.app/api/producto/conseguir";
+      const url =
+        "https://back-diana-production.up.railway.app/api/producto/conseguir";
       const response = await fetch(url);
       const data = await response.json();
       setProductos(data);
@@ -399,9 +402,7 @@ export const InicioAdmin = () => {
             `}
             key={`producto-${producto.Id}`}
           >
-            <div
-              className="card" 
-            >
+            <div className="card">
               <figure className="h-3/4">
                 <img
                   src={producto.URLImagen}
@@ -1009,13 +1010,25 @@ export const InicioAdmin = () => {
             Deseas eliminar {nombre} ?
           </p>
           <div className="modal-action block w-full">
-            <form method="dialog " onSubmit={(e)=>{handlerDelete(e)}}>
-              <img src={preview} alt="" className="h-40 m-auto"/>
+            <form
+              method="dialog "
+              onSubmit={(e) => {
+                handlerDelete(e);
+              }}
+            >
+              <img src={preview} alt="" className="h-40 m-auto" />
               <div className="flex justify-center gap-4">
-                <button className="w-1/3 border-2 p-2 border-red-500 rounded-lg text-red-500">
+                <button
+                  type="submit"
+                  className="w-1/3 border-2 p-2 border-red-500 rounded-lg text-red-500"
+                >
                   eliminar
                 </button>
-                <button className="w-1/3 border-2 p-2 border-red-500 rounded-lg text-white bg-red-500">
+                <button
+                  type="button"
+                  onClick={() => document.getElementById("my_eliminar").close()}
+                  className="w-1/3 border-2 p-2 border-red-500 rounded-lg text-white bg-red-500"
+                >
                   Cerrar
                 </button>
               </div>

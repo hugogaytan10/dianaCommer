@@ -6,7 +6,7 @@ export const Card = (props) => {
   const [loaded, setLoaded] = useState(false);
   return (
     <div className={`card rounded-none bg-white shadow-sm `}>
-      <figure className="h-3/4">
+      <figure className="h-1/4">
         <NavLink
           to={"/item"}
           className="h-full w-full"

@@ -76,7 +76,7 @@ export const Home = () => {
               <div
                 key={`tennis-home-${card.Id}`}
                 className={`contenedor-card rounded-none scroll-content ${
-                  card.Id % 2 == 0 ? "mt-8" : "mt-0"}
+                  card.Id % 2 == 0 ? "mt-16" : "mt-0"}
                   ${card.Id > 4 ? "fadeRight" : ""}
                   `}
                   onClick={()=>{contexto.setCard(card)}}
