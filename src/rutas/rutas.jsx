@@ -8,6 +8,7 @@ import carrito from "../assets/cart-outline.svg";
 import { useContext, useEffect } from "react";
 import { AppContext } from "../Context/AppContext";
 import { Ubication } from "../Ubication/Ubication";
+import { InicioAdmin } from "../Admin/InicioAdmin";
 export const Rutas = () => {
   const contexto = useContext(AppContext);
 
@@ -74,6 +75,7 @@ export const Rutas = () => {
                       Ubicación
                     </NavLink>
                   </li>
+                 
                 </ul>
               </div>
             </div>
@@ -85,6 +87,7 @@ export const Rutas = () => {
               <Route path="/cart" element={<Cart />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/ubication" element={<Ubication />} />
+              <Route path="/admin" element={<InicioAdmin />} />
             </Routes>
           </div>
 

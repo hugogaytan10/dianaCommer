@@ -1,28 +1,20 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import carritoAzul from "../../assets/cart-outline-blue.svg";
 import { NavLink } from "react-router-dom";
-import { AppContext } from "../../Context/AppContext";
 export const Card = (props) => {
-  const { title, price, img, description, tallas } = props;
+  const { title, price, img } = props;
   const [loaded, setLoaded] = useState(false);
-  const contexto = useContext(AppContext);
-  const NewStateContext = () => {
-    contexto.setCard({ img, title, price, description, tallas });
-  };
   return (
     <div className={`card rounded-none bg-white shadow-sm `}>
       <figure className="h-3/4">
         <NavLink
           to={"/item"}
-          onClick={() => {
-            NewStateContext();
-          }}
           className="h-full w-full"
         >
           <img
             src={img}
             alt="Shoes"
-            className="object-cover h-full w-full"
+            className="object-contain h-full w-full"
             onLoad={() => setLoaded(true)}
             style={{ display: loaded ? "block" : "none" }}
           />
@@ -44,9 +36,6 @@ export const Card = (props) => {
           <p className="text-gray-400 font-thin text-sm">{price} MXN</p>
           <NavLink
             to={"/item"}
-            onClick={() => {
-              NewStateContext();
-            }}
           >
             <img src={carritoAzul} alt="carrito" />
           </NavLink>

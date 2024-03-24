@@ -4,6 +4,7 @@ import carrito from "../assets/cart-outline.svg";
 import "./item.css";
 import { NavLink } from "react-router-dom";
 import flecha from "../assets/arrow-back.svg";
+import { CarruselItem } from "./CarruselItem";
 export const Item = () => {
   const contexto = useContext(AppContext);
   const [oldPrice, setOldPrice] = useState(0);
@@ -58,13 +59,28 @@ export const Item = () => {
   };
 
   useEffect(() => {
-    const oldPriceCalculate = contexto.card.price * 1.15;
+    const precioVenta = Number(contexto.card.PrecioVenta);
+    const oldPriceCalculate = precioVenta * 1.15;
     setOldPrice(oldPriceCalculate);
     const cart = JSON.parse(localStorage.getItem("items")) || [];
     contexto.setCart(cart.length);
     //UBICATE ON THE TOP OF THE SCREEN
     window.scrollTo(0, 0);
-  }, []);
+    if (contexto.card.Titulo == "") {
+      const url = `https://back-diana-production.up.railway.app/api/producto/conseguir/${11}`;
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          contexto.setCard({
+            Descripcion: data[0].Descripcion,
+            Titulo: data[0].Titulo,
+            PrecioVenta: data[0].PrecioVenta,
+            ImagenesCarrusel: data[0].ImagenesCarrusel,
+            ListaTallas: data[0].ListaTallas,
+          });
+        });
+    }
+  }, [contexto.card.img]);
 
   return (
     <div>
@@ -78,25 +94,23 @@ export const Item = () => {
       </div>
 
       <div className="image-container">
-        <img
-          src={contexto.card.img}
-          alt="shoes"
-          className="w-full object-cover md:h-96 md:w-1/2 md:m-auto bg-white"
-        />
+        {contexto.card && contexto.card.ImagenesCarrusel && contexto.card.ImagenesCarrusel.length > 0 && (
+          <CarruselItem images={contexto.card.ImagenesCarrusel} />
+        )}
       </div>
 
       <div className="p-2 bg-white md:w-1/2 md:m-auto">
         <h2 className="text-pink-500 font-bold">Díaz Zapatos y Accesorios</h2>
         <p className="font-extrabold text-xl ml-4 mt-4 text-black">
-          {contexto.card.title}
+          {contexto.card.Titulo}
         </p>
         <p className="text-gray-400 font-thin text-sm ml-4 mt-2">
-          {contexto.card.description}
+          {contexto.card.Descripcion}
         </p>
 
         <div className="mt-4 text-black pl-2 flex flex-wrap items-center justify-between w-full">
           <div className="flex items-center">
-            <p className="font-extrabold">${contexto.card.price} MXN</p>
+            <p className="font-extrabold">${contexto.card.PrecioVenta} MXN</p>
             <span className="ml-4 descuento">15%</span>
           </div>
           <span className="line-through text-sm text-gray-400 mr-4">
@@ -106,8 +120,8 @@ export const Item = () => {
 
         <p className="mt-4 ml-4">Talla</p>
         <div className="flex flex-wrap gap-2  w-full overflow-x-auto">
-          {contexto.card.tallas.length > 0 &&
-            contexto.card.tallas.map((tallaMap, index) => {
+          {contexto.card && contexto.card.ListaTallas && contexto.card.ListaTallas.length > 0 &&
+            contexto.card.ListaTallas.map((tallaMap, index) => {
               return (
                 <button
                   key={index}
