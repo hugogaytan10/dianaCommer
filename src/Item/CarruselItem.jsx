@@ -31,7 +31,7 @@ export const CarruselItem = (props) => {
 
   return (
     <div className="carrusel">
-    <div id="carrusel" className="container_item justify-center bg-white">
+    <div id="carrusel" className="container_item justify-center bg-white h-96">
       
       <img
         src={images[currentImage]}
