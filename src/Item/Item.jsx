@@ -60,8 +60,9 @@ export const Item = () => {
 
   useEffect(() => {
     const precioVenta = Number(contexto.card.PrecioVenta);
-    const oldPriceCalculate = precioVenta * 1.15;
+    const oldPriceCalculate = Number((precioVenta * 1.15).toFixed(2));
     setOldPrice(oldPriceCalculate);
+    
     const cart = JSON.parse(localStorage.getItem("items")) || [];
     contexto.setCart(cart.length);
     //UBICATE ON THE TOP OF THE SCREEN
