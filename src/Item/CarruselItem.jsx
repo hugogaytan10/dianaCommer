@@ -1,57 +1,40 @@
-import React, { useState } from "react";
-import '../Home/Carrusel/Carrusel.css';
+import React, { useState, useRef } from "react";
+import "../Home/Carrusel/Carrusel.css";
+
 export const CarruselItem = (props) => {
   const [currentImage, setCurrentImage] = useState(0);
-  const images = props.images || [];
+    const carouselRef = useRef(null);
+    const lastScrollLeft = useRef(0); // Almacena la última posición de scroll conocida
 
-  const handleNext = () => {
-    setTimeout(() => {
-      setCurrentImage((prevImage) => (prevImage + 1) % images.length);
-    }, 300);
+    const handleScroll = () => {
+        const scrollLeft = carouselRef.current.scrollLeft;
+        const direction = scrollLeft > lastScrollLeft.current ? "right" : "left";
+        lastScrollLeft.current = scrollLeft; // Actualiza la última posición de scroll conocida
 
-    const carrusel = document.getElementById("carrusel");
-    carrusel?.classList.add("carrusel__item--next");
-    setTimeout(() => {
-      carrusel?.classList.remove("carrusel__item--next");
-    }, 1000);
-  };
+        // Aquí puedes usar 'direction' si necesitas realizar acciones específicas
+        // dependiendo de si el usuario hizo scroll hacia la derecha o hacia la izquierda
 
-  const handlePrevious = () => {
-    setTimeout(() => {
-      setCurrentImage((prevImage) =>
-        prevImage === 0 ? images.length - 1 : prevImage - 1
-      );
-    }, 300);
-    const carrusel = document.getElementById("carrusel");
-    carrusel?.classList.add("carrusel__item--previous");
-    setTimeout(() => {
-      carrusel?.classList.remove("carrusel__item--previous");
-    }, 1000);
-  };
+        const totalWidth = carouselRef.current.scrollWidth - carouselRef.current.clientWidth;
+        const newCurrentImage = Math.round((scrollLeft / totalWidth) * (props.images.length - 1));
 
-  return (
-    <div className="carrusel">
-    <div id="carrusel" className="container_item justify-center bg-white h-96">
-      
-      <img
-        src={images[currentImage]}
-        alt="carrusel__item"
-        className="relative object-contain h-full w-full"
-        
-      />
-    </div>
-    <button
-      onClick={handlePrevious}
-      className="carrusel-button left-button z-20"
-    >
-      {'<'}
-    </button>
-    <button
-      onClick={handleNext}
-      className="carrusel-button right-button z-20 text-bold"
-    >
-      {'>'}
-    </button>
-  </div>
-  );
+        if (newCurrentImage !== currentImage) {
+            setCurrentImage(newCurrentImage);
+        }
+    };
+
+    return (
+        <div ref={carouselRef} className="w-full carousel rounded-box h-96 overflow-auto " onScroll={handleScroll}>
+            <div className="flex">
+                {props.images.map((img, index) => (
+                    <div key={index} className={`carousel-item w-full flex-shrink-0 flex justify-center items-center`}>
+                        <img src={img} alt={`imagen ${index + 1}`} className="w-full h-full object-contain object-center"/>
+                    </div>
+                ))}
+            </div>
+            {/* Toast para mostrar el índice actual de la imagen / total de imágenes */}
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-black text-white py-2 px-4 rounded z-10">
+                {currentImage + 1} / {props.images.length}
+            </div>
+        </div>
+    );
 };

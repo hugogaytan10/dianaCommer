@@ -62,13 +62,13 @@ export const Item = () => {
     const precioVenta = Number(contexto.card.PrecioVenta);
     const oldPriceCalculate = Number((precioVenta * 1.15).toFixed(2));
     setOldPrice(oldPriceCalculate);
-    
+
     const cart = JSON.parse(localStorage.getItem("items")) || [];
     contexto.setCart(cart.length);
     //UBICATE ON THE TOP OF THE SCREEN
     window.scrollTo(0, 0);
     if (contexto.card.Titulo == "") {
-      const url = `https://back-diana-production.up.railway.app/api/producto/conseguir/${11}`;
+      const url = `https://back-diana-production.up.railway.app/api/producto/conseguir/${1}`;
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
@@ -94,11 +94,13 @@ export const Item = () => {
         </NavLink>
       </div>
 
-      <div className="image-container">
-        {contexto.card && contexto.card.ImagenesCarrusel && contexto.card.ImagenesCarrusel.length > 0 && (
-          <CarruselItem images={contexto.card.ImagenesCarrusel} />
+      {contexto.card &&
+        contexto.card.ImagenesCarrusel &&
+        contexto.card.ImagenesCarrusel.length > 0 && (
+          <div className="relative m-auto w-full block">
+            <CarruselItem images={contexto.card.ImagenesCarrusel} />
+          </div>
         )}
-      </div>
 
       <div className="p-2 bg-white md:w-1/2 md:m-auto">
         <h2 className="text-pink-500 font-bold">Díaz Zapatos y Accesorios</h2>
@@ -121,7 +123,9 @@ export const Item = () => {
 
         <p className="mt-4 ml-4">Talla</p>
         <div className="flex flex-wrap gap-2  w-full overflow-x-auto">
-          {contexto.card && contexto.card.ListaTallas && contexto.card.ListaTallas.length > 0 &&
+          {contexto.card &&
+            contexto.card.ListaTallas &&
+            contexto.card.ListaTallas.length > 0 &&
             contexto.card.ListaTallas.map((tallaMap, index) => {
               return (
                 <button
