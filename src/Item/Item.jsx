@@ -62,9 +62,17 @@ export const Item = (props) => {
   };
 
   useEffect(() => {
-    const precioVenta = Number(contexto.card.PrecioVenta);
-    const oldPriceCalculate = Number((precioVenta * 1.15).toFixed(2));
-    setOldPrice(oldPriceCalculate);
+    if (contexto.card.Descuento != 0) {
+      const precioVenta = Number(contexto.card.PrecioVenta);
+      const oldPriceCalculate = Number(
+        (precioVenta * ((contexto.card.Descuento / 100) + 1)).toFixed(2)
+      );
+      setOldPrice(oldPriceCalculate);
+    } else {
+      const precioVenta = Number(contexto.card.PrecioVenta);
+      const oldPriceCalculate = Number((precioVenta * 1.15).toFixed(2));
+      setOldPrice(oldPriceCalculate);
+    }
 
     const cart = JSON.parse(localStorage.getItem("items")) || [];
     contexto.setCart(cart.length);
@@ -138,7 +146,7 @@ export const Item = (props) => {
         <div className="mt-4 text-black pl-2 flex flex-wrap items-center justify-between w-full">
           <div className="flex items-center">
             <p className="font-extrabold">${contexto.card.PrecioVenta} MXN</p>
-            <span className="ml-4 descuento">15%</span>
+            <span className="ml-4 descuento">{contexto.card.Descuento > 0 ? contexto.card.Descuento : '15'}%</span>
           </div>
           <span className="line-through text-sm text-gray-400 mr-4">
             {oldPrice}
@@ -161,7 +169,7 @@ export const Item = (props) => {
                     talla === tallaMap
                       ? "bg-black text-gray-200"
                       : "bg-white text-black"
-                  } w-8 h-8 text-center rounded-full border-black text-xs  talla text-black`}
+                  } w-8 h-8 text-center rounded-full border-black text-xs  talla text-black ml-2`}
                 >
                   {tallaMap}
                 </button>

@@ -2,7 +2,7 @@ import React from "react";
 import fb from "../assets/logo-facebook.svg";
 export const Footer = () => {
   return (
-    <footer className='bg-primary h-52 w-full'>
+    <footer className='bg-primary h- w-full'>
       <h3 className="text-white text-center text-2xl font-bold uppercase mt-4">Diaz zapatos y accesorios</h3>
 
       <div className="flex justify-center gap-2 mt-5">
