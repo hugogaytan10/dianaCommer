@@ -9,6 +9,7 @@ import { useContext, useEffect } from "react";
 import { AppContext } from "../Context/AppContext";
 import { Ubication } from "../Ubication/Ubication";
 import { InicioAdmin } from "../Admin/InicioAdmin";
+import { Footer } from "../Footer/Footer";
 export const Rutas = () => {
   const contexto = useContext(AppContext);
 
@@ -83,6 +84,7 @@ export const Rutas = () => {
             {/* Page content here */}
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/item/:id" element={<Item />} />
               <Route path="/item" element={<Item />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/profile" element={<Profile />} />
@@ -142,6 +144,7 @@ export const Rutas = () => {
           </div>
         </div>
       </BrowserRouter>
+      <Footer />
     </div>
   );
 };

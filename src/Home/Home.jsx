@@ -79,7 +79,7 @@ export const Home = () => {
                   card.Id % 2 == 0 ? "mt-16" : "mt-0"}
                   ${card.Id > 4 ? "fadeRight" : ""}
                   `}
-                  onClick={()=>{contexto.setCard(card)}}
+                  onClick={()=>{contexto.setCard(card);}}
               >
                 <Card
                   title={card.Titulo}

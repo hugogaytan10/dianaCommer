@@ -2,23 +2,26 @@ import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../Context/AppContext";
 import carrito from "../assets/cart-outline.svg";
 import "./item.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import flecha from "../assets/arrow-back.svg";
 import { CarruselItem } from "./CarruselItem";
-export const Item = () => {
+export const Item = (props) => {
+  const parametros = useParams();
   const contexto = useContext(AppContext);
   const [oldPrice, setOldPrice] = useState(0);
   const [count, setCount] = useState(1);
   const [talla, setTalla] = useState("");
+  //parametro
+  const id = parametros.id;
 
   const AddToCart = () => {
     if (talla !== "") {
       const oldItems = JSON.parse(localStorage.getItem("items")) || [];
       const item = {
-        id: contexto.card.id,
-        title: contexto.card.title,
-        price: contexto.card.price * count,
-        img: contexto.card.img,
+        id: contexto.card.Id,
+        title: contexto.card.Titulo,
+        price: contexto.card.PrecioVenta * count,
+        img: contexto.card.URLImagen,
         talla: talla,
         count: count,
       };
@@ -67,7 +70,24 @@ export const Item = () => {
     contexto.setCart(cart.length);
     //UBICATE ON THE TOP OF THE SCREEN
     window.scrollTo(0, 0);
-    if (contexto.card.Titulo == "") {
+    if (id) {
+      const url = `https://back-diana-production.up.railway.app/api/producto/conseguir/${id}`;
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          contexto.setCard({
+            Descripcion: data[0].Descripcion,
+            Titulo: data[0].Titulo,
+            PrecioVenta: data[0].PrecioVenta,
+            ImagenesCarrusel: data[0].ImagenesCarrusel,
+            ListaTallas: data[0].ListaTallas,
+            Descuento: data[0].Descuento,
+            PrecioAquisicion: data[0].PrecioAquisicion,
+            URLImagen: data[0].URLImagen,
+            Id: data[0].Id,
+          });
+        });
+    } else {
       const url = `https://back-diana-production.up.railway.app/api/producto/conseguir/${1}`;
       fetch(url)
         .then((response) => response.json())
@@ -78,10 +98,14 @@ export const Item = () => {
             PrecioVenta: data[0].PrecioVenta,
             ImagenesCarrusel: data[0].ImagenesCarrusel,
             ListaTallas: data[0].ListaTallas,
+            Descuento: data[0].Descuento,
+            PrecioAquisicion: data[0].PrecioAquisicion,
+            URLImagen: data[0].URLImagen,
+            Id: data[0].Id,
           });
         });
     }
-  }, [contexto.card.img]);
+  }, [contexto.card.Id]);
 
   return (
     <div>
