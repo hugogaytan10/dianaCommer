@@ -86,7 +86,7 @@ export const Home = () => {
                   price={card.PrecioVenta}
                   img={card.URLImagen}
                   description={card.Descripcion}
-                  
+                  id={card.Id} 
                 />
               </div>
             );

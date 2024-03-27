@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import carritoAzul from "../../assets/cart-outline-blue.svg";
 import { NavLink } from "react-router-dom";
 export const Card = (props) => {
-  const { title, price, img } = props;
+  const { title, price, img, id } = props;
   const [loaded, setLoaded] = useState(false);
   return (
     <div className={`card rounded-none bg-white shadow-sm `}>
       <figure className="h-1/4 h-96">
         <NavLink
-          to={"/item"}
+          to={`/item/${id}`}
           className="h-full w-full"
         >
           <img
