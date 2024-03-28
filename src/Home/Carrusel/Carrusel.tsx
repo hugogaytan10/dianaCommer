@@ -52,7 +52,7 @@ export const Carrusel = () => {
     <div className="carrusel">
       <div id="carrusel__item" className="container_item justify-center">
         <div className="w-full md:w-1/3 order-3 md:order-1 ">
-            <h2 className="text-xl text-green-600 font-semibold text-center md:text-left">{images[currentImage].title}</h2>
+            <h2 className="text-xl text-pink-500 font-semibold text-center md:text-left">{images[currentImage].title}</h2>
             <p className="text-gray-600 text-center md:text-left">{images[currentImage].description}</p>
         </div> 
         <img

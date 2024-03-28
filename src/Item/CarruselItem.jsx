@@ -1,14 +1,17 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import "../Home/Carrusel/Carrusel.css";
 import share from "../assets/share.svg";
+import { AppContext } from "../Context/AppContext";
 export const CarruselItem = (props) => {
   const [currentImage, setCurrentImage] = useState(0);
   const carouselRef = useRef(null);
   const lastScrollLeft = useRef(0); // Almacena la última posición de scroll conocida
+  const contexto = useContext(AppContext);
+  const [loaded, setLoaded] = useState(false);
+
 
   const handleScroll = () => {
     const scrollLeft = carouselRef.current.scrollLeft;
-    const direction = scrollLeft > lastScrollLeft.current ? "right" : "left";
     lastScrollLeft.current = scrollLeft; // Actualiza la última posición de scroll conocida
 
     // Aquí puedes usar 'direction' si necesitas realizar acciones específicas
@@ -41,7 +44,18 @@ export const CarruselItem = (props) => {
               src={img}
               alt={`imagen ${index + 1}`}
               className="w-full h-full object-contain object-center"
+              style={{ display: loaded ? "block" : "none" }}
+              onLoad={() => setLoaded(true)}
+
             />
+            {!loaded && (
+            <div className="flex flex-col gap-4 w-52">
+              <div className="skeleton h-32 w-full"></div>
+              <div className="skeleton h-4 w-28"></div>
+              <div className="skeleton h-4 w-full"></div>
+              <div className="skeleton h-4 w-full"></div>
+            </div>
+          )}
           </div>
         ))}
       </div>
@@ -51,8 +65,9 @@ export const CarruselItem = (props) => {
       </div>
       <div className="absolute bottom-0 left-0  text-gray-100 py-0 px-2 rounded-md z-10 ">
         <a
-          href="https://wa.me/?text=Mira%20estos%20increíbles%20tenis"
+          href={`https://wa.me/?text=Mira%20estos%20increíbles%20tenis%20en%20www.calzadodiaz.com/item/${contexto.card.Id}`}
           target="_blank"
+          rel="noopener noreferrer"
         >
           <img src={share} alt="share" className="h-6 w-6" />
         </a>
