@@ -10,6 +10,7 @@ import { AppContext } from "../Context/AppContext";
 import { Ubication } from "../Ubication/Ubication";
 import { InicioAdmin } from "../Admin/InicioAdmin";
 import { Footer } from "../Footer/Footer";
+import { Politica } from "../Politica/Politica";
 export const Rutas = () => {
   const contexto = useContext(AppContext);
 
@@ -76,7 +77,6 @@ export const Rutas = () => {
                       Ubicación
                     </NavLink>
                   </li>
-                 
                 </ul>
               </div>
             </div>
@@ -90,6 +90,7 @@ export const Rutas = () => {
               <Route path="/profile" element={<Profile />} />
               <Route path="/ubication" element={<Ubication />} />
               <Route path="/admin" element={<InicioAdmin />} />
+              <Route path="/politica" element={<Politica />} />
             </Routes>
           </div>
 
@@ -143,8 +144,8 @@ export const Rutas = () => {
             </ul>
           </div>
         </div>
+        <Footer />
       </BrowserRouter>
-      <Footer />
     </div>
   );
 };

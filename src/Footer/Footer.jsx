@@ -1,5 +1,6 @@
 import React from "react";
 import fb from "../assets/logo-facebook.svg";
+import { NavLink } from "react-router-dom";
 export const Footer = () => {
   return (
 
@@ -13,8 +14,10 @@ export const Footer = () => {
         >
           <img src={fb} alt="fb" />
         </a>
-       
       </div>
+      <NavLink to="/politica" className="text-white text-center block mt-5">
+        Política de privacidad
+      </NavLink>
     </footer>
   );
 };
