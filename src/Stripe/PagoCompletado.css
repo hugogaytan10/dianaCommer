@@ -1,0 +1,32 @@
+.contenedor-pago{
+    width: 0;
+    height: 0;
+    opacity: 0;
+    animation: aparecer 1s forwards;
+    border-radius: 50%;
+    background-color: #303030;
+    margin: auto;
+    text-align: center;
+}
+
+@keyframes aparecer {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0;
+        background-color: #000000;
+    }
+   
+ 
+    100% {
+        width: 100%;
+        opacity: 1;
+        border-radius: 5px;
+        height: 200px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        border: 0.5px solid rgb(229, 229, 229);
+        background-color: #fff;
+    }
+}

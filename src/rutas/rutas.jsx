@@ -11,6 +11,9 @@ import { Ubication } from "../Ubication/Ubication";
 import { InicioAdmin } from "../Admin/InicioAdmin";
 import { Footer } from "../Footer/Footer";
 import { Politica } from "../Politica/Politica";
+import { MainStripe } from "../Stripe/MainStripe";
+import { PagoCompletado } from "../Stripe/PagoCompletado";
+import { ElegirMetodoPago } from "../MetodoPago/ElegirMetodoPago";
 export const Rutas = () => {
   const contexto = useContext(AppContext);
 
@@ -89,6 +92,9 @@ export const Rutas = () => {
               <Route path="/cart" element={<Cart />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/ubication" element={<Ubication />} />
+              <Route path="/metodoPago" element={<ElegirMetodoPago />} />
+              <Route path="/pago" element={<MainStripe />} />
+              <Route path="/pagoCompletado" element={<PagoCompletado />} />
               <Route path="/admin" element={<InicioAdmin />} />
               <Route path="/politica" element={<Politica />} />
             </Routes>

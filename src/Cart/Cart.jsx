@@ -128,7 +128,7 @@ export const Cart = () => {
           </div>
           {cart?.length > 0 && (
             <NavLink
-              to={"/profile"}
+              to={"/metodoPago"}
               className="mt-2 m-auto w-2/4 p-1 block bg-primary text-center text-gray-50 font-semibold rounded-sm"
             >
               Pedir

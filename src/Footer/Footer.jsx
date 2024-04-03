@@ -8,7 +8,7 @@ export const Footer = () => {
         Diaz zapatos y accesorios
       </h3>
 
-      <div className="flex justify-around gap-2 mt-5 items-center">
+      <div className="flex justify-around gap-2  items-center">
         <a
           target="_blank"
           href="https://www.facebook.com/profile.php?id=100068048930464"
@@ -21,7 +21,7 @@ export const Footer = () => {
         >
           Política de privacidad
         </NavLink>
-        <a href="https://www.ravekh.com" target="_blank">&copy; Powered by Ravekh</a>
+        <a href="https://www.ravekh.com" target="_blank" className="text-white text-center bg-primary">&copy; Powered by Ravekh</a>
       </div>
     </footer>
   );

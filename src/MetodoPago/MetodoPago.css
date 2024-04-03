@@ -1,0 +1,14 @@
+.metodo{
+    border: 0.5px solid rgb(229, 229, 229);
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.metodo:hover{
+    background-color: #303030;
+    color: #f2f2f2;
+}
