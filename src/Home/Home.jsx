@@ -67,7 +67,7 @@ export const Home = () => {
      }
       <Carrusel/>
       <h1 className="text-center font-thin m-4 text-gray-500 text-xl">
-        Zapatos y accesorios{" "}
+        Todo tipo de calzado (zapato, tennis deportivos, hombre, mujer, niño) en Moroleón, Guanajuato{" "}
       </h1>
       <div className="w-11/12 flex flex-wrap justify-between p-2 items-center m-auto">
         {cardFilter.length > 0 ? (
