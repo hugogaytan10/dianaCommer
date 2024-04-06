@@ -14,6 +14,7 @@ import { Politica } from "../Politica/Politica";
 import { MainStripe } from "../Stripe/MainStripe";
 import { PagoCompletado } from "../Stripe/PagoCompletado";
 import { ElegirMetodoPago } from "../MetodoPago/ElegirMetodoPago";
+import { Intro } from "../Blog/CalzadoDiazIntro/Intro";
 export const Rutas = () => {
   const contexto = useContext(AppContext);
 
@@ -97,6 +98,9 @@ export const Rutas = () => {
               <Route path="/pagoCompletado" element={<PagoCompletado />} />
               <Route path="/admin" element={<InicioAdmin />} />
               <Route path="/politica" element={<Politica />} />
+              <Route path="/blog" element={<Politica />} />
+              <Route path="/blog/intro" element={<Intro />} />
+
             </Routes>
           </div>
 
