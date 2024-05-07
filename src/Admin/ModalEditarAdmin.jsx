@@ -37,7 +37,7 @@ export const ModalEditarAdmin = ({
 
   //reset update form
   const ResetEditar = () => {
-    setPaso(-1);
+    setPaso(0);
     setBanner(image);
     setBanner2(image);
     setBanner3(image);
@@ -49,7 +49,7 @@ export const ModalEditarAdmin = ({
     setStock(0);
     setDescuento(0);
     setTallas([]);
-    document.getElementById("modal_editar").close();
+    
   };
   const SubirImagen = async (file) => {
     const formData = new FormData();
@@ -77,6 +77,7 @@ export const ModalEditarAdmin = ({
   };
   const ActualizarProducto = async (e) => {
     e.preventDefault();
+    
     const producto = {
       Id: idProducto,
       Titulo: nombre,
@@ -102,9 +103,10 @@ export const ModalEditarAdmin = ({
       banner2 != image &&
       banner3 != image
     ) {
-      //document.getElementById("modal_editar").close();
-      const url =
-        "https://back-diana-production.up.railway.app/api/producto/actualizar";
+
+      document.getElementById("modal_editar").close();
+      const url ="https://back-diana-production.up.railway.app/api/producto/actualizar";
+      //const url ="http://localhost:8090/api/producto/actualizar";
       try {
         const response = await fetch(url, {
           method: "POST",
@@ -114,7 +116,7 @@ export const ModalEditarAdmin = ({
           },
           body: JSON.stringify(producto),
         });
-        ResetEditar();
+       
         if (response.status === 200) {
           const newProductos = productos.map((p) => {
             if (p.Id === idProducto) {
@@ -123,6 +125,8 @@ export const ModalEditarAdmin = ({
             return p;
           });
           setProductos(newProductos);
+          setPaso(paso + 1);
+          console.log(paso)
         }
       } catch (error) {
         console.error("Error al actualizar producto", error);
@@ -158,7 +162,11 @@ export const ModalEditarAdmin = ({
       setPreview(url);
     }
   };
-  useEffect(() => {}, [idProducto]);
+  useEffect(() => {
+    if (paso == 3) {
+     ResetEditar();
+    }
+  }, [idProducto, paso]);
   return (
     <dialog id="modal_editar" className="modal">
       <div className="modal-box w-11/12 max-w-5xl bg-white">
@@ -243,7 +251,10 @@ export const ModalEditarAdmin = ({
               <label>Descripción</label>
             </div>
             <div className="flex w-full justify-around">
-              <button className="btn-cancelar" onClick={ResetEditar}>
+              <button className="btn-cancelar" onClick={()=>{
+                document.getElementById("modal_editar").close();
+                ResetEditar();
+              }}>
                 Cancelar
               </button>
               <button className="btn-siguiente">Siguiente</button>
@@ -325,7 +336,7 @@ export const ModalEditarAdmin = ({
                 type="button"
                 className="btn-cancelar"
                 onClick={() => {
-                  setPaso(0);
+                  setPaso(paso - 1);
                 }}
               >
                 Atras
@@ -436,7 +447,7 @@ export const ModalEditarAdmin = ({
                 type="button"
                 className="btn-cancelar"
                 onClick={() => {
-                  setPaso(1);
+                  setPaso(paso - 1);
                 }}
               >
                 Atras

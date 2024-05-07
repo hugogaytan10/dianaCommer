@@ -6,6 +6,7 @@ import add from "./add.svg";
 import trash from "./trash.svg";
 import { ModalAgregarAdmin } from "./ModalAgregarAdmin";
 import { ModalEditarAdmin } from "./ModalEditarAdmin";
+import jsPDF from "jspdf";
 export const InicioAdmin = () => {
   const [loaded, setLoaded] = useState(false);
   const [productos, setProductos] = useState([]);
@@ -23,30 +24,37 @@ export const InicioAdmin = () => {
   const [stock, setStock] = useState(0);
   const [descuento, setDescuento] = useState(0);
 
-
   const handlerDelete = async (e) => {
     e.preventDefault();
     const url = `https://back-diana-production.up.railway.app/api/producto/eliminar/${idProducto}`;
+    //const url = `http://localhost:8090/api/producto/eliminar/${idProducto}`;
     const response = await fetch(url, {
       method: "PUT",
     });
     document.getElementById("my_eliminar").close();
   };
+  const exportPDF = async (e) => {
+    e.preventDefault();
+    //const url = `https://back-diana-production.up.railway.app/api/producto/eliminar/${idProducto}`;
+   const doc = new jsPDF();
+    
+
+  };
   useEffect(() => {
     const getProductos = async () => {
-      const url =
-        "https://back-diana-production.up.railway.app/api/producto/conseguir";
+      //const url ="https://back-diana-production.up.railway.app/api/producto/conseguir";
+      const url = "http://localhost:8090/api/producto/conseguir";
       const response = await fetch(url);
       const data = await response.json();
       setProductos(data);
     };
     getProductos();
   }, []);
-  useEffect(() => {
-  }, [banner, preview, productos]);
+  useEffect(() => {}, [banner, preview, productos]);
   return (
     <div>
-      <div className="flex w-full justify-end gap-2">
+      <div className="flex w-full justify-end gap-2 mt-4">
+       
         <img
           src={add}
           alt="agregar"
@@ -74,7 +82,7 @@ export const InicioAdmin = () => {
                 <img
                   src={producto.URLImagen}
                   alt="Shoes"
-                  className="object-cover h-full w-full"
+                  className="object-contain h-full w-full"
                   onLoad={() => setLoaded(true)}
                   style={{ display: loaded ? "block" : "none" }}
                   onClick={() => {

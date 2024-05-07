@@ -31,14 +31,14 @@ export const CarruselItem = (props) => {
   return (
     <div
       ref={carouselRef}
-      className="w-full carousel rounded-box h-96 overflow-auto "
+      className="w-full carousel carousel-center rounded-box h-96 overflow-auto "
       onScroll={handleScroll}
     >
       <div className="flex">
         {props.images.map((img, index) => (
           <div
             key={index}
-            className={`carousel-item w-full flex-shrink-0 flex justify-center items-center`}
+            className={`carousel-item w-full flex-shrink-0 `}
           >
             <img
               src={img}

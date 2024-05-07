@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 export const ModalAgregarAdmin = ({
   paso,
@@ -31,6 +31,7 @@ export const ModalAgregarAdmin = ({
 }) => {
   const InsertarProducto = async (e) => {
     e.preventDefault();
+
     const producto = {
       Titulo: nombre,
       Descripcion: descripcion,
@@ -58,19 +59,19 @@ export const ModalAgregarAdmin = ({
     ) {
       document.getElementById("modal_agregar").close();
       try {
-        const url =
-          "https://back-diana-production.up.railway.app/api/producto/agregar";
+        const url ="https://back-diana-production.up.railway.app/api/producto/agregar";
+        //const url = "http://localhost:8090/api/producto/agregar";
         const response = await fetch(url, {
           method: "POST",
           headers: {
-            'mode': 'cors',
+            mode: "cors",
             "Content-Type": "application/json",
           },
           body: JSON.stringify(producto),
         });
-        console.log(response);
         if (response.status === 200) {
           setProductos([...productos, producto]);
+          setPaso(paso + 1);
           Reset();
         }
       } catch (e) {
@@ -79,7 +80,7 @@ export const ModalAgregarAdmin = ({
     }
   };
   const Reset = () => {
-    setPaso(-1);
+    setPaso(0);
     setBanner(image);
     setBanner2(image);
     setBanner3(image);
@@ -150,6 +151,12 @@ export const ModalAgregarAdmin = ({
       console.error("Error al subir la imagen:", error);
     }
   };
+  useEffect(() => {
+    if (paso == 3) {
+      Reset();
+      setPaso(0);
+    }
+  }, [paso]);
   return (
     <dialog id="modal_agregar" className="modal">
       <div className="modal-box w-11/12 max-w-5xl bg-white">
@@ -234,7 +241,12 @@ export const ModalAgregarAdmin = ({
             <div className="flex w-full justify-around">
               <button
                 className="btn-cancelar"
-                onClick={() => document.getElementById("modal_agregar").close()}
+                onClick={() =>{
+                  document.getElementById("modal_agregar").close();
+                  Reset();
+                  setPaso(-1);
+                }
+                }
               >
                 Cancelar
               </button>
