@@ -7,6 +7,7 @@ import trash from "./trash.svg";
 import { ModalAgregarAdmin } from "./ModalAgregarAdmin";
 import { ModalEditarAdmin } from "./ModalEditarAdmin";
 import jsPDF from "jspdf";
+import { BtnImprimir } from "./BtnImprimir";
 export const InicioAdmin = () => {
   const [loaded, setLoaded] = useState(false);
   const [productos, setProductos] = useState([]);
@@ -54,7 +55,7 @@ export const InicioAdmin = () => {
   return (
     <div>
       <div className="flex w-full justify-end gap-2 mt-4">
-       
+       <BtnImprimir productos={productos}/>
         <img
           src={add}
           alt="agregar"
