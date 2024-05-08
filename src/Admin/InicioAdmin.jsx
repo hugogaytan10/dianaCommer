@@ -43,8 +43,8 @@ export const InicioAdmin = () => {
   };
   useEffect(() => {
     const getProductos = async () => {
-      //const url ="https://back-diana-production.up.railway.app/api/producto/conseguir";
-      const url = "http://localhost:8090/api/producto/conseguir";
+      const url ="https://back-diana-production.up.railway.app/api/producto/conseguir";
+      //const url = "http://localhost:8090/api/producto/conseguir";
       const response = await fetch(url);
       const data = await response.json();
       setProductos(data);
