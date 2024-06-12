@@ -17,6 +17,8 @@ const Filtrador = (props) => {
       if (tallasFiltered.length > 0) {
         setCardFilter((prev) => [...prev, card]);
       }
+      //close the modal
+      document.getElementById("modal_filtrar").close();
     });
     
     console.log(cardsFil)
@@ -26,20 +28,20 @@ const Filtrador = (props) => {
     <dialog id="modal_filtrar" className="modal">
       <div className="modal-box w-11/12 max-w-xl bg-white">
         <form method="dialog w-full" onSubmit={(e) => {}}>
-          <div className="w-full flex flex-wrap justify-around items-center mb-4">
+          <div className="w-full flex flex-wrap justify-around items-center mb-4 ">
             <input
               type="text"
               placeholder="23"
-              className="input input-bordered w-full max-w-32 text-center"
+              className="input input-bordered w-full max-w-32 text-center bg-white border-2 border-gray-600 placeholder:text-gray-800 text-gray-700"
               onChange={(e) => {
                 setRangeOne(e.target.value);
               }}
             />
-            <p>A</p>
+            <p className="text-gray-700">A</p>
             <input
               type="text"
               placeholder="26"
-              className="input input-bordered w-full max-w-32 text-center"
+              className="input input-bordered w-full max-w-32 text-center bg-white border-2 border-gray-600 placeholder:text-gray-800 text-gray-700"
               onChange={(e) => {
                 setRangeTwo(e.target.value);
               }}
