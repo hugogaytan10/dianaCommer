@@ -4,13 +4,18 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import './FormularioStripe.css';
+import "./FormularioStripe.css";
 export default function FormularioPago() {
   const stripe = useStripe();
   const elements = useElements();
 
   const [message, setMessage] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  
+  setTimeout(() => {
+    setIsLoading(false);
+  }, 1500);
+  
 
   useEffect(() => {
     if (!stripe) {
@@ -60,7 +65,6 @@ export default function FormularioPago() {
         // Make sure to change this to your payment completion page
         return_url: "https://www.calzadodiaz.com/pagoCompletado",
       },
-
     });
 
     // This point will only be reached if there is an immediate error when
@@ -82,11 +86,25 @@ export default function FormularioPago() {
   const paymentElementOptions = {
     layout: "tabs",
   };
-
+  if (isLoading) {
+    return (
+      <div className="spinner-screen">
+        <div className="spinner"></div>
+      </div>
+    );
+  }
   return (
-    <form id="payment-form" onSubmit={handleSubmit} className="formulario-stripe">
+    <form
+      id="payment-form"
+      onSubmit={handleSubmit}
+      className="formulario-stripe"
+    >
       <PaymentElement id="payment-element" options={paymentElementOptions} />
-      <button disabled={isLoading || !stripe || !elements} id="submit" className="btn-stripe">
+      <button
+        disabled={isLoading || !stripe || !elements}
+        id="submit"
+        className="btn-stripe"
+      >
         <span id="button-text">
           {isLoading ? <div className="spinner" id="spinner"></div> : "Pagar"}
         </span>

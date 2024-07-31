@@ -52,9 +52,7 @@ const styles = StyleSheet.create({
 
 // Componente que renderiza el PDF
 export const ImprimirDoc = ({ productos }) => {
-  useEffect(() => {
-    console.log("prueba", productos);
-  }, [productos]);
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>

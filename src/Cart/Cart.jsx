@@ -43,7 +43,7 @@ export const Cart = () => {
     <div>
       <div className="bg-white p-2">
         <NavLink
-          onClick={() => navigate(-1)}
+          to={"/"}
           className="bg-black  p-2 font-semibold w-10 h-10 flex items-center rounded-full"
         >
           <img alt="regresar" src={flecha} className="h-10 w-10" />

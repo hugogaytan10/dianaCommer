@@ -6,8 +6,9 @@ import add from "./add.svg";
 import trash from "./trash.svg";
 import { ModalAgregarAdmin } from "./ModalAgregarAdmin";
 import { ModalEditarAdmin } from "./ModalEditarAdmin";
-import jsPDF from "jspdf";
-import { BtnImprimir } from "./BtnImprimir";
+
+import {URL} from '../Const/Const'
+
 export const InicioAdmin = () => {
   const [loaded, setLoaded] = useState(false);
   const [productos, setProductos] = useState([]);
@@ -24,38 +25,36 @@ export const InicioAdmin = () => {
   const [precioVenta, setPrecioVenta] = useState(0);
   const [stock, setStock] = useState(0);
   const [descuento, setDescuento] = useState(0);
+  const [pdfLoader, setPdfLoader] = useState(true);
+
+  useEffect(() => {
+    const getProductos = async () => {
+      try {
+        const url = `${URL}/api/producto/conseguir`;
+        const response = await fetch(url);
+        const data = await response.json();
+        setProductos(data);
+        setPdfLoader(false);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+    getProductos();
+  }, []);
 
   const handlerDelete = async (e) => {
     e.preventDefault();
-    const url = `https://back-diana-production.up.railway.app/api/producto/eliminar/${idProducto}`;
-    //const url = `http://localhost:8090/api/producto/eliminar/${idProducto}`;
-    const response = await fetch(url, {
+    const url = `${URL}/api/producto/eliminar/${idProducto}`;
+    await fetch(url, {
       method: "PUT",
     });
     document.getElementById("my_eliminar").close();
   };
-  const exportPDF = async (e) => {
-    e.preventDefault();
-    //const url = `https://back-diana-production.up.railway.app/api/producto/eliminar/${idProducto}`;
-   const doc = new jsPDF();
-    
 
-  };
-  useEffect(() => {
-    const getProductos = async () => {
-      const url ="https://back-diana-production.up.railway.app/api/producto/conseguir";
-      //const url = "http://localhost:8090/api/producto/conseguir";
-      const response = await fetch(url);
-      const data = await response.json();
-      setProductos(data);
-    };
-    getProductos();
-  }, []);
-  useEffect(() => {}, [banner, preview, productos]);
   return (
     <div>
       <div className="flex w-full justify-end gap-2 mt-4">
-       <BtnImprimir productos={productos}/>
+      
         <img
           src={add}
           alt="agregar"
@@ -69,13 +68,11 @@ export const InicioAdmin = () => {
         />
       </div>
 
-      <div className="w-11/12 flex flex-wrap justify-between p-2 items-center m-auto">
+
+      <div className={pdfLoader ? 'none' : `w-11/12 flex flex-wrap justify-between p-2 items-center m-auto`}>
         {productos.map((producto) => (
           <div
-            className={`contenedor-card border-2  rounded-lg ${
-              producto.Id % 2 == 0 ? "mt-8" : "mt-0"
-            }
-            `}
+            className={`contenedor-card border-2  rounded-lg ${producto.Id % 2 === 0 ? "mt-8" : "mt-0"}`}
             key={`producto-${producto.Id}`}
           >
             <div className="card">
@@ -205,7 +202,7 @@ export const InicioAdmin = () => {
           </p>
           <div className="modal-action block w-full">
             <form
-              method="dialog "
+              method="dialog"
               onSubmit={(e) => {
                 handlerDelete(e);
               }}

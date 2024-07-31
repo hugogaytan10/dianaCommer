@@ -6,6 +6,7 @@ import perrito from "../assets/Perrito.webp";
 import { AppContext } from "../Context/AppContext";
 import { Carrusel } from "./Carrusel/Carrusel";
 import Filtrador from "./Filtrador/Filtrador";
+import { URL } from "../Const/Const";
 export const Home = () => {
   const contexto = useContext(AppContext);
   const [cards, setCards] = useState([]);
@@ -13,7 +14,7 @@ export const Home = () => {
 
   const getTennis = async () => {
     const url =
-      "https://back-diana-production.up.railway.app/api/producto/conseguir";
+      `${URL}/producto/conseguir`;
     const response = await fetch(url);
     const data = await response.json();
     setCards(data);

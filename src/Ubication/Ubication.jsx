@@ -36,14 +36,7 @@ export const Ubication = () => {
           </div>
         ) : (
           // Muestra el mapa una vez que isLoading es false
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d936.4971868778423!2d-101.18539148464376!3d20.134517049284533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842cfaea088744d3%3A0x1bca8f42c7445268!2sPlaza%20Textil%20Metropolitana!5e0!3m2!1ses-419!2smx!4v1708207540402!5m2!1ses-419!2smx"
-            height="450"
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className="w-full m-auto"
-          ></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d468.283008539001!2d-101.19212157974617!3d20.123027990910124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1722365151557!5m2!1ses-419!2smx" width="600" height="450"  allowFullScreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style={{margin: 'auto'}}></iframe>
         )}
       </div>
     </div>
