@@ -30,7 +30,7 @@ export const InicioAdmin = () => {
   useEffect(() => {
     const getProductos = async () => {
       try {
-        const url = `${URL}/api/producto/conseguir`;
+        const url = `${URL}/producto/conseguir`;
         const response = await fetch(url);
         const data = await response.json();
         setProductos(data);
@@ -44,7 +44,7 @@ export const InicioAdmin = () => {
 
   const handlerDelete = async (e) => {
     e.preventDefault();
-    const url = `${URL}/api/producto/eliminar/${idProducto}`;
+    const url = `${URL}/producto/eliminar/${idProducto}`;
     await fetch(url, {
       method: "PUT",
     });

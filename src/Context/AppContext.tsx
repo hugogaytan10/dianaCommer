@@ -9,7 +9,6 @@ type Props = {
 export const AppContext = createContext({} as AppContextState);
 
 const AppProvider: React.FC<Props> = ({ children }) => {
- 
   const [card, setCard] = useState<Card>({
     Titulo: "",
     Descripcion: "",
@@ -21,19 +20,20 @@ const AppProvider: React.FC<Props> = ({ children }) => {
     URLImagen: "",
     ImagenesCarrusel: [],
     ListaTallas: [],
-  
   });
   const [cart, setCart] = useState(0);
   const [user, setUser] = useState<User>({
+    Apellido: "",
+    Correo: "",
+    Contrasenia: "",
+    EstadoUsuario: "",
     Id: 0,
-    Email: "",
-    Password: "",
-    User: "",
-    Type: 0,
+    Nombre: "",
+    TipoUsuario: "",
   });
 
-   // Método para iniciar sesión
-   const login = (userData: User) => {
+  // Método para iniciar sesión
+  const login = (userData: User) => {
     setUser(userData);
     localStorage.setItem("user", JSON.stringify(userData)); // Guardar el usuario en el almacenamiento local
   };
@@ -41,16 +41,17 @@ const AppProvider: React.FC<Props> = ({ children }) => {
   // Método para cerrar sesión
   const logout = () => {
     setUser({
+      Apellido: "",
+      Correo: "",
+      Contrasenia: "",
+      EstadoUsuario: "",
       Id: 0,
-      Email: "",
-      Password: "",
-      User: "",
-      Type: 0,
+      Nombre: "",
+      TipoUsuario: "",
     });
     localStorage.removeItem("user");
   };
 
-  
   const memoizedValue = useMemo(
     () => ({
       card: card,

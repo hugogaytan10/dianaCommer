@@ -22,8 +22,8 @@ import { PagoCompletado } from "../Stripe/PagoCompletado";
 import { ElegirMetodoPago } from "../MetodoPago/ElegirMetodoPago";
 import { Intro } from "../Blog/CalzadoDiazIntro/Intro";
 import { Reportes } from "../Admin/Reportes";
-import { Login } from "../Login/Login";
 import { ProtectedRoute } from "./RutasProtegidas";
+import { AuthPage } from "../Login/AuthPage";
 
 export const Rutas = () => {
   const contexto = useContext(AppContext);
@@ -90,6 +90,36 @@ export const Rutas = () => {
                         Ubicación
                       </NavLink>
                     </li>
+                    {
+                      contexto.user.TipoUsuario === "1" && (
+                        <>
+                        <li>
+                        <NavLink
+                          className={({ isActive }) =>
+                            isActive
+                              ? "active-link text-lg bg-primary text-white"
+                              : "text-white text-lg"
+                          }
+                          to="/admin"
+                        >
+                          Productos
+                        </NavLink>
+                      </li>
+                        <li>
+                        <NavLink
+                          className={({ isActive }) =>
+                            isActive
+                              ? "active-link text-lg bg-primary text-white"
+                              : "text-white text-lg"
+                          }
+                          to="/admin/Reporte"
+                        >
+                          Reportes
+                        </NavLink>
+                      </li>
+                      </>
+                      )
+                    }
                   </ul>
                 </div>
               </div>
@@ -97,7 +127,7 @@ export const Rutas = () => {
 
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="/login" element={<AuthPage />} />
               <Route path="/item/:id" element={<Item />} />
               <Route path="/item" element={<Item />} />
               <Route path="/cart" element={<Cart />} />
@@ -175,6 +205,42 @@ export const Rutas = () => {
                     Ubicación
                   </NavLink>
                 </li>
+                {
+                      contexto.user.TipoUsuario == "1" && (
+                        <>
+                        <li>
+                        <NavLink
+                          className={({ isActive }) =>
+                            isActive
+                              ? "active-link text-lg bg-primary text-white"
+                              : "text-white text-lg"
+                          }
+                          to="/admin"
+                          onClick={() => {
+                            document.getElementById("my-drawer-3").checked = false;
+                          }}
+                        >
+                          Productos
+                        </NavLink>
+                      </li>
+                        <li>
+                        <NavLink
+                          className={({ isActive }) =>
+                            isActive
+                              ? "active-link text-lg bg-primary text-white"
+                              : "text-white text-lg"
+                          }
+                          to="/admin/Reporte"
+                          onClick={() => {
+                            document.getElementById("my-drawer-3").checked = false;
+                          }}
+                        >
+                          Reportes
+                        </NavLink>
+                      </li>
+                      </>
+                      )
+                    }
               </ul>
             </div>
             </HeaderWrapper>
