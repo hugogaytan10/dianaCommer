@@ -125,8 +125,7 @@ export const ModalEditarAdmin = ({
             return p;
           });
           setProductos(newProductos);
-          setPaso(paso + 1);
-          console.log(paso)
+          ResetEditar();
         }
       } catch (error) {
         console.error("Error al actualizar producto", error);
@@ -251,8 +250,9 @@ export const ModalEditarAdmin = ({
               <label>Descripción</label>
             </div>
             <div className="flex w-full justify-around">
-              <button className="btn-cancelar" onClick={()=>{
+              <button className="btn-cancelar" onClick={(e)=>{
                 document.getElementById("modal_editar").close();
+                e.preventDefault();
                 ResetEditar();
               }}>
                 Cancelar
