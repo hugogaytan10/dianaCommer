@@ -29,7 +29,7 @@ export const Card = (props) => {
         </NavLink>
       </figure>
       <div className="card-body p-1">
-        <h2 className="text-black card-title font-semibold flex justify-between mt-1">
+        <h2 className="text-black text-md md:text-lg font-semibold flex justify-between mt-1">
           {title}
         </h2>
         <div className="card-actions flex justify-between items-end w-full mt-2 ">
