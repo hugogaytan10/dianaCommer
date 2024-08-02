@@ -164,7 +164,7 @@ export const AuthPage: React.FC = () => {
         >
           <form
             action="#"
-            className="w-full"
+            className="w-full form-login"
             onSubmit={(e) => {
               creatAccount(e);
             }}
@@ -198,6 +198,7 @@ export const AuthPage: React.FC = () => {
         >
           <form
             action="#"
+            className="form-login"
             onSubmit={(e) => {
               login(e);
             }}
