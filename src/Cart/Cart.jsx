@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import flecha from "../assets/arrow-back.svg";
 import carrito from "../assets/cart-outline.svg";
 import "./cart.css";
+import { AppContext } from "../Context/AppContext";
+import { Modal } from "../utilities/Modal";
+import { AuthPageCart } from "../Login/AuthPageCart";
 export const Cart = () => {
+  const context = useContext(AppContext);
   const [cart, setCart] = useState([]);
   const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
   const UpdateAmount = (id, talla, accion) => {
     if (accion === 1) {
       const newCart = cart.map((item) => {
@@ -35,10 +40,19 @@ export const Cart = () => {
       localStorage.setItem("items", JSON.stringify(newCart));
     }
   };
+  //vericamos si esta logueado para poder encargar
+  const metodoPago = async () => {
+    if (!context.user.Correo) {
+      setShowModal(true);
+    } else {
+      navigate("/metodoPago");
+    }
+  };
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem("items")) || [];
     setCart(cart);
   }, []);
+
   return (
     <div>
       <div className="bg-white p-2">
@@ -126,6 +140,14 @@ export const Cart = () => {
               MXN
             </p>
           </div>
+          {/*
+          <div
+            onClick={metodoPago}
+            className="mt-2 m-auto w-2/4 p-1 block bg-primary text-center text-gray-50 font-semibold rounded-sm"
+          >
+            Pedir
+          </div>
+           */}
           {cart?.length > 0 && (
             <NavLink
               to={"/metodoPago"}
@@ -136,6 +158,9 @@ export const Cart = () => {
           )}
         </div>
       )}
+      <Modal show={showModal} onClose={() => setShowModal(false)}>
+        <AuthPageCart show={showModal} onClose={() => setShowModal(false)} />
+      </Modal>
     </div>
   );
 };

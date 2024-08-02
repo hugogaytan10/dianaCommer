@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import "./Login.css";
 import { GoogleLogin, CredentialResponse } from "@react-oauth/google";
-import { useNavigate } from "react-router-dom";
 import { loginToServer, signUpToServer } from "./Peticiones";
 import { AppContext } from "../Context/AppContext";
 import { jwtDecode } from "jwt-decode";
@@ -10,9 +9,15 @@ interface DecodedToken {
   email: string;
   picture: string;
 }
-export const AuthPage: React.FC = () => {
+interface AuthPageCartProps {
+  show: boolean;
+  onClose: () => void;
+}
+export const AuthPageCart: React.FC<AuthPageCartProps> = ({
+  show,
+  onClose,
+}) => {
   const context = useContext(AppContext);
-  const navigate = useNavigate();
 
   // Referencias a los elementos del DOM
   const signUpButtonRef = useRef<HTMLButtonElement>(null);
@@ -79,11 +84,9 @@ export const AuthPage: React.FC = () => {
     if (name && email && password) {
       const dataSignUp = await signUpToServer(name, email, password);
       if (dataSignUp) {
-        //si todo fue cvalido guardar el correo y contraseña en el localstorage
-        //como un objeto user
         localStorage.setItem("user", JSON.stringify({ email, password }));
         context.setUser(dataSignUp);
-        navigate("/");
+        onClose(); // Mover aquí para cerrar solo si el registro fue exitoso
       }
     }
   };
@@ -94,18 +97,13 @@ export const AuthPage: React.FC = () => {
     const password = e.target[1].value;
     const dataLogin = await loginToServer(email, password);
     if (dataLogin) {
-      //si todo fue cvalido guardar el correo y contraseña en el localstorage
-      //como un objeto user
+      console.log("entro al login", dataLogin);
       localStorage.setItem("user", JSON.stringify({ email, password }));
       context.setUser(dataLogin);
-      //redireccionar a la pagina dependiendo el tipo de usuario
-      if (dataLogin.TipoUsuario == "0") {
-        navigate("/");
-      } else {
-        navigate("/admin");
-      }
+      onClose(); // Mover aquí para cerrar solo si el inicio de sesión fue exitoso
     }
   };
+
   const responseMessage = async (response: CredentialResponse) => {
     if (response.credential) {
       const token = response.credential;
@@ -118,35 +116,20 @@ export const AuthPage: React.FC = () => {
             decoded.email,
             ""
           );
-          context.setUser(dataSignUp);
+          if (dataSignUp) {
+            context.setUser(dataSignUp);
+            onClose(); // Mover aquí para cerrar solo si el registro fue exitoso
+          }
+          return;
         }
         context.setUser(dataLogin);
-        navigate("/");
+        onClose(); // Mover aquí para cerrar solo si el inicio de sesión fue exitoso
       } catch (error) {
         console.error("Error decoding token: ", error);
       }
     }
   };
-  const errorMessage = (error) => {
-    console.log(error);
-  };
-  useEffect(() => {
-    //verificamos si contamos con un usuario en el localstorage
-    const user = localStorage.getItem("user");
-    if (user) {
-      const { email, password } = JSON.parse(user);
-      loginToServer(email, password).then((data) => {
-        if (data) {
-          context.setUser(data);
-          if (data.TipoUsuario == "0") {
-            navigate("/");
-          } else {
-            navigate("/admin");
-          }
-        }
-      });
-    }
-  }, []);
+
   return (
     <div className="w-full h-screen flex justify-center items-center">
       <div className="container" id="container" ref={containerRef}>
