@@ -8,10 +8,12 @@ import { ModalAgregarAdmin } from "./ModalAgregarAdmin";
 import { ModalEditarAdmin } from "./ModalEditarAdmin";
 
 import {URL} from '../Const/Const'
+import { HeaderAdmin } from "./HeaderAdmin";
 
 export const InicioAdmin = () => {
   const [loaded, setLoaded] = useState(false);
   const [productos, setProductos] = useState([]);
+  const [productosFiltrados, setProductosFiltrados] = useState([]);
   const [idProducto, setIdProducto] = useState(0);
   const [paso, setPaso] = useState(0);
   const [tallas, setTallas] = useState([]);
@@ -34,6 +36,7 @@ export const InicioAdmin = () => {
         const response = await fetch(url);
         const data = await response.json();
         setProductos(data);
+        setProductosFiltrados(data);
         setPdfLoader(false);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -53,6 +56,9 @@ export const InicioAdmin = () => {
 
   return (
     <div>
+      {
+        /*
+      
       <div className="flex w-full justify-end gap-2 mt-4">
       
         <img
@@ -67,12 +73,14 @@ export const InicioAdmin = () => {
           className="h-8 w-8 rounded-full bg-white border-primary border-2 cursor-pointer flex items-center justify-center"
         />
       </div>
+      */}
+      <HeaderAdmin productosFiltrados={productosFiltrados} productos={productos} setProductosFiltrados={setProductosFiltrados} />
 
 
       <div className={pdfLoader ? 'none' : `w-11/12 flex flex-wrap justify-between p-2 items-center m-auto`}>
-        {productos.map((producto) => (
+        {productosFiltrados.map((producto) => (
           <div
-            className={`contenedor-card border-2  rounded-lg ${producto.Id % 2 === 0 ? "mt-8" : "mt-0"}`}
+            className={`contenedor-card border-b-2  rounded-md ${producto.Id % 2 === 0 ? "mt-8" : "mt-0"}`}
             key={`producto-${producto.Id}`}
           >
             <div className="card">
@@ -110,13 +118,13 @@ export const InicioAdmin = () => {
               </figure>
               <div className="card-body p-1">
                 <div className="card-actions flex justify-between items-end w-full mt-2 ">
-                  <h2 className="text-black card-title font-semibold flex justify-between mt-1">
+                  <h2 className="text-black text-md md:text-lg font-semibold flex justify-between mt-1">
                     {producto.Titulo}
                   </h2>
                   <img
                     src={trash}
                     alt="trash"
-                    className="h-10 w-10"
+                    className="h-6 w-6"
                     onClick={() => {
                       document.getElementById("my_eliminar").showModal();
                       setPreview(producto.URLImagen);
