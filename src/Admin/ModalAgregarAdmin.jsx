@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-
+import {URL} from '../Const/Const'
 export const ModalAgregarAdmin = ({
   paso,
   setPaso,
@@ -59,8 +59,7 @@ export const ModalAgregarAdmin = ({
     ) {
       document.getElementById("modal_agregar").close();
       try {
-        const url ="https://back-diana-production.up.railway.app/api/producto/agregar";
-        //const url = "http://localhost:8090/api/producto/agregar";
+        const url =`${URL}/producto/agregar`;
         const response = await fetch(url, {
           method: "POST",
           headers: {

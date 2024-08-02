@@ -5,6 +5,7 @@ import "./item.css";
 import { NavLink, useParams } from "react-router-dom";
 import flecha from "../assets/arrow-back.svg";
 import { CarruselItem } from "./CarruselItem";
+import { URL } from "../Const/Const";
 export const Item = (props) => {
   const parametros = useParams();
   const contexto = useContext(AppContext);
@@ -79,7 +80,7 @@ export const Item = (props) => {
     //UBICATE ON THE TOP OF THE SCREEN
     window.scrollTo(0, 0);
     if (id) {
-      const url = `https://back-diana-production.up.railway.app/api/producto/conseguir/${id}`;
+      const url = `${URL}/producto/conseguir/${id}`;
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
@@ -96,7 +97,7 @@ export const Item = (props) => {
           });
         });
     } else {
-      const url = `https://back-diana-production.up.railway.app/api/producto/conseguir/${1}`;
+      const url = `${URL}/producto/conseguir/${1}`;
       fetch(url)
         .then((response) => response.json())
         .then((data) => {

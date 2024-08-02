@@ -8,53 +8,55 @@ import {
   StyleSheet,
 } from "@react-pdf/renderer";
 
-// Define estilos usando StyleSheet de react-pdf
+
 const styles = StyleSheet.create({
   page: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
     padding: 10,
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
   },
   card: {
-    backgroundColor: '#fff',
-    border: "1px solid #e5e7eb",
-    margin: "5px",
-    borderRadius: "5px",
-    //flexBasis: "100%", // Ajusta según el diseño deseado
+    backgroundColor: '#ffffff',
+    border: "1pt solid #e5e7eb",
+    margin: 5,
+    borderRadius: 5,
     padding: 5,
     width: "30%",
+    height: 180,
+    boxSizing: "border-box",
   },
   image: {
-    height: "200px",
+    height: 100,
     width: "100%",
   },
   title: {
     fontSize: 14,
     marginTop: 5,
   },
-  conteinerTallas:{
-    display: "flex",
+  conteinerTallas: {
     flexDirection: "row",
+    flexWrap: "wrap",
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
   },
-  talla:{
-    fontSize: 12,
+  talla: {
+    fontSize: 8,
     marginTop: 5,
-    border: "1px solid #e5e7eb",
-    borderRadius: "100px",
-    padding: 10,
-  }
+    border: "0.7pt solid #e5e7eb",
+    borderRadius: 10,
+    padding: 4,
+    textAlign: "center",
+    width: 20, // Tamaño fijo o ajustable
+  },
 });
+
 
 // Componente que renderiza el PDF
 export const ImprimirDoc = ({ productos }) => {
-  useEffect(() => {
-    console.log("prueba", productos);
-  }, [productos]);
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
