@@ -26,10 +26,13 @@ const styles = StyleSheet.create({
     width: "30%",
     height: 180,
     boxSizing: "border-box",
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems:'center'
   },
   image: {
-    height: 80,
-    width: 80,
+    height: 120,
+    width: 120,
     objectFit: "contain"
   },
   title: {
