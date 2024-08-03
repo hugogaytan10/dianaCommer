@@ -28,8 +28,8 @@ const styles = StyleSheet.create({
     boxSizing: "border-box",
   },
   image: {
-    height: 100,
-    width: "100%",
+    height: 80,
+    width: 80,
   },
   title: {
     fontSize: 14,
