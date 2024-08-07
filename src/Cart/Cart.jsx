@@ -140,15 +140,21 @@ export const Cart = () => {
               MXN
             </p>
           </div>
+          {/*
+          <div
+            onClick={metodoPago}
+            className="mt-2 m-auto w-2/4 p-1 block bg-primary text-center text-gray-50 font-semibold rounded-sm"
+          >
+            Pedir
+          </div>
+           */}
           {cart?.length > 0 && (
-            
-            <div
-              onClick={metodoPago}
+            <NavLink
+              to={"/metodoPago"}
               className="mt-2 m-auto w-2/4 p-1 block bg-primary text-center text-gray-50 font-semibold rounded-sm"
             >
               Pedir
-            </div>
-             
+            </NavLink>
           )}
         </div>
       )}

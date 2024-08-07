@@ -24,6 +24,7 @@ import { Intro } from "../Blog/CalzadoDiazIntro/Intro";
 import { Reportes } from "../Admin/Reportes";
 import { ProtectedRoute } from "./RutasProtegidas";
 import { AuthPage } from "../Login/AuthPage";
+import { Caliz } from "../caliz/Caliz";
 
 export const Rutas = () => {
   const contexto = useContext(AppContext);
@@ -136,6 +137,7 @@ export const Rutas = () => {
               <Route path="/metodoPago" element={<ElegirMetodoPago />} />
               <Route path="/pago" element={<MainStripe />} />
               <Route path="/pagoCompletado" element={<PagoCompletado />} />
+              <Route path="/caliz" element={<Caliz />} />
               <Route
                 path="/admin"
                 element={
