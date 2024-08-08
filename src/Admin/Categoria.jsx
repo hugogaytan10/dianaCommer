@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./InicioAdmin.css";
+//import "./Categoria.css";
 import image from "./images-outline.svg";
 import lupa from "./search.svg";
 import add from "./add.svg";
@@ -10,7 +10,7 @@ import { ModalEditarAdmin } from "./ModalEditarAdmin";
 import {URL} from '../Const/Const'
 import { HeaderAdmin } from "./HeaderAdmin";
 
-export const InicioAdmin = () => {
+export const Categoria = () => {
   const [loaded, setLoaded] = useState(false);
   const [productos, setProductos] = useState([]);
   const [productosFiltrados, setProductosFiltrados] = useState([]);
