@@ -1,11 +1,11 @@
 .btn-cancelar, .btn-siguiente{
     background-color: white;
     color: #303030;
-    border: 1px solid #303030;
     padding: 0.4em;
     border-radius: 5px;
     cursor: pointer;
     width: 45%;
+    font-weight: 600;
 }
 
 .btn-siguiente{
