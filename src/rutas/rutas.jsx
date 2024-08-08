@@ -15,6 +15,7 @@ import { useContext, useEffect } from "react";
 import { AppContext } from "../Context/AppContext";
 import { Ubication } from "../Ubication/Ubication";
 import { InicioAdmin } from "../Admin/InicioAdmin";
+import { Categoria } from "../Admin/Categoria";
 import { Footer } from "../Footer/Footer";
 import { Politica } from "../Politica/Politica";
 import { MainStripe } from "../Stripe/MainStripe";
@@ -41,7 +42,7 @@ export const Rutas = () => {
 
           <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content flex flex-col h-full min-w-full">
-           <HeaderWrapper>
+            <HeaderWrapper>
               <div className="w-full navbar bg-primary">
                 <div className="flex-none lg:hidden">
                   <label
@@ -94,37 +95,49 @@ export const Rutas = () => {
                     {
                       contexto.user.TipoUsuario === 0 && (
                         <>
-                        <li>
-                        <NavLink
-                          className={({ isActive }) =>
-                            isActive
-                              ? "active-link text-lg bg-primary text-white"
-                              : "text-white text-lg"
-                          }
-                          to="/admin"
-                        >
-                          Productos
-                        </NavLink>
-                      </li>
-                        <li>
-                        <NavLink
-                          className={({ isActive }) =>
-                            isActive
-                              ? "active-link text-lg bg-primary text-white"
-                              : "text-white text-lg"
-                          }
-                          to="/admin/Reporte"
-                        >
-                          Reportes
-                        </NavLink>
-                      </li>
-                      </>
+                          <li>
+                            <NavLink
+                              className={({ isActive }) =>
+                                isActive
+                                  ? "active-link text-lg bg-primary text-white"
+                                  : "text-white text-lg"
+                              }
+                              to="/admin"
+                            >
+                              Productos
+                            </NavLink>
+                          </li>
+                          <li>
+                            <NavLink
+                              className={({ isActive }) =>
+                                isActive
+                                  ? "active-link text-lg bg-primary text-white"
+                                  : "text-white text-lg"
+                              }
+                              to="/admin/categorias"
+                            >
+                              Categorias
+                            </NavLink>
+                          </li>
+                          <li>
+                            <NavLink
+                              className={({ isActive }) =>
+                                isActive
+                                  ? "active-link text-lg bg-primary text-white"
+                                  : "text-white text-lg"
+                              }
+                              to="/admin/Reporte"
+                            >
+                              Reportes
+                            </NavLink>
+                          </li>
+                        </>
                       )
                     }
                   </ul>
                 </div>
               </div>
-              </HeaderWrapper>
+            </HeaderWrapper>
 
             <Routes>
               <Route path="/" element={<Home />} />
@@ -143,6 +156,14 @@ export const Rutas = () => {
                 element={
                   <ProtectedRoute>
                     <InicioAdmin />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/categorias"
+                element={
+                  <ProtectedRoute>
+                    <Categoria />
                   </ProtectedRoute>
                 }
               />
@@ -208,9 +229,9 @@ export const Rutas = () => {
                   </NavLink>
                 </li>
                 {
-                      contexto.user.TipoUsuario == 0 && (
-                        <>
-                        <li>
+                  contexto.user.TipoUsuario == 0 && (
+                    <>
+                      <li>
                         <NavLink
                           className={({ isActive }) =>
                             isActive
@@ -225,7 +246,22 @@ export const Rutas = () => {
                           Productos
                         </NavLink>
                       </li>
-                        <li>
+                      <li>
+                        <NavLink
+                          className={({ isActive }) =>
+                            isActive
+                              ? "active-link text-lg bg-primary text-white"
+                              : "text-white text-lg"
+                          }
+                          to="/admin/categorias"
+                          onClick={() => {
+                            document.getElementById("my-drawer-3").checked = false;
+                          }}
+                        >
+                          Categorias
+                        </NavLink>
+                      </li>
+                      <li>
                         <NavLink
                           className={({ isActive }) =>
                             isActive
@@ -240,12 +276,12 @@ export const Rutas = () => {
                           Reportes
                         </NavLink>
                       </li>
-                      </>
-                      )
-                    }
+                    </>
+                  )
+                }
               </ul>
             </div>
-            </HeaderWrapper>
+          </HeaderWrapper>
         </div>
         <FooterWrapper />
       </BrowserRouter>
@@ -261,6 +297,7 @@ const FooterWrapper = () => {
     "/pagoCompletado",
     "/admin",
     "/admin/Reporte",
+    "/admin/categorias",
     "/login",
   ];
 
