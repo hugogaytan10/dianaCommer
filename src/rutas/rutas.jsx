@@ -91,7 +91,7 @@ export const Rutas = () => {
                       </NavLink>
                     </li>
                     {
-                      contexto.user.TipoUsuario === "1" && (
+                      contexto.user.TipoUsuario === 0 && (
                         <>
                         <li>
                         <NavLink
@@ -206,7 +206,7 @@ export const Rutas = () => {
                   </NavLink>
                 </li>
                 {
-                      contexto.user.TipoUsuario == "1" && (
+                      contexto.user.TipoUsuario == 0 && (
                         <>
                         <li>
                         <NavLink

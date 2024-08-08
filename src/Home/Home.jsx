@@ -21,6 +21,7 @@ export const Home = () => {
     setCardFilter(data);
   };
   useEffect(() => {
+    console.log('usuario; ', contexto.user)
     const itemsCart = JSON.parse(localStorage.getItem("items")) || [];
     contexto.setCart(itemsCart.length);
     getTennis();

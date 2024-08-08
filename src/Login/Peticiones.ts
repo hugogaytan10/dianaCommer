@@ -1,6 +1,8 @@
 import {URL} from '../Const/Const'
 
 export const loginToServer = async (email: string, password: string) => {
+    console.log('email: ', email)
+    console.log('contraseña: ', password)
     const response = await fetch(`${URL}/login`, {
         method: 'POST',
         headers: {
@@ -8,7 +10,9 @@ export const loginToServer = async (email: string, password: string) => {
         },
         body: JSON.stringify({Correo: email, Contrasenia: password})
     })
+    //console.log('respuesta pedorra: ', response.json())
     return response.json();
+
 }
 
 export const signUpToServer = async (name: string, email: string, password: string) => {

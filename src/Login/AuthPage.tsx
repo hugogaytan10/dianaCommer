@@ -83,6 +83,8 @@ export const AuthPage: React.FC = () => {
         //como un objeto user
         localStorage.setItem("user", JSON.stringify({ email, password }));
         context.setUser(dataSignUp);
+        console.log('data inicio: ', dataSignUp)
+        console.log('setUser: ', context.user)
         navigate("/");
       }
     }
@@ -99,7 +101,10 @@ export const AuthPage: React.FC = () => {
       localStorage.setItem("user", JSON.stringify({ email, password }));
       context.setUser(dataLogin);
       //redireccionar a la pagina dependiendo el tipo de usuario
-      if (dataLogin.TipoUsuario == "0") {
+      console.log('data inicio: ', dataLogin)
+      console.log('setUser: ', context.user)
+      console.log('mira mama, estamos valiendo shit', dataLogin.TipoUsuario)
+      if (dataLogin.TipoUsuario == 1) {
         navigate("/");
       } else {
         navigate("/admin");
@@ -138,7 +143,7 @@ export const AuthPage: React.FC = () => {
       loginToServer(email, password).then((data) => {
         if (data) {
           context.setUser(data);
-          if (data.TipoUsuario == "0") {
+          if (data.TipoUsuario == 1) {
             navigate("/");
           } else {
             navigate("/admin");
