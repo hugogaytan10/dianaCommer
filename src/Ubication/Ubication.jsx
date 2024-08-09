@@ -20,7 +20,7 @@ export const Ubication = () => {
         Ubicación
       </h3>
       <p className="text-center text-black m-2">
-        Plaza Metropilitana de Moroleón Local <strong>14 A</strong>
+        Venustiano Carranza <strong>#23</strong>
       </p>
       <p className="text-center text-black m-2 font-semibold">
         445-111-33-70 o 445-129-09-37

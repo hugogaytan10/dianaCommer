@@ -63,7 +63,7 @@ export const Cart = () => {
           <img alt="regresar" src={flecha} className="h-10 w-10" />
         </NavLink>
       </div>
-      <div className="flex flex-wrap contenedor-cart overflow-auto bg-white">
+      <div className="flex flex-wrap contenedor-cart overflow-auto bg-white pb-20">
         {cart.length > 0 ? (
           cart?.map((item) => {
             return (

@@ -32,7 +32,7 @@ const Filtrador = (props) => {
             <input
               type="text"
               placeholder="23"
-              className="input input-bordered w-full max-w-32 text-center bg-white border-2 border-gray-600 placeholder:text-gray-800 text-gray-700"
+              className="input input-bordered w-full max-w-32 text-center bg-white border-2 border-gray-300 placeholder:text-gray-300 text-gray-700"
               onChange={(e) => {
                 setRangeOne(e.target.value);
               }}
@@ -41,7 +41,7 @@ const Filtrador = (props) => {
             <input
               type="text"
               placeholder="26"
-              className="input input-bordered w-full max-w-32 text-center bg-white border-2 border-gray-600 placeholder:text-gray-800 text-gray-700"
+              className="input input-bordered w-full max-w-32 text-center bg-white border-2 border-gray-300 placeholder:text-gray-300 text-gray-700"
               onChange={(e) => {
                 setRangeTwo(e.target.value);
               }}

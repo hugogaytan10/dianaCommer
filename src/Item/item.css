@@ -11,7 +11,8 @@
 }
 .contador{
     width: 100%;
-    border: 0.5px solid #000;
+    border-radius: 25px;
+    border: 1px solid #d8d8d8;
 }
 .agregar-al-carrito{
     display: block;
@@ -23,6 +24,7 @@
     padding: 0.2em;
     text-align: center;
     font-weight: 600;
+    border-radius: 25px;
 }
 .aviso{
     position: fixed;
