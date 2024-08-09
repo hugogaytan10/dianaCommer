@@ -18,6 +18,10 @@
     margin-bottom: 20px;
 }
 
+.card{
+    background-color: #303030;
+}
+
 .form-group input {
     width: 100%;
     padding: 10px;
@@ -110,9 +114,9 @@
     align-items: center;
   }
   
-  .contenedor-img label:hover {
+  /*.contenedor-img label:hover {
     background-color: #e0e0e0;
-  }
+  }*/
 
 .btn-talla{
     background-color: #fff;

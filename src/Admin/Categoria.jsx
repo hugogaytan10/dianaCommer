@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-//import "./Categoria.css";
+import "./Categoria.css";
 import image from "./images-outline.svg";
 import lupa from "./search.svg";
 import add from "./add.svg";
@@ -56,33 +56,17 @@ export const Categoria = () => {
 
   return (
     <div>
-      {/*   
-      <div className="flex w-full justify-end gap-2 mt-4">
-      
-        <img
-          src={add}
-          alt="agregar"
-          className="h-8 w-8 rounded-full bg-white border-primary border-2 cursor-pointer flex items-center justify-center"
-          onClick={() => document.getElementById("modal_agregar").showModal()}
-        />
-        <img
-          src={lupa}
-          alt="Buscar"
-          className="h-8 w-8 rounded-full bg-white border-primary border-2 cursor-pointer flex items-center justify-center"
-        />
-      </div>
-      */}
       <HeaderAdmin productosFiltrados={productosFiltrados} productos={productos} setProductosFiltrados={setProductosFiltrados} />
 
 
       <div className={pdfLoader ? 'none' : `w-11/12 flex flex-wrap justify-between p-2 items-center m-auto`}>
         {productosFiltrados.map((producto) => (
           <div
-            className={`contenedor-card border-b-2  rounded-md ${producto.Id % 2 === 0 ? "mt-8" : "mt-0"}`}
+            className={`contenedor-card border-b-2 w-7/12 h-20 rounded-md mx-auto ${producto.Id % 2 === 0 ? "mt-6" : "mt-6"}`}
             key={`producto-${producto.Id}`}
           >
             <div className="card">
-              <figure className="h-3/4">
+              {/*<figure className="h-3">
                 <img
                   src={producto.URLImagen}
                   alt="Shoes"
@@ -113,7 +97,7 @@ export const Categoria = () => {
                     <div className="skeleton h-4 w-full"></div>
                   </div>
                 )}
-              </figure>
+              </figure>*/}
               <div className="card-body p-1">
                 <div className="card-actions flex justify-between items-end w-full mt-2 ">
                   <h2 className="text-black text-md md:text-lg font-semibold flex justify-between mt-1">
