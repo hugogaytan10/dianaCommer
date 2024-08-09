@@ -19,6 +19,7 @@ export const Home = () => {
     const data = await response.json();
     setCards(data);
     setCardFilter(data);
+    console.log(data)
   };
   useEffect(() => {
     const itemsCart = JSON.parse(localStorage.getItem("items")) || [];

@@ -31,14 +31,14 @@ export const Favoritos = ({ idProducto, showModal, setShowModal }) => {
         <img
           src={favoritoRelleno}
           alt="favoritos"
-          className="w-6 h-6"
+          className="w-6 h-6 hover:scale-110 cursor-pointer transition-all"
           onClick={agregarFavoritos}
         />
       ) : (
         <img
           src={favoritos}
           alt="favoritos"
-          className="w-6 h-6"
+          className="w-6 h-6 hover:scale-110 cursor-pointer transition-all"
           onClick={agregarFavoritos}
         />
       )}

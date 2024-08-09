@@ -27,7 +27,7 @@ const Filtrador = (props) => {
   return (
     <dialog id="modal_filtrar" className="modal">
       <div className="modal-box w-11/12 max-w-xl bg-white">
-        <form method="dialog w-full" onSubmit={(e) => {}}>
+        <form method="dialog" onSubmit={(e) => {}}>
           <div className="w-full flex flex-wrap justify-around items-center mb-4 ">
             <input
               type="text"
@@ -50,7 +50,7 @@ const Filtrador = (props) => {
 
           <div className="flex w-full justify-around">
             <button
-              className="btn-cancelar"
+              className="btn-cancelar border-none"
               onClick={(e) => {
                 e.preventDefault();
                 document.getElementById("modal_filtrar").close();

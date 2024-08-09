@@ -12,7 +12,7 @@ export const Item = (props) => {
   const handleResize = () => {
     setIsLargeScreen(window.innerWidth > 768);
   };
-
+  
   useEffect(() => {
     window.addEventListener("resize", handleResize);
     return () => {

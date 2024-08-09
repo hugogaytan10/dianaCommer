@@ -9,12 +9,14 @@ import { URL } from "../Const/Const";
 import { Favoritos } from "./Favoritos/Favoritos";
 import { Modal } from "../utilities/Modal";
 import { AuthPageCart } from "../Login/AuthPageCart";
+import { CarruselRelacionados } from "./CarruselRelacionados/CarruselRelacionados";
 export const ItemMobile = ({id}) => {
   const contexto = useContext(AppContext);
   const [oldPrice, setOldPrice] = useState(0);
   const [count, setCount] = useState(1);
   const [talla, setTalla] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [ImagenesCarrusel, setImagenesCarrusel] = useState([]);
 
   const AddToCart = () => {
     if (talla !== "") {
@@ -116,7 +118,13 @@ export const ItemMobile = ({id}) => {
           });
         });
     }
-  }, [contexto.card.Id]);
+    const url = `${URL}/producto/conseguir/aleatorio`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        setImagenesCarrusel(data);
+      });
+  }, [id]);
 
   return (
     <div>
@@ -176,9 +184,9 @@ export const ItemMobile = ({id}) => {
                     talla === tallaMap.Talla
                       ? "bg-black text-gray-200"
                       : "bg-white text-black"
-                  } w-8 h-8 text-center rounded-full border-black text-xs  talla text-black ml-2`}
+                  } w-1/4 h-10 text-center rounded-lg border-black text-xs  talla text-black font-semibold`}
                 >
-                  {tallaMap.Talla}
+                  CM {tallaMap.Talla}
                 </button>
               );
             })}
@@ -213,6 +221,10 @@ export const ItemMobile = ({id}) => {
         >
           Agregar Al carrito
         </button>
+      </div>
+
+      <div className="block w-full">
+        <CarruselRelacionados item={ImagenesCarrusel} />
       </div>
 
       <div className="aviso">
