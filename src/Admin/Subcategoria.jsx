@@ -70,13 +70,6 @@ export const Categoria = () => {
           <div
             className={`contenedor-card border-b-2 w-7/12 h-20 rounded-md mx-auto ${producto.Id % 2 === 0 ? "mt-6" : "mt-6"}`}
             key={`producto-${producto.Id}`}
-            /*onClick={() => {
-              const modal = document.getElementById("modal_editar");
-              setNombre(producto.Nombre)
-              if (modal && typeof modal.showModal === "function") {
-                modal.showModal();
-              }
-            }}*/
           >
             <div className="card" id="a">
               <div className="card-body p-1">
@@ -85,26 +78,6 @@ export const Categoria = () => {
                     {producto.Nombre}
                   </h2>
                   <div className="flex justify-between w-1/5">
-                    <img
-                      src={trash}
-                      alt="trash"
-                      className="h-6 w-6"
-                      onClick={() => {
-                        document.getElementById("my_eliminar").showModal();
-                        setNombre(producto.Nombre);
-                        setIdProducto(producto.Id);
-                      }}
-                    />
-                    <img
-                      src={trash}
-                      alt="trash"
-                      className="h-6 w-6"
-                      onClick={() => {
-                        document.getElementById("my_eliminar").showModal();
-                        setNombre(producto.Nombre);
-                        setIdProducto(producto.Id);
-                      }}
-                    />
                     <img
                       src={trash}
                       alt="trash"
