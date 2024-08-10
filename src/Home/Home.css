@@ -88,10 +88,16 @@
     scale: 0.9;
     cursor: pointer;
 }
+.card#a{
+    width: 100%;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
 
-
-
-
+.card#a:hover{
+    scale: 1;
+    cursor: pointer;
+}
 
 @media (min-width: 570px) {
 

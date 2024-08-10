@@ -113,6 +113,7 @@ export const ModalEditarAdmin = ({
           mode: "cors",
           headers: {
             "Content-Type": "application/json",
+            token: context.user.Token
           },
           body: JSON.stringify(producto),
         });

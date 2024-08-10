@@ -35,6 +35,7 @@ export const InicioAdmin = () => {
         const url = `${URL}/producto/conseguir`;
         const response = await fetch(url);
         const data = await response.json();
+        console.log(data)
         setProductos(data);
         setProductosFiltrados(data);
         setPdfLoader(false);
