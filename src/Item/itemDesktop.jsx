@@ -207,8 +207,8 @@ export const ItemDesktop = ({ id }) => {
                   })}
               </div>
 
-              <div className="block w-full m-auto mt-5  ">
-                <div className="flex flex-wrap w-full justify-around contador font-semibold text-lg text-black  `">
+              <div className="block w-3/4  m-auto mt-5  ">
+                <div className="flex flex-wrap w-full justify-around contador font-semibold text-lg text-black`">
                   <button
                     className="text-black"
                     onClick={() => {
@@ -233,7 +233,7 @@ export const ItemDesktop = ({ id }) => {
 
               <button
                 onClick={AddToCart}
-                className="agregar-al-carrito mb-10 mt-3 w-full"
+                className="agregar-al-carrito mb-10 mt-3 w-3/4 p-4"
               >
                 Comprar ahora
               </button>
@@ -247,6 +247,9 @@ export const ItemDesktop = ({ id }) => {
       </div>
 
       <div className="block w-full">
+        <h2 className="text-left text-black font-bold text-2xl mt-4">
+          Productos Relacionados
+        </h2>
         <CarruselRelacionados item={ImagenesCarrusel} />
       </div>
 

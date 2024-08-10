@@ -7,6 +7,8 @@ const Filtrador = (props) => {
   const [rangeTwo, setRangeTwo] = useState(0);
   const Filtrar = (e) => {
     e.preventDefault();
+    if(e.target.value === "") return;
+    console.log(e.target.value);
     //create a function to filter the cards by tallas, but tallas is an array
     setCardFilter([]);
     const cardsFil = cards.filter((card) => {
@@ -21,7 +23,6 @@ const Filtrador = (props) => {
       document.getElementById("modal_filtrar").close();
     });
     
-    console.log(cardsFil)
   };
   useEffect(() => {}, []);
   return (

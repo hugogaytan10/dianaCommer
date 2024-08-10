@@ -35,7 +35,7 @@ export const Card = (props) => {
         <div className="card-actions flex justify-between items-end w-full mt-2 ">
           <p className="text-gray-400 font-thin text-sm">{price} MXN</p>
           <NavLink
-            to={"/item"}
+            to={`/item/${id}`}
           >
             <img src={carritoAzul} alt="carrito" />
           </NavLink>

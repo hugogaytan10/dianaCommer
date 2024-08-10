@@ -3,6 +3,7 @@ import favoritos from "../../assets/corazon.svg";
 import { AppContext } from "../../Context/AppContext";
 import favoritoRelleno from "../../assets/corazonRelleno.svg";
 import { set } from "@cloudinary/url-gen/actions/variable";
+import { agregarFavorito } from "./Peticiones";
 export const Favoritos = ({ idProducto, showModal, setShowModal }) => {
   const context = useContext(AppContext);
   const [favorito, setFavorito] = useState(false);
@@ -14,6 +15,7 @@ export const Favoritos = ({ idProducto, showModal, setShowModal }) => {
     } 
     if(!favorito){
       //peticion para guardar en la base de datos
+      agregarFavorito(idProducto, context.user.Id, context.user.Token);
       setFavorito(!favorito);
       const aviso = document.querySelector(".aviso");
       aviso.classList.add("mostrar");

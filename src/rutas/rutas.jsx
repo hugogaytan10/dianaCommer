@@ -11,6 +11,7 @@ import { Cart } from "../Cart/Cart";
 import { Profile } from "../Profile/Profile";
 import menu from "../assets/menu.svg";
 import carrito from "../assets/cart-outline.svg";
+import usuario from "../assets/userIcon.svg";
 import { useContext, useEffect } from "react";
 import { AppContext } from "../Context/AppContext";
 import { Ubication } from "../Ubication/Ubication";
@@ -26,6 +27,7 @@ import { Reportes } from "../Admin/Reportes";
 import { ProtectedRoute } from "./RutasProtegidas";
 import { AuthPage } from "../Login/AuthPage";
 import { Caliz } from "../caliz/Caliz";
+import { ListaDeseos } from "../ListaDeseos/ListaDeseos";
 
 export const Rutas = () => {
   const contexto = useContext(AppContext);
@@ -66,6 +68,11 @@ export const Rutas = () => {
                     <img src={carrito} alt="carrito" />
                   </NavLink>
                 </div>
+                <div className="contenedor-carrito">
+                  <NavLink to="/login">
+                    <img src={usuario} alt="usuario" className="w-8 h-8"/>
+                  </NavLink>
+                </div>
                 <div className="flex-none hidden lg:block">
                   <ul className="menu menu-horizontal">
                     <li>
@@ -78,6 +85,18 @@ export const Rutas = () => {
                         to="/"
                       >
                         Inicio
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive
+                            ? "active-link text-lg bg-primary text-white"
+                            : "text-white text-lg"
+                        }
+                        to="/listaDeseos"
+                      >
+                        Favoritos
                       </NavLink>
                     </li>
                     <li>
@@ -151,6 +170,7 @@ export const Rutas = () => {
               <Route path="/pago" element={<MainStripe />} />
               <Route path="/pagoCompletado" element={<PagoCompletado />} />
               <Route path="/caliz" element={<Caliz />} />
+              <Route path="/listaDeseos" element={<ListaDeseos />} />
               <Route
                 path="/admin"
                 element={
@@ -200,6 +220,19 @@ export const Rutas = () => {
                     }}
                   >
                     Inicio
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/listaDeseos"
+                    className={({ isActive }) =>
+                      isActive ? "active-link text-lg" : "text-white text-lg"
+                    }
+                    onClick={() => {
+                      document.getElementById("my-drawer-3").checked = false;
+                    }}
+                  >
+                    Favoritos
                   </NavLink>
                 </li>
                 <li>

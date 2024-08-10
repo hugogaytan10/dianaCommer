@@ -224,6 +224,9 @@ export const ItemMobile = ({id}) => {
       </div>
 
       <div className="block w-full">
+        <h2 className="text-left text-black font-bold text-2xl mt-4">
+          Productos Relacionados
+        </h2>
         <CarruselRelacionados item={ImagenesCarrusel} />
       </div>
 

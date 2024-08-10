@@ -12,9 +12,7 @@ export default function FormularioPago() {
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   
-  setTimeout(() => {
-    setIsLoading(false);
-  }, 1500);
+
   
 
   useEffect(() => {
@@ -87,6 +85,9 @@ export default function FormularioPago() {
     layout: "tabs",
   };
   if (isLoading) {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
     return (
       <div className="spinner-screen">
         <div className="spinner"></div>
