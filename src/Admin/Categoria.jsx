@@ -9,6 +9,7 @@ import { ModalEditarAdmin } from "./ModalEditarAdmin";
 
 import {URL} from '../Const/Const'
 import { HeaderAdmin } from "./HeaderAdmin";
+import { ModalAgregarCategoria } from "./ModalAgregarCategoria";
 
 export const Categoria = () => {
   const [loaded, setLoaded] = useState(false);
@@ -32,7 +33,7 @@ export const Categoria = () => {
   useEffect(() => {
     const getProductos = async () => {
       try {
-        const url = `${URL}/producto/conseguir`;
+        const url = `${URL}/categoria/conseguir`;
         const response = await fetch(url);
         const data = await response.json();
         setProductos(data);
@@ -65,43 +66,11 @@ export const Categoria = () => {
             className={`contenedor-card border-b-2 w-7/12 h-20 rounded-md mx-auto ${producto.Id % 2 === 0 ? "mt-6" : "mt-6"}`}
             key={`producto-${producto.Id}`}
           >
-            <div className="card">
-              {/*<figure className="h-3">
-                <img
-                  src={producto.URLImagen}
-                  alt="Shoes"
-                  className="object-contain h-full w-full"
-                  onLoad={() => setLoaded(true)}
-                  style={{ display: loaded ? "block" : "none" }}
-                  onClick={() => {
-                    setIdProducto(producto.Id);
-                    setPreview(producto.URLImagen);
-                    setNombre(producto.Titulo);
-                    setDescripcion(producto.Descripcion);
-                    setPrecioAdquisicion(producto.PrecioAdquisicion);
-                    setPrecioVenta(producto.PrecioVenta);
-                    setStock(producto.Stock);
-                    setDescuento(producto.Descuento);
-                    setTallas(producto.ListaTallas);
-                    setBanner(producto.ImagenesCarrusel[0]);
-                    setBanner2(producto.ImagenesCarrusel[1]);
-                    setBanner3(producto.ImagenesCarrusel[2]);
-                    document.getElementById("modal_editar").showModal();
-                  }}
-                />
-                {!loaded && (
-                  <div className="flex flex-col gap-4 w-52">
-                    <div className="skeleton h-32 w-full"></div>
-                    <div className="skeleton h-4 w-28"></div>
-                    <div className="skeleton h-4 w-full"></div>
-                    <div className="skeleton h-4 w-full"></div>
-                  </div>
-                )}
-              </figure>*/}
+            <div className="card" id="a">
               <div className="card-body p-1">
                 <div className="card-actions flex justify-between items-end w-full mt-2 ">
                   <h2 className="text-black text-md md:text-lg font-semibold flex justify-between mt-1">
-                    {producto.Titulo}
+                    {producto.Nombre}
                   </h2>
                   <img
                     src={trash}
@@ -121,34 +90,9 @@ export const Categoria = () => {
         ))}
       </div>
 
-      <ModalAgregarAdmin
-        paso={paso}
-        setPaso={setPaso}
-        image={image}
+      <ModalAgregarCategoria
         nombre={nombre}
         setNombre={setNombre}
-        descripcion={descripcion}
-        setDescripcion={setDescripcion}
-        tallas={tallas}
-        setTallas={setTallas}
-        precioAdquisicion={precioAdquisicion}
-        setPrecioAdquisicion={setPrecioAdquisicion}
-        precioVenta={precioVenta}
-        setPrecioVenta={setPrecioVenta}
-        stock={stock}
-        setStock={setStock}
-        descuento={descuento}
-        setDescuento={setDescuento}
-        preview={preview}
-        setPreview={setPreview}
-        banner={banner}
-        setBanner={setBanner}
-        banner2={banner2}
-        setBanner2={setBanner2}
-        banner3={banner3}
-        setBanner3={setBanner3}
-        productos={productos}
-        setProductos={setProductos}
       />
 
       <ModalEditarAdmin
