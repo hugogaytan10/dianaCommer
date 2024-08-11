@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
-import {URL} from '../Const/Const'
+import React, { useContext, useEffect } from "react";
+import { URL } from "../Const/Const";
+import { AppContext } from "../Context/AppContext";
 export const ModalAgregarAdmin = ({
   paso,
   setPaso,
@@ -29,25 +30,26 @@ export const ModalAgregarAdmin = ({
   productos,
   setProductos,
 }) => {
+  const context = useContext(AppContext);
   const InsertarProducto = async (e) => {
     e.preventDefault();
 
     const producto = {
-      Titulo: nombre,
-      Descripcion: descripcion,
-      PrecioAdquisicion: precioAdquisicion,
-      Descuento: descuento,
-      PrecioVenta: precioVenta,
-      Stock: stock,
+      Producto: {
+        Titulo: nombre,
+        Descripcion: descripcion,
+        PrecioAdquisicion: precioAdquisicion,
+        LineaId: 1,
+        Descuento: descuento,
+        PrecioVenta: precioVenta,
+        URLImagen: preview || "",
+      },
+      ImgCarrusel: [banner || "", banner2 || "", banner3 || ""],
       Tallas: tallas,
-      URLImagen: preview,
-      ImgCarrusel: [banner, banner2, banner3],
-      ListaTallas: tallas,
     };
-    if (
-      nombre != "" &&
+ 
+    if (nombre != "" &&
       descripcion != "" &&
-      tallas.length > 0 &&
       precioAdquisicion > 0 &&
       precioVenta > 0 &&
       stock > 0 &&
@@ -59,12 +61,13 @@ export const ModalAgregarAdmin = ({
     ) {
       document.getElementById("modal_agregar").close();
       try {
-        const url =`${URL}/producto/agregar`;
+        const url = `${URL}/producto/agregar`;
         const response = await fetch(url, {
           method: "POST",
           headers: {
             mode: "cors",
             "Content-Type": "application/json",
+            token: context.user.Token,
           },
           body: JSON.stringify(producto),
         });
@@ -240,12 +243,11 @@ export const ModalAgregarAdmin = ({
             <div className="flex w-full justify-around">
               <button
                 className="btn-cancelar"
-                onClick={() =>{
+                onClick={() => {
                   document.getElementById("modal_agregar").close();
                   Reset();
                   setPaso(-1);
-                }
-                }
+                }}
               >
                 Cancelar
               </button>
@@ -297,19 +299,6 @@ export const ModalAgregarAdmin = ({
               <input
                 type="number"
                 placeholder=" "
-                id="stock"
-                name="stock"
-                className="bg-white"
-                onChange={(e) => {
-                  setStock(e.target.value);
-                }}
-              />
-              <label>Cantidad en inventario</label>
-            </div>
-            <div className="form-group">
-              <input
-                type="number"
-                placeholder=" "
                 id="descuento"
                 name="descuento"
                 className="bg-white"
@@ -347,25 +336,44 @@ export const ModalAgregarAdmin = ({
             }}
           >
             {/* if there is a button, it will close the modal */}
-            <div className="form-group w-full flex items-center gap-2">
-              <input
-                type="number"
-                placeholder=" "
-                id="talla"
-                name="talla"
-                className="bg-white "
-              />
-              <label>Talla</label>
+            <div className="form-group w-full flex items-start gap-2">
+              <div className="form-group">
+                <input
+                  type="number"
+                  placeholder=" "
+                  id="talla"
+                  name="talla"
+                  className="bg-white "
+                />
+                <label>Talla</label>
+              </div>
+
+              <div className="form-group">
+                <input
+                  type="number"
+                  placeholder=" "
+                  id="stock"
+                  name="stock"
+                  className="bg-white"
+                  onChange={(e) => {
+                    setStock(e.target.value);
+                  }}
+                />
+                <label>Stock</label>
+              </div>
+
               <button
                 type="button"
                 onClick={() => {
-                  setTallas([
-                    ...tallas,
-                    document.getElementById("talla").value,
-                  ]);
+                  const nuevaTalla = {
+                    Talla: document.getElementById("talla").value,
+                    Stock: document.getElementById("stock").value,
+                  };
+                  setTallas([...tallas, nuevaTalla]);
                   document.getElementById("talla").value = "";
+                  document.getElementById("stock").value = "";
                 }}
-                className="btn-siguiente text-primary"
+                className="btn-siguiente h-12 text-primary border-none"
               >
                 Agregar
               </button>
@@ -433,7 +441,7 @@ export const ModalAgregarAdmin = ({
             <div className="flex w-full justify-around ">
               <button
                 type="button"
-                className="btn-cancelar"
+                className="btn-cancelar border-none"
                 onClick={() => {
                   setPaso(paso - 1);
                 }}
