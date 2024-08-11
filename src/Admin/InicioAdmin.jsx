@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./InicioAdmin.css";
-import image from "./images-outline.svg";
-import lupa from "./search.svg";
-import add from "./add.svg";
-import trash from "./trash.svg";
+import image from "../assets/images-outline.svg";
+import trash from "../assets/trash.svg";
 import { ModalAgregarAdmin } from "./ModalAgregarAdmin";
 import { ModalEditarAdmin } from "./ModalEditarAdmin";
 

@@ -374,8 +374,8 @@ export const ModalAgregarAdmin = ({
               {tallas &&
                 tallas.length > 0 &&
                 tallas.map((talla, index) => (
-                  <div className="btn-talla" key={`talla-${talla}`}>
-                    <p id={`talla-${talla}`}>{talla}</p>
+                  <div className="btn-talla" key={`talla-${talla.Talla}`}>
+                    <p id={`talla-${talla}`}>{talla.Talla}</p>
                     <button
                       className="btn-eliminar-talla"
                       onClick={() => {

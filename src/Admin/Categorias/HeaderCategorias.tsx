@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import lupa from "../assets/search.svg";
+import lupa from "../../assets/search.svg";
 import "./HeaderAdmin.css";
 
 type HeaderAdminProps = {
-  productosFiltrados: any[]; // Replace 'any' with the actual type of 'productosFiltrados'
-  productos: any[]; // Replace 'any' with the actual type of 'productos'
-  setProductosFiltrados: (productos: any[]) => void; // Replace 'any' with the actual type of 'productos'
+  categoriasFiltradas: any[]; // Replace 'any' with the actual type of 'productosFiltrados'
+  categorias: any[]; // Replace 'any' with the actual type of 'productos'
+  setCategoriasFiltradas: (productos: any[]) => void; // Replace 'any' with the actual type of 'productos'
 };
 
-export const HeaderAdmin = ({
-  productosFiltrados,
-  productos,
-  setProductosFiltrados
+export const HeaderCategorias = ({
+  categoriasFiltradas,
+  categorias,
+  setCategoriasFiltradas
 }: HeaderAdminProps) => {
   const [showInput, setShowInput] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -20,10 +20,10 @@ export const HeaderAdmin = ({
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
     //vamos a iterar sobre los productos y vamos a filtrar los que contengan el texto que estamos buscando
-    const filtro = productos.filter((producto) =>
-      producto.Titulo.toLowerCase().includes(event.target.value.toLowerCase())
+    const filtro = categorias.filter((categoria) =>
+      categoria.Nombre.toLowerCase().includes(event.target.value.toLowerCase())
     );
-    setProductosFiltrados(filtro);
+    setCategoriasFiltradas(filtro);
   };
 
   return (
@@ -32,7 +32,7 @@ export const HeaderAdmin = ({
         className= "h-8 w-8 rounded-full bg-primary border-primary border-2 cursor-pointer flex items-center justify-center"
         onClick={() =>
           (
-            document.getElementById("modal_agregar") as HTMLDialogElement
+            document.getElementById("modal_agregar_categoria") as HTMLDialogElement
           )?.showModal?.()
         }
         tabIndex={0}

@@ -387,8 +387,8 @@ export const ModalEditarAdmin = ({
               {tallas &&
                 tallas.length > 0 &&
                 tallas.map((talla, index) => (
-                  <div className="btn-talla" key={`talla-${talla}-editar`}>
-                    <p id={`talla-${talla}-editar`}>{talla}</p>
+                  <div className="btn-talla" key={`talla-${talla.Talla}-editar`}>
+                    <p id={`talla-${talla}-editar`}>{talla.Talla}</p>
                     <button
                       className="btn-eliminar-talla"
                       onClick={() => {

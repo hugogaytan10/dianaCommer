@@ -16,7 +16,7 @@ import { useContext, useEffect } from "react";
 import { AppContext } from "../Context/AppContext";
 import { Ubication } from "../Ubication/Ubication";
 import { InicioAdmin } from "../Admin/InicioAdmin";
-import { Categoria } from "../Admin/Categoria";
+import { Categoria } from "../Admin/Categorias/Categoria";
 import { Footer } from "../Footer/Footer";
 import { Politica } from "../Politica/Politica";
 import { MainStripe } from "../Stripe/MainStripe";

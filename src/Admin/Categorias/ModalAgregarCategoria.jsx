@@ -1,14 +1,10 @@
-import React, { useContext, useEffect } from "react";
-import {URL} from '../Const/Const'
-import { AppContext } from "../Context/AppContext";
-export const ModalEditarCategoria = ({
-  id,
-  nombre,
-  setNombre,
-}) => {
-  console.log({nombre})
+import React, { useContext, useState } from "react";
+import {URL} from '../../Const/Const'
+import { AppContext } from "../../Context/AppContext";
+export const ModalAgregarCategoria = ({actualizar, setActualizar}) => {
+  const [nombre, setNombre] = useState("");
   const context = useContext(AppContext);
-  const EditarCategoria = async (e) => {
+  const InsertarCategoria = async (e) => {
     e.preventDefault();
     const categoria = {
       Nombre: nombre
@@ -16,9 +12,9 @@ export const ModalEditarCategoria = ({
     if (
       nombre != "" 
     ) {
-      document.getElementById("modal_editar").close();
+      document.getElementById("modal_agregar_categoria").close();
       try {
-        const url =`${URL}/categoria/editar`;
+        const url =`${URL}/categoria/agregar`;
         const response = await fetch(url, {
           method: "POST",
           headers: {
@@ -29,7 +25,7 @@ export const ModalEditarCategoria = ({
           body: JSON.stringify(categoria),
         });
         if (response.status === 200) {
-          setCategorias([...categorias, categoria]);
+          setActualizar(!actualizar);
           Reset();
         }
       } catch (e) {
@@ -40,32 +36,31 @@ export const ModalEditarCategoria = ({
   const Reset = () => {
     setNombre("");
   };
+
+ /* useEffect(() => {
+    if (paso == 3) {
+      Reset();
+      setPaso(0);
+    }
+  }, [paso]);*/
   return (
-    <dialog id="modal_editar" className="modal">
-      <div className="modal-box w-11/12 max-w-5xl bg-white">
-        <div className="flex flex-wrap w-full justify-around">
-          <div
-            id="pasoUno"
-            className={`mt-4 h-16 w-16 bg-indigo-800 text-white rounded-full flex items-center justify-center font-bold text-2xl`}
-          >
-            1
-          </div>
-        </div>
+    <dialog id="modal_agregar_categoria" className="modal">
+      <div className="modal-box w-11/12  bg-white">
+        <h2 className="text-gray-800">Agregar Categoría</h2>
         <div
-          className={`h-96 modal-action block m-auto bg-white mt-10 transition-all md:w-2/4 text-gray-600`}
-          id="divPasoUno"
+          className={`modal-action block m-auto bg-white mt-10 transition-all  text-gray-600`}
         >
           <form
             method="dialog w-full"
             onSubmit={(e) => {
-              EditarCategoria(e);
+              InsertarCategoria(e);
             }}
           >
 
             <div className="form-group">
               <input
                 type="text"
-                placeholder={JSON.stringify(nombre)}
+                placeholder=" "
                 id="nombreArticulo"
                 name="nombreArticulo"
                 className="bg-white"
@@ -77,16 +72,16 @@ export const ModalEditarCategoria = ({
             </div>
             <div className="flex w-full justify-around">
               <button
-                className="btn-cancelar"
+                className="btn-cancelar border-none"
                 onClick={() =>{
-                  document.getElementById("modal_editar").close();
+                  document.getElementById("modal_agregar_categoria").close();
                   Reset();
                 }
                 }
               >
                 Cancelar
               </button>
-              <button className="btn-siguiente">Editar</button>
+              <button className="btn-siguiente">Guardar</button>
             </div>
           </form>
         </div>
