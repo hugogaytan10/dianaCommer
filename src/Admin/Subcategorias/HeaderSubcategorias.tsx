@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import lupa from "../../assets/search.svg";
+import subcategory from "../../assets/subcategory.svg";
 import "./HeaderAdmin.css";
-import {  NavLink } from "react-router-dom";
 
 type HeaderAdminProps = {
-  categoriasFiltradas: any[]; // Replace 'any' with the actual type of 'productosFiltrados'
-  categorias: any[]; // Replace 'any' with the actual type of 'productos'
-  setCategoriasFiltradas: (productos: any[]) => void; // Replace 'any' with the actual type of 'productos'
+  subcategoriasFiltradas: any[]; // Replace 'any' with the actual type of 'productosFiltrados'
+  subcategorias: any[]; // Replace 'any' with the actual type of 'productos'
+  setSubcategoriasFiltradas: (productos: any[]) => void; // Replace 'any' with the actual type of 'productos'
 };
 
-export const HeaderCategorias = ({
-  categoriasFiltradas,
-  categorias,
-  setCategoriasFiltradas
+export const HeaderSubcategorias = ({
+  subcategoriasFiltradas,
+  subcategorias,
+  setSubcategoriasFiltradas
 }: HeaderAdminProps) => {
   const [showInput, setShowInput] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -21,23 +21,19 @@ export const HeaderCategorias = ({
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
     //vamos a iterar sobre los productos y vamos a filtrar los que contengan el texto que estamos buscando
-    const filtro = categorias.filter((categoria) =>
-      categoria.Nombre.toLowerCase().includes(event.target.value.toLowerCase())
+    const filtro = subcategorias.filter((subcategoria) =>
+      subcategoria.Nombre.toLowerCase().includes(event.target.value.toLowerCase())
     );
-    setCategoriasFiltradas(filtro);
+    setSubcategoriasFiltradas(filtro);
   };
 
   return (
     <div className="flex w-full justify-end gap-2 mt-4">
-
-      <NavLink to="/admin/subcategorias">
-          Agregar subcategoria
-      </NavLink>
       <button
         className="h-8 w-8 rounded-full bg-primary border-primary border-2 cursor-pointer flex items-center justify-center"
         onClick={() =>
           (
-            document.getElementById("modal_agregar_categoria") as HTMLDialogElement
+            document.getElementById("modal_agregar_subcategoria") as HTMLDialogElement
           )?.showModal?.()
         }
         tabIndex={0}

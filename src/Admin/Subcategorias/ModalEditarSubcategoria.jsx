@@ -1,23 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
 import { URL } from "../../Const/Const";
 import { AppContext } from "../../Context/AppContext";
-import { getSubcategorias } from "./Peticiones";
-export const ModalEditarCategoria = ({actualizar, setActualizar, Id, nombre, setNombre }) => {
+export const ModalEditarSubcategoria = ({actualizar, setActualizar, Id, nombre, setNombre }) => {
   const context = useContext(AppContext);
   const [seEdito, setSeEdito] = useState(false);
-  const [subcategorias, setSubcategorias] = useState([]);
-
-  const EditarCategoria = async (e) => {
+  const EditarSubcategoria = async (e) => {
     e.preventDefault();
-    const categoria = {
+    const subcategoria = {
       Id: Id,
       Nombre: nombre,
     };
-    console.log(categoria);
+    console.log(subcategoria);
     if (nombre != "") {
-      document.getElementById("modal_editar_categoria").close();
+      document.getElementById("modal_editar_subcategoria").close();
       try {
-        const url = `${URL}/categoria/actualizar`;
+        const url = `${URL}/subcategoria/actualizar`;
         const response = await fetch(url, {
           method: "PUT",
           headers: {
@@ -25,7 +22,7 @@ export const ModalEditarCategoria = ({actualizar, setActualizar, Id, nombre, set
             "Content-Type": "application/json",
             token: context.user.Token,
           },
-          body: JSON.stringify(categoria),
+          body: JSON.stringify(subcategoria),
         });
         if (response.status === 200) {
           setSeEdito(true);
@@ -45,15 +42,8 @@ export const ModalEditarCategoria = ({actualizar, setActualizar, Id, nombre, set
       setSeEdito(false);
     }
   }, [nombre, seEdito]);
-
-  useEffect(() => {
-    getSubcategorias().then((data) => {
-      setSubcategorias(data);
-    });
-  }, [actualizar]);
-
   return (
-    <dialog id="modal_editar_categoria" className="modal">
+    <dialog id="modal_editar_subcategoria" className="modal">
       <div className="modal-box w-11/12  bg-white">
         <h2 className="text-gray-800">Editar Categoría</h2>
         <div
@@ -62,7 +52,7 @@ export const ModalEditarCategoria = ({actualizar, setActualizar, Id, nombre, set
           <form
             method="dialog w-full"
             onSubmit={(e) => {
-              EditarCategoria(e);
+              EditarSubcategoria(e);
             }}
           >
             <div className="form-group">
@@ -79,24 +69,11 @@ export const ModalEditarCategoria = ({actualizar, setActualizar, Id, nombre, set
               />
               <label>Nombre del artículo</label>
             </div>
-
-            <div className="form-group">
-              <select
-              className="bg-white">
-                <option className="text-gray-800" value="">Selecciona una Subcategoria</option>
-                {subcategorias.map((subcategoria) => (
-                  <option className="text-gray-800" key={subcategoria.Id} value={subcategoria.Id}>
-                    {subcategoria.Nombre}
-                  </option>
-                ))}
-              </select>
-            </div>
-
             <div className="flex w-full justify-around">
               <button
                 className="btn-cancelar border-none"
                 onClick={() => {
-                  document.getElementById("modal_editar_categoria").close();
+                  document.getElementById("modal_editar_subcategoria").close();
                   Reset();
                 }}
               >

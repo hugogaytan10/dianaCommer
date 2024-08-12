@@ -1,0 +1,147 @@
+.btn-cancelar, .btn-siguiente{
+    background-color: white;
+    color: #303030;
+    border: 1px solid #303030;
+    padding: 0.4em;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 45%;
+}
+
+.btn-siguiente{
+    background-color: #303030;
+    color: white;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+.form-group label {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    font-size: 14px;
+    color: #777;
+    transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: rgba(55,48,163,1);
+    outline: none;
+}
+
+.form-group input+label,
+.form-group textarea+label, 
+.form-group input:not(:placeholder-shown)+label {
+    top: -6px;
+    font-size: 12px;
+    color: rgba(55,48,163,1);
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 8px;
+}
+.contenedor-img{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+.img-previa{
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 100%;
+    position: absolute;
+    border: 1px solid rgba(55,48,163,1);
+    
+}
+.contenedor-img input[type="file"] {
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+    z-index: -1;
+    position: absolute;
+  }
+  
+  .contenedor-img label {
+    /* Estilos para tu etiqueta; haz que parezca un botón */
+    background-color: #fff;
+    border: 1px solid rgba(55,48,163,1);
+    padding: 10px;
+    border-radius: 100%;
+    display: inline-block;
+    cursor: pointer;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+  }
+  
+  /*.contenedor-img label:hover {
+    background-color: #e0e0e0;
+  }*/
+
+.btn-talla{
+    background-color: #fff;
+    border: 1px solid #303030;
+    color: #303030;
+    padding: 0.4em;
+    cursor: pointer;
+    margin: 0.5em;
+    position: relative;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  .btn-eliminar-talla{
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    padding: 0.1em;
+    border-radius: 100%;
+    cursor: pointer;
+    position: absolute;
+    top: -2px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

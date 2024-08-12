@@ -1,7 +1,7 @@
 import { URL } from "../../Const/Const";
-export const getCategorias = async () => {
+export const getSubcategorias = async () => {
   try {
-    const url = `${URL}/categoria/conseguir`;
+    const url = `${URL}/subcategoria/conseguir`;
     const response = await fetch(url);
     const data = await response.json();
     return data;
@@ -11,9 +11,9 @@ export const getCategorias = async () => {
   }
 };
 
-export const eliminarCategoria = async (id: number, token: string) => {
+export const eliminarSubcategoria = async (id: number, token: string) => {
   try {
-    const url = `${URL}/categoria/eliminar/${id}`;
+    const url = `${URL}/subcategoria/eliminar/${id}`;
     const response = await fetch(url, {
       method: "PUT",
       headers: {
@@ -27,17 +27,5 @@ export const eliminarCategoria = async (id: number, token: string) => {
   } catch (error) {
     console.error("Error fetching products:", error);
     return false;
-  }
-};
-
-export const getSubcategorias = async () => {
-  try {
-    const url = `${URL}/subcategoria/conseguir`;
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching products:", error);
-    return [];
   }
 };

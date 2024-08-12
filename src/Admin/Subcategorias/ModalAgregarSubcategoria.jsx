@@ -1,24 +1,22 @@
-import React, { useContext, useState, useEffect } from "react";
-import { URL } from '../../Const/Const'
+import React, { useContext, useState } from "react";
+import {URL} from '../../Const/Const'
 import { AppContext } from "../../Context/AppContext";
-import { getSubcategorias } from "./Peticiones";
-
-export const ModalAgregarCategoria = ({ actualizar, setActualizar }) => {
+export const ModalAgregarSubcategoria = ({actualizar, setActualizar}) => {
   const [nombre, setNombre] = useState("");
-  const [subcategorias, setSubcategorias] = useState([]);
   const context = useContext(AppContext);
-
-  const InsertarCategoria = async (e) => {
+  const InsertarSubcategoria = async (e) => {
     e.preventDefault();
-    const categoria = {
-      Nombre: nombre
+    const subcategoria = {
+      Nombre: nombre,
+      //CategoriaId hardcodeado por el momento 
+      CategoriaId: 1
     };
     if (
-      nombre != ""
+      nombre != "" 
     ) {
-      document.getElementById("modal_agregar_categoria").close();
+      document.getElementById("modal_agregar_subcategoria").close();
       try {
-        const url = `${URL}/categoria/agregar`;
+        const url =`${URL}/subcategoria/agregar`;
         const response = await fetch(url, {
           method: "POST",
           headers: {
@@ -26,7 +24,7 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar }) => {
             "Content-Type": "application/json",
             token: context.user.Token
           },
-          body: JSON.stringify(categoria),
+          body: JSON.stringify(subcategoria),
         });
         if (response.status === 200) {
           setActualizar(!actualizar);
@@ -41,14 +39,14 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar }) => {
     setNombre("");
   };
 
-  useEffect(() => {
-    getSubcategorias().then((data) => {
-      setSubcategorias(data);
-    });
-  }, [actualizar]);
-
+ /* useEffect(() => {
+    if (paso == 3) {
+      Reset();
+      setPaso(0);
+    }
+  }, [paso]);*/
   return (
-    <dialog id="modal_agregar_categoria" className="modal">
+    <dialog id="modal_agregar_subcategoria" className="modal">
       <div className="modal-box w-11/12  bg-white">
         <h2 className="text-gray-800">Agregar Categoría</h2>
         <div
@@ -57,7 +55,7 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar }) => {
           <form
             method="dialog w-full"
             onSubmit={(e) => {
-              InsertarCategoria(e);
+              InsertarSubcategoria(e);
             }}
           >
 
@@ -74,24 +72,11 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar }) => {
               />
               <label>Nombre del artículo</label>
             </div>
-
-            <div className="form-group">
-              <select
-              className="bg-white">
-                <option className="text-gray-800" value="">Selecciona una Subcategoria</option>
-                {subcategorias.map((subcategoria) => (
-                  <option className="text-gray-800" key={subcategoria.Id} value={subcategoria.Id}>
-                    {subcategoria.Nombre}
-                  </option>
-                ))}
-              </select>
-            </div>
-            
             <div className="flex w-full justify-around">
               <button
                 className="btn-cancelar border-none"
-                onClick={() => {
-                  document.getElementById("modal_agregar_categoria").close();
+                onClick={() =>{
+                  document.getElementById("modal_agregar_subcategoria").close();
                   Reset();
                 }
                 }

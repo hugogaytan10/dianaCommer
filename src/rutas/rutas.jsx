@@ -17,6 +17,7 @@ import { AppContext } from "../Context/AppContext";
 import { Ubication } from "../Ubication/Ubication";
 import { InicioAdmin } from "../Admin/InicioAdmin";
 import { Categoria } from "../Admin/Categorias/Categoria";
+import { Subcategoria } from "../Admin/Subcategorias/Subcategoria";
 import { Footer } from "../Footer/Footer";
 import { Politica } from "../Politica/Politica";
 import { MainStripe } from "../Stripe/MainStripe";
@@ -192,6 +193,14 @@ export const Rutas = () => {
                 element={
                   <ProtectedRoute>
                     <Reportes />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/Subcategorias"
+                element={
+                  <ProtectedRoute>
+                    <Subcategoria />
                   </ProtectedRoute>
                 }
               />
