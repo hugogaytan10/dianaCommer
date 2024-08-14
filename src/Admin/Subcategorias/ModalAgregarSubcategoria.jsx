@@ -9,7 +9,7 @@ export const ModalAgregarSubcategoria = ({actualizar, setActualizar}) => {
     const subcategoria = {
       Nombre: nombre,
       //CategoriaId hardcodeado por el momento 
-      CategoriaId: 1
+      //CategoriaId: 
     };
     if (
       nombre != "" 

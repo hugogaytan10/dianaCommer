@@ -10,8 +10,11 @@ export const ModalEditarCategoria = ({actualizar, setActualizar, Id, nombre, set
   const EditarCategoria = async (e) => {
     e.preventDefault();
     const categoria = {
-      Id: Id,
-      Nombre: nombre,
+      Category: {
+        Id: Id,
+        Nombre: nombre
+      },
+      SubcategoryId: idSubcategoria
     };
     console.log(categoria);
     if (nombre != "") {
