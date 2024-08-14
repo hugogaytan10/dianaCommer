@@ -1,54 +1,54 @@
 import React, { useEffect, useState, useContext } from "react";
-import "./Categoria.css";
+import "./Subcategoria.css";
 import trash from "../../assets/trash.svg";
 import edit from "../../assets/edit.svg";
 import subcategory from "../../assets/subcategory.svg";
-import { ModalAgregarCategoria } from "./ModalAgregarCategoria";
-import { ModalEditarCategoria } from "./ModalEditarCategoria";
+import { ModalAgregarSubcategoria } from "./ModalAgregarSubcategoria";
+import { ModalEditarSubcategoria } from "./ModalEditarSubcategoria";
 import { URL } from "../../Const/Const";
-import { getCategorias, eliminarCategoria } from "./Peticiones";
+import { getSubcategorias, eliminarSubcategoria } from "./Peticiones";
 import { AppContext } from "../../Context/AppContext";
-import { HeaderCategorias } from "./HeaderCategorias";
+import { HeaderSubcategorias } from "./HeaderSubcategorias";
 
-export const Categoria = () => {
-  const [categorias, setCategorias] = useState([]);
-  const [categoriasFiltradas, setCategoriasFiltradas] = useState([]);
-  const [idCategoria, setIdCategoria] = useState(0);
+export const Subcategoria = () => {
+  const [subcategorias, setSubcategorias] = useState([]);
+  const [subcategoriasFiltradas, setSubcategoriasFiltradas] = useState([]);
+  const [idSubcategoria, setIdSubcategoria] = useState(0);
   const [nombre, setNombre] = useState("");
   const [actualizar, setActualizar] = useState(false);
   const context = useContext(AppContext);
   useEffect(() => {
-    getCategorias().then((data) => {
-      setCategorias(data);
-      setCategoriasFiltradas(data);
+    getSubcategorias().then((data) => {
+      setSubcategorias(data);
+      setSubcategoriasFiltradas(data);
     });
   }, [actualizar]);
 
   const handlerDelete = async (e) => {
     e.preventDefault();
-    eliminarCategoria(idCategoria, context.user.Token).then((res) => {
+    eliminarSubcategoria(idSubcategoria, context.user.Token).then((res) => {
       if (res.status === 200) {
         setActualizar(!actualizar);
-        document.getElementById("modal_eliminar_categoria").close();
+        document.getElementById("modal_eliminar_subcategoria").close();
       }
     });
   };
   return (
     <div>
-      <HeaderCategorias
-        categorias={categorias}
-        setCategoriasFiltradas={setCategoriasFiltradas}
-        categoriasFiltradas={categoriasFiltradas}
+      <HeaderSubcategorias
+        subcategorias={subcategorias}
+        setSubcategoriasFiltradas={setSubcategoriasFiltradas}
+        subcategoriasFiltradas={subcategoriasFiltradas}
       />
       <div
         className={`w-11/12 flex flex-wrap justify-between p-2 items-center m-auto`}
       >
-        {categoriasFiltradas.map((categoria) => (
+        {subcategoriasFiltradas.map((subcategoria) => (
           <div
             className={`contenedor-card border-b-2 w-full md:w-7/12 h-20  mx-auto ${
-              categoria.Id % 2 === 0 ? "mt-6" : "mt-6"
+              subcategoria.Id % 2 === 0 ? "mt-6" : "mt-6"
             }`}
-            key={`producto-${categoria.Id}`}
+            key={`producto-${subcategoria.Id}`}
           >
             <div className="card" id="a">
               <div className="card-body p-1">
@@ -56,14 +56,14 @@ export const Categoria = () => {
                   <h2
                     onClick={() => {
                       document
-                        .getElementById("modal_editar_categoria")
+                        .getElementById("modal_editar_subcategoria")
                         .showModal();
-                      setNombre(categoria.Nombre);
-                      setIdCategoria(categoria.Id);
+                      setNombre(subcategoria.Nombre);
+                      setIdSubcategoria(subcategoria.Id);
                     }}
                     className="text-black text-md md:text-lg font-semibold flex justify-between mt-1 w-3/5"
                   >
-                    {categoria.Nombre}
+                    {subcategoria.Nombre}
                   </h2>
                   <div className="flex justify-between w-1/10">
                     <img
@@ -72,10 +72,10 @@ export const Categoria = () => {
                       className="h-6 w-6"
                       onClick={() => {
                         document
-                          .getElementById("modal_eliminar_categoria")
+                          .getElementById("modal_eliminar_subcategoria")
                           .showModal();
-                        setNombre(categoria.Nombre);
-                        setIdCategoria(categoria.Id);
+                        setNombre(subcategoria.Nombre);
+                        setIdSubcategoria(subcategoria.Id);
                       }}
                     />
                   </div>
@@ -85,26 +85,26 @@ export const Categoria = () => {
           </div>
         ))}
 
-        <ModalAgregarCategoria
+        <ModalAgregarSubcategoria
           actualizar={actualizar}
           setActualizar={setActualizar}
         />
 
-        <ModalEditarCategoria
+        <ModalEditarSubcategoria
           actualizar={actualizar}
           setActualizar={setActualizar}
-          Id={idCategoria}
+          Id={idSubcategoria}
           nombre={nombre}
           setNombre={setNombre}
         />
 
         <dialog
-          id="modal_eliminar_categoria"
+          id="modal_eliminar_subcategoria"
           className="modal modal-bottom sm:modal-middle"
         >
           <div className="modal-box bg-white">
             <h3 className="font-bold text-lg text-primary text-center">
-              Eliminar Categoria
+              Eliminar Subcategoria
             </h3>
             <p className="py-4 text-primary text-center">
               Deseas eliminar {nombre} ?
@@ -128,7 +128,7 @@ export const Categoria = () => {
                     type="button"
                     onClick={() =>
                       document
-                        .getElementById("modal_eliminar_categoria")
+                        .getElementById("modal_eliminar_subcategoria")
                         .close()
                     }
                     className="w-1/3 border-2 p-2 border-red-500 rounded-lg text-white bg-red-500"
