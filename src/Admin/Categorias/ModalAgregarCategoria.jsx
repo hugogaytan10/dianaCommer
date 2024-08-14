@@ -11,7 +11,10 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar }) => {
   const InsertarCategoria = async (e) => {
     e.preventDefault();
     const categoria = {
-      Nombre: nombre
+      Category: {
+        Nombre: nombre
+      },
+      SubcategoryId: idSubcategoria
     };
     if (
       nombre != ""
@@ -77,7 +80,7 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar }) => {
 
             <div className="form-group">
               <select
-              className="bg-white">
+                className="bg-white">
                 <option className="text-gray-800" value="">Selecciona una Subcategoria</option>
                 {subcategorias.map((subcategoria) => (
                   <option className="text-gray-800" key={subcategoria.Id} value={subcategoria.Id}>
@@ -86,7 +89,7 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar }) => {
                 ))}
               </select>
             </div>
-            
+
             <div className="flex w-full justify-around">
               <button
                 className="btn-cancelar border-none"
