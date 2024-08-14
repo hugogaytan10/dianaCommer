@@ -14,7 +14,7 @@ export const ModalEditarCategoria = ({actualizar, setActualizar, Id, nombre, set
         Nombre: nombre
       },
       Subcategories: [{
-        Nombre:nombreSubcategoria,
+        Nombre:nombreSubcategori,
       }]
     };
     console.log(categoria);
