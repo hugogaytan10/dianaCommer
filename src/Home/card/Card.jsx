@@ -29,13 +29,13 @@ export const Card = (props) => {
         </NavLink>
       </figure>
       <div className="card-body p-1">
-        <h2 className="text-black text-md md:text-lg font-semibold flex justify-between mt-1">
+        <h2 className="text-black text-md md:text-base lg:text-lg font-semibold flex justify-between mt-1">
           {title}
         </h2>
         <div className="card-actions flex justify-between items-end w-full mt-2 ">
           <p className="text-gray-400 font-thin text-sm">{price} MXN</p>
           <NavLink
-            to={"/item"}
+            to={`/item/${id}`}
           >
             <img src={carritoAzul} alt="carrito" />
           </NavLink>

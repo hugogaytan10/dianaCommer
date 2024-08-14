@@ -6,4 +6,5 @@ export type User = {
     EstadoUsuario: string;
     Nombre: string;
     Apellido: string;
+    Token: string;
 }

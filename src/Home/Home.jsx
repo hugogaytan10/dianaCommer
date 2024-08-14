@@ -43,7 +43,7 @@ export const Home = () => {
       </div>
        */}
       <Carrusel />
-      <h1 className="text-center font-thin m-4 text-gray-500 text-xl">
+      <h1 className="text-center font-thin m-4 text-gray-500 text-sm">
         Todo tipo de calzado (zapato, tennis deportivos, hombre, mujer, niño) en
         Moroleón, Guanajuato{" "}
       </h1>

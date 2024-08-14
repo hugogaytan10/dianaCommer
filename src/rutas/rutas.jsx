@@ -11,10 +11,13 @@ import { Cart } from "../Cart/Cart";
 import { Profile } from "../Profile/Profile";
 import menu from "../assets/menu.svg";
 import carrito from "../assets/cart-outline.svg";
+import usuario from "../assets/userIcon.svg";
 import { useContext, useEffect } from "react";
 import { AppContext } from "../Context/AppContext";
 import { Ubication } from "../Ubication/Ubication";
 import { InicioAdmin } from "../Admin/InicioAdmin";
+import { Categoria } from "../Admin/Categorias/Categoria";
+import { Subcategoria } from "../Admin/Subcategorias/Subcategoria";
 import { Footer } from "../Footer/Footer";
 import { Politica } from "../Politica/Politica";
 import { MainStripe } from "../Stripe/MainStripe";
@@ -25,6 +28,7 @@ import { Reportes } from "../Admin/Reportes";
 import { ProtectedRoute } from "./RutasProtegidas";
 import { AuthPage } from "../Login/AuthPage";
 import { Caliz } from "../caliz/Caliz";
+import { ListaDeseos } from "../ListaDeseos/ListaDeseos";
 
 export const Rutas = () => {
   const contexto = useContext(AppContext);
@@ -41,7 +45,7 @@ export const Rutas = () => {
 
           <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content flex flex-col h-full min-w-full">
-           <HeaderWrapper>
+            <HeaderWrapper>
               <div className="w-full navbar bg-primary">
                 <div className="flex-none lg:hidden">
                   <label
@@ -65,6 +69,11 @@ export const Rutas = () => {
                     <img src={carrito} alt="carrito" />
                   </NavLink>
                 </div>
+                <div className="contenedor-carrito">
+                  <NavLink to="/login">
+                    <img src={usuario} alt="usuario" className="w-8 h-8"/>
+                  </NavLink>
+                </div>
                 <div className="flex-none hidden lg:block">
                   <ul className="menu menu-horizontal">
                     <li>
@@ -86,45 +95,69 @@ export const Rutas = () => {
                             ? "active-link text-lg bg-primary text-white"
                             : "text-white text-lg"
                         }
+                        to="/listaDeseos"
+                      >
+                        Favoritos
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive
+                            ? "active-link text-lg bg-primary text-white"
+                            : "text-white text-lg"
+                        }
                         to="/ubication"
                       >
                         Ubicación
                       </NavLink>
                     </li>
                     {
-                      contexto.user.TipoUsuario === "1" && (
+                      contexto.user.TipoUsuario === 0 && (
                         <>
-                        <li>
-                        <NavLink
-                          className={({ isActive }) =>
-                            isActive
-                              ? "active-link text-lg bg-primary text-white"
-                              : "text-white text-lg"
-                          }
-                          to="/admin"
-                        >
-                          Productos
-                        </NavLink>
-                      </li>
-                        <li>
-                        <NavLink
-                          className={({ isActive }) =>
-                            isActive
-                              ? "active-link text-lg bg-primary text-white"
-                              : "text-white text-lg"
-                          }
-                          to="/admin/Reporte"
-                        >
-                          Reportes
-                        </NavLink>
-                      </li>
-                      </>
+                          <li>
+                            <NavLink
+                              className={({ isActive }) =>
+                                isActive
+                                  ? "active-link text-lg bg-primary text-white"
+                                  : "text-white text-lg"
+                              }
+                              to="/admin"
+                            >
+                              Productos
+                            </NavLink>
+                          </li>
+                          <li>
+                            <NavLink
+                              className={({ isActive }) =>
+                                isActive
+                                  ? "active-link text-lg bg-primary text-white"
+                                  : "text-white text-lg"
+                              }
+                              to="/admin/categorias"
+                            >
+                              Categorias
+                            </NavLink>
+                          </li>
+                          <li>
+                            <NavLink
+                              className={({ isActive }) =>
+                                isActive
+                                  ? "active-link text-lg bg-primary text-white"
+                                  : "text-white text-lg"
+                              }
+                              to="/admin/Reporte"
+                            >
+                              Reportes
+                            </NavLink>
+                          </li>
+                        </>
                       )
                     }
                   </ul>
                 </div>
               </div>
-              </HeaderWrapper>
+            </HeaderWrapper>
 
             <Routes>
               <Route path="/" element={<Home />} />
@@ -138,6 +171,7 @@ export const Rutas = () => {
               <Route path="/pago" element={<MainStripe />} />
               <Route path="/pagoCompletado" element={<PagoCompletado />} />
               <Route path="/caliz" element={<Caliz />} />
+              <Route path="/listaDeseos" element={<ListaDeseos />} />
               <Route
                 path="/admin"
                 element={
@@ -147,10 +181,26 @@ export const Rutas = () => {
                 }
               />
               <Route
+                path="/admin/categorias"
+                element={
+                  <ProtectedRoute>
+                    <Categoria />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
                 path="/admin/Reporte"
                 element={
                   <ProtectedRoute>
                     <Reportes />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/Subcategorias"
+                element={
+                  <ProtectedRoute>
+                    <Subcategoria />
                   </ProtectedRoute>
                 }
               />
@@ -183,6 +233,19 @@ export const Rutas = () => {
                 </li>
                 <li>
                   <NavLink
+                    to="/listaDeseos"
+                    className={({ isActive }) =>
+                      isActive ? "active-link text-lg" : "text-white text-lg"
+                    }
+                    onClick={() => {
+                      document.getElementById("my-drawer-3").checked = false;
+                    }}
+                  >
+                    Favoritos
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
                     className={({ isActive }) =>
                       isActive ? "active-link text-lg" : "text-white text-lg"
                     }
@@ -208,9 +271,9 @@ export const Rutas = () => {
                   </NavLink>
                 </li>
                 {
-                      contexto.user.TipoUsuario == "1" && (
-                        <>
-                        <li>
+                  contexto.user.TipoUsuario == 0 && (
+                    <>
+                      <li>
                         <NavLink
                           className={({ isActive }) =>
                             isActive
@@ -225,7 +288,22 @@ export const Rutas = () => {
                           Productos
                         </NavLink>
                       </li>
-                        <li>
+                      <li>
+                        <NavLink
+                          className={({ isActive }) =>
+                            isActive
+                              ? "active-link text-lg bg-primary text-white"
+                              : "text-white text-lg"
+                          }
+                          to="/admin/categorias"
+                          onClick={() => {
+                            document.getElementById("my-drawer-3").checked = false;
+                          }}
+                        >
+                          Categorias
+                        </NavLink>
+                      </li>
+                      <li>
                         <NavLink
                           className={({ isActive }) =>
                             isActive
@@ -240,12 +318,12 @@ export const Rutas = () => {
                           Reportes
                         </NavLink>
                       </li>
-                      </>
-                      )
-                    }
+                    </>
+                  )
+                }
               </ul>
             </div>
-            </HeaderWrapper>
+          </HeaderWrapper>
         </div>
         <FooterWrapper />
       </BrowserRouter>
@@ -261,6 +339,7 @@ const FooterWrapper = () => {
     "/pagoCompletado",
     "/admin",
     "/admin/Reporte",
+    "/admin/categorias",
     "/login",
   ];
 

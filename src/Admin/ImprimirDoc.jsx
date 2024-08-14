@@ -73,7 +73,7 @@ export const ImprimirDoc = ({ productos }) => {
               {
                 //mostrar las tallas
                 producto.ListaTallas.map((talla, index) => (
-                  <Text key={index} style={styles.talla}>{talla}</Text>
+                  <Text key={index} style={styles.talla}>{talla.Talla}</Text>
                 ))
               }
               </View>

@@ -11,7 +11,9 @@
 }
 .contador{
     width: 100%;
-    border: 0.5px solid #000;
+    border-radius: 25px;
+    border: 1px solid #d8d8d8;
+  
 }
 .agregar-al-carrito{
     display: block;
@@ -23,6 +25,7 @@
     padding: 0.2em;
     text-align: center;
     font-weight: 600;
+    border-radius: 25px;
 }
 .aviso{
     position: fixed;
@@ -59,4 +62,12 @@
     bottom: 0;
     background: rgba(0, 0, 0, 0.05); /* Cambia el color y la opacidad según necesites */
     z-index: 2;
+  }
+
+  @media (min-width: 768px){
+
+    .contador{
+      padding: 1rem;
+    }
+    
   }

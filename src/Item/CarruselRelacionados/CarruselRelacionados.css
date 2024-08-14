@@ -1,0 +1,31 @@
+.container-products{
+    width: 97%;
+    padding: 1em;
+    margin: auto;
+    margin-top: 1em;
+    border-radius: 6px;
+    display: flex;
+    /*justify-content: start;*/
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    column-gap: 20px;
+    border: 1px solid #e2e5f1;
+}
+.product{
+    flex: 0 0 90%;
+    scroll-snap-align: start;
+}
+.container-products::-webkit-scrollbar{
+    height: 0.5em;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+}
+.container-products::-webkit-scrollbar-thumb{
+    background-color: #303030;
+    border-radius: 8px;
+}
+@media (min-width: 520px){
+    .product{
+        flex: 0 0 40%;
+    }
+}

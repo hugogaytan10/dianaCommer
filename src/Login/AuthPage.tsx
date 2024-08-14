@@ -13,6 +13,9 @@ interface DecodedToken {
 export const AuthPage: React.FC = () => {
   const context = useContext(AppContext);
   const navigate = useNavigate();
+  // variables para el control del login y errores
+  const [errorUsuario, setErrorUsuario] = useState("");
+  const [errorPassword, setErrorPassword] = useState("");
 
   // Referencias a los elementos del DOM
   const signUpButtonRef = useRef<HTMLButtonElement>(null);
@@ -83,8 +86,10 @@ export const AuthPage: React.FC = () => {
         //como un objeto user
         localStorage.setItem("user", JSON.stringify({ email, password }));
         context.setUser(dataSignUp);
+        console.log("data inicio: ", dataSignUp);
+        console.log("setUser: ", context.user);
         navigate("/");
-      }
+      } 
     }
   };
 
@@ -93,17 +98,21 @@ export const AuthPage: React.FC = () => {
     const email = e.target[0].value;
     const password = e.target[1].value;
     const dataLogin = await loginToServer(email, password);
+
     if (dataLogin) {
       //si todo fue cvalido guardar el correo y contraseña en el localstorage
       //como un objeto user
       localStorage.setItem("user", JSON.stringify({ email, password }));
       context.setUser(dataLogin);
       //redireccionar a la pagina dependiendo el tipo de usuario
-      if (dataLogin.TipoUsuario == "0") {
+      if (dataLogin.TipoUsuario == 1) {
         navigate("/");
       } else {
         navigate("/admin");
       }
+    }else {
+      setErrorUsuario("Revise sus datos");
+      setErrorPassword("Revise sus datos");
     }
   };
   const responseMessage = async (response: CredentialResponse) => {
@@ -138,7 +147,7 @@ export const AuthPage: React.FC = () => {
       loginToServer(email, password).then((data) => {
         if (data) {
           context.setUser(data);
-          if (data.TipoUsuario == "0") {
+          if (data.TipoUsuario == 1) {
             navigate("/");
           } else {
             navigate("/admin");
@@ -168,7 +177,7 @@ export const AuthPage: React.FC = () => {
             </div>
             <span>O usa tu correo para registrarte</span>
             <input type="text" placeholder="Nombre" className="input-login" />
-            <input type="email" placeholder="Correo" className="input-login" />
+            <input type="email" placeholder="Correo" className="input-login"/>
             <input
               type="password"
               placeholder="Contraseña"
@@ -201,12 +210,19 @@ export const AuthPage: React.FC = () => {
               <GoogleLogin onSuccess={responseMessage} />
             </div>
             <span>o usa tu cuenta</span>
-            <input type="email" placeholder="Correo" className="input-login" />
+            <input type="email" placeholder="Correo" className="input-login" onChange={(e)=>{setErrorUsuario('')}}/>
+            {errorUsuario != "" && (
+              <span className="text-red-500 text-xs self-start">{errorUsuario}</span>
+            )}
             <input
               type="password"
               placeholder="Contraseña"
               className="input-login"
+              onChange={(e)=>{setErrorPassword('')}}
             />
+            {errorPassword != "" && (
+              <span className="text-red-500 text-xs self-start">{errorPassword}</span>
+            )}
             <a href="#" className="self-end text-xs mt-2 mb-2">
               Olvidaste tu contraseña?
             </a>

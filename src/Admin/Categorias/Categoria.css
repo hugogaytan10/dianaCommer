@@ -1,11 +1,11 @@
 .btn-cancelar, .btn-siguiente{
     background-color: white;
     color: #303030;
+    border: 1px solid #303030;
     padding: 0.4em;
     border-radius: 5px;
     cursor: pointer;
     width: 45%;
-    font-weight: 600;
 }
 
 .btn-siguiente{
@@ -93,7 +93,7 @@
     position: absolute;
   }
   
-.contenedor-img label {
+  .contenedor-img label {
     /* Estilos para tu etiqueta; haz que parezca un botón */
     background-color: #fff;
     border: 1px solid rgba(55,48,163,1);
@@ -110,9 +110,9 @@
     align-items: center;
   }
   
-.contenedor-img label:hover {
+  /*.contenedor-img label:hover {
     background-color: #e0e0e0;
-  }
+  }*/
 
 .btn-talla{
     background-color: #fff;
@@ -129,7 +129,7 @@
     align-items: center;
     justify-content: center;
 }
-.btn-eliminar-talla{
+  .btn-eliminar-talla{
     background-color: #ff0000;
     color: white;
     border: none;
@@ -145,17 +145,3 @@
     align-items: center;
     justify-content: center;
   }
-
-.toast-admin{
-    position: fixed;
-    top: 50%;
-    right: 15px;
-    background-color: #c70404;
-    padding: 0.4em;
-    border-radius: 8px;
-    transition: all 0.3s ease-in-out;
-    transform: translateX(1000px);
-  }
-.mostrar{
-    transform: translateX(0);
-}
