@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./InicioAdmin.css";
 import image from "../assets/images-outline.svg";
 import trash from "../assets/trash.svg";
 import { ModalAgregarAdmin } from "./ModalAgregarAdmin";
 import { ModalEditarAdmin } from "./ModalEditarAdmin";
 
-import {URL} from '../Const/Const'
+import { URL } from "../Const/Const";
 import { HeaderAdmin } from "./HeaderAdmin";
+import { AppContext } from "../Context/AppContext";
 
 export const InicioAdmin = () => {
+  const context = useContext(AppContext);
+  let contadorToast = 0;
   const [loaded, setLoaded] = useState(false);
   const [productos, setProductos] = useState([]);
   const [productosFiltrados, setProductosFiltrados] = useState([]);
@@ -26,6 +29,16 @@ export const InicioAdmin = () => {
   const [stock, setStock] = useState(0);
   const [descuento, setDescuento] = useState(0);
   const [pdfLoader, setPdfLoader] = useState(true);
+  const [categorias, setCategorias] = useState([]);
+  const [subCategorias, setSubCategorias] = useState([]);
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState({
+    CategoriaId: 0,
+    Categoria: "",
+  });
+  const [subCategoriaSeleccionada, setSubCategoriaSeleccionada] = useState({
+    SubCategoriaId: 0,
+    SubCategoria: "",
+  });
 
   useEffect(() => {
     const getProductos = async () => {
@@ -33,7 +46,6 @@ export const InicioAdmin = () => {
         const url = `${URL}/producto/conseguir`;
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data)
         setProductos(data);
         setProductosFiltrados(data);
         setPdfLoader(false);
@@ -41,6 +53,28 @@ export const InicioAdmin = () => {
         console.error("Error fetching products:", error);
       }
     };
+    const getCategorias = async () => {
+      try {
+        const url = `${URL}/categoria/conseguir`;
+        const response = await fetch(url);
+        const data = await response.json();
+        setCategorias(data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+    const getSubCategorias = async () => {
+      try {
+        const url = `${URL}/subcategoria/conseguir`;
+        const response = await fetch(url);
+        const data = await response.json();
+        setSubCategorias(data);
+      } catch (error) {
+        console.error("Error fetching subcategories:", error);
+      }
+    };
+    getSubCategorias();
+    getCategorias();
     getProductos();
   }, []);
 
@@ -49,9 +83,35 @@ export const InicioAdmin = () => {
     const url = `${URL}/producto/eliminar/${idProducto}`;
     await fetch(url, {
       method: "PUT",
+      headers: {
+        token: context.user.Token,
+      },
+    }).then((response) => {
+      if (response.status === 200) {
+        const newProductos = productos.filter(
+          (producto) => producto.Id !== idProducto
+        );
+        setProductos(newProductos);
+        setProductosFiltrados(newProductos);
+      } else {
+        console.log("Error al eliminar producto");
+      }
     });
+
     document.getElementById("my_eliminar").close();
   };
+
+  useEffect(() => {
+    if (contadorToast > 2) {
+      const aviso = document.querySelector(".toast-admin");
+
+      aviso.classList.add("mostrar");
+      setTimeout(() => {
+        aviso.classList.remove("mostrar");
+      }, 1000);
+    }
+    contadorToast++;
+  }, [productos]);
 
   return (
     <div>
@@ -71,69 +131,99 @@ export const InicioAdmin = () => {
         />
       </div>
       */}
-      <HeaderAdmin productosFiltrados={productosFiltrados} productos={productos} setProductosFiltrados={setProductosFiltrados} />
 
-
-      <div className={pdfLoader ? 'none' : `w-11/12 flex flex-wrap justify-between p-2 items-center m-auto`}>
-        {productosFiltrados.map((producto) => (
-          <div
-            className={`contenedor-card border-b-2  rounded-md ${producto.Id % 2 === 0 ? "mt-8" : "mt-0"}`}
-            key={`producto-${producto.Id}`}
-          >
-            <div className="card">
-              <figure className="h-3/4">
-                <img
-                  src={producto.URLImagen}
-                  alt="Shoes"
-                  className="object-contain h-full w-full"
-                  onLoad={() => setLoaded(true)}
-                  style={{ display: loaded ? "block" : "none" }}
-                  onClick={() => {
-                    setIdProducto(producto.Id);
-                    setPreview(producto.URLImagen);
-                    setNombre(producto.Titulo);
-                    setDescripcion(producto.Descripcion);
-                    setPrecioAdquisicion(producto.PrecioAdquisicion);
-                    setPrecioVenta(producto.PrecioVenta);
-                    setStock(producto.Stock);
-                    setDescuento(producto.Descuento);
-                    setTallas(producto.ListaTallas);
-                    setBanner(producto.ImagenesCarrusel[0]);
-                    setBanner2(producto.ImagenesCarrusel[1]);
-                    setBanner3(producto.ImagenesCarrusel[2]);
-                    document.getElementById("modal_editar").showModal();
-                  }}
-                />
-                {!loaded && (
-                  <div className="flex flex-col gap-4 w-52">
-                    <div className="skeleton h-32 w-full"></div>
-                    <div className="skeleton h-4 w-28"></div>
-                    <div className="skeleton h-4 w-full"></div>
-                    <div className="skeleton h-4 w-full"></div>
-                  </div>
-                )}
-              </figure>
-              <div className="card-body p-1">
-                <div className="card-actions flex justify-between items-end w-full mt-2 ">
-                  <h2 className="text-black text-md md:text-lg font-semibold flex justify-between mt-1">
-                    {producto.Titulo}
-                  </h2>
-                  <img
-                    src={trash}
-                    alt="trash"
-                    className="h-6 w-6"
-                    onClick={() => {
-                      document.getElementById("my_eliminar").showModal();
-                      setPreview(producto.URLImagen);
-                      setNombre(producto.Titulo);
-                      setIdProducto(producto.Id);
-                    }}
+      <div
+        className={
+          pdfLoader
+            ? "none"
+            : `w-11/12 flex flex-wrap justify-between p-2 items-center m-auto `
+        }
+      >
+        {productosFiltrados.map((producto, idx) => {
+          return (
+            <div
+              key={`producto-${producto.Id}`}
+              className={`contenedor-card border-b-2  rounded-md ${
+                producto.Id % 2 === 0 ? "mt-8" : "mt-0"
+              }`}
+            >
+              {idx === 0 && (
+                <div className="fixed bg-transparent z-10  right-0">
+                  <HeaderAdmin
+                    productosFiltrados={productosFiltrados}
+                    productos={productos}
+                    setProductosFiltrados={setProductosFiltrados}
                   />
+                </div>
+              )}
+
+              <div>
+                <div className="card">
+                  <figure className="h-3/4">
+                    <img
+                      src={producto.URLImagen}
+                      alt="Shoes"
+                      className="object-contain h-full w-full"
+                      onLoad={() => setLoaded(true)}
+                      style={{ display: loaded ? "block" : "none" }}
+                      onClick={() => {
+                        setIdProducto(producto.Id);
+                        setPreview(producto.URLImagen);
+                        setNombre(producto.Titulo);
+                        setDescripcion(producto.Descripcion);
+                        setPrecioAdquisicion(producto.PrecioAdquisicion);
+                        setPrecioVenta(producto.PrecioVenta);
+                        setStock(producto.Stock);
+                        setDescuento(producto.Descuento);
+                        setTallas(producto.ListaTallas);
+                        setBanner(producto.ImagenesCarrusel[0]);
+                        setBanner2(producto.ImagenesCarrusel[1]);
+                        setBanner3(producto.ImagenesCarrusel[2]);
+                        setSubCategoriaSeleccionada({
+                          SubcategoriaId: producto.SubcategoriaId,
+                          Subcategoria: producto.Subcategoria,
+                        });
+                        document.getElementById("modal_editar").showModal();
+                      }}
+                    />
+                    {!loaded && (
+                      <div className="flex flex-col gap-4 w-52">
+                        <div className="skeleton h-32 w-full"></div>
+                        <div className="skeleton h-4 w-28"></div>
+                        <div className="skeleton h-4 w-full"></div>
+                        <div className="skeleton h-4 w-full"></div>
+                      </div>
+                    )}
+                  </figure>
+                  <div className="card-body p-1">
+                    <div className="card-actions flex justify-between items-end w-full mt-2 ">
+                      <h2 className="text-black text-md md:text-lg font-semibold flex justify-between mt-1">
+                        {producto.Titulo}
+                      </h2>
+                      <img
+                        src={trash}
+                        alt="trash"
+                        className="h-6 w-6"
+                        onClick={() => {
+                          document.getElementById("my_eliminar").showModal();
+                          setPreview(producto.URLImagen);
+                          setNombre(producto.Titulo);
+                          setIdProducto(producto.Id);
+                        }}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
+      </div>
+
+      <div className="toast-admin">
+        <div className="text-gray-200 text-lg">
+          <span>Nuevo Cambio</span>
+        </div>
       </div>
 
       <ModalAgregarAdmin
@@ -163,7 +253,8 @@ export const InicioAdmin = () => {
         banner3={banner3}
         setBanner3={setBanner3}
         productos={productos}
-        setProductos={setProductos}
+        setProductosFiltrados={setProductosFiltrados}
+        subCategorias={subCategorias}
       />
 
       <ModalEditarAdmin
@@ -195,6 +286,9 @@ export const InicioAdmin = () => {
         setBanner3={setBanner3}
         productos={productos}
         setProductos={setProductos}
+        subCategorias={subCategorias}
+        subCategoriaSeleccionada={subCategoriaSeleccionada}
+        setSubCategoriaSeleccionada={setSubCategoriaSeleccionada}
       />
 
       <dialog id="my_eliminar" className="modal modal-bottom sm:modal-middle">

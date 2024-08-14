@@ -30,6 +30,7 @@ const AppProvider: React.FC<Props> = ({ children }) => {
     Id: 0,
     Nombre: "",
     TipoUsuario: "",
+    Token: "",
   });
 
   // Método para iniciar sesión

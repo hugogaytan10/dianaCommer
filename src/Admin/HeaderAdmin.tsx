@@ -27,7 +27,7 @@ export const HeaderAdmin = ({
   };
 
   return (
-    <div className="flex w-full justify-end gap-2 mt-4">
+    <div className="flex w-full justify-end gap-2 mt-4 sticky top-0">
       <button
         className= "h-8 w-8 rounded-full bg-primary border-primary border-2 cursor-pointer flex items-center justify-center"
         onClick={() =>
