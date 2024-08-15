@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Home.css";
 import { Card } from "./card/Card";
 import perrito from "../assets/Perrito.webp";
-
 import { AppContext } from "../Context/AppContext";
 import { Carrusel } from "./Carrusel/Carrusel";
 import Filtrador from "./Filtrador/Filtrador";
 import { URL } from "../Const/Const";
+import drag from '../assets/drag.gif';
 export const Home = () => {
   const contexto = useContext(AppContext);
   const [cards, setCards] = useState([]);
