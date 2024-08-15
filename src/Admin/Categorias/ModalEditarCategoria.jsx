@@ -11,10 +11,11 @@ export const ModalEditarCategoria = ({actualizar, setActualizar, Id, nombre, set
     e.preventDefault();
     const categoria = {
       Category: {
-        Id: Id,
         Nombre: nombre
       },
-      SubcategoryId: idSubcategoria
+      Subcategories: [{
+        Nombre:nombreSubcategoria,
+      }]
     };
     console.log(categoria);
     if (nombre != "") {

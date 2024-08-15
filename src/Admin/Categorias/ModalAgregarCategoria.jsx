@@ -5,6 +5,7 @@ import { getSubcategorias } from "./Peticiones";
 
 export const ModalAgregarCategoria = ({ actualizar, setActualizar }) => {
   const [nombre, setNombre] = useState("");
+  const [nombreSubcategoria, setNombreSubcategoria] = useState("");
   const [subcategorias, setSubcategorias] = useState([]);
   const context = useContext(AppContext);
 
@@ -14,7 +15,9 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar }) => {
       Category: {
         Nombre: nombre
       },
-      SubcategoryId: idSubcategoria
+      Subcategories: [{
+        Nombre:nombreSubcategoria,
+      }]
     };
     if (
       nombre != ""
@@ -40,6 +43,12 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar }) => {
       }
     }
   };
+
+  const handleSelectChange = (event) => {
+    console.log(nombreSubcategoria)
+    setNombreSubcategoria(event.target.value);
+  };
+
   const Reset = () => {
     setNombre("");
   };
@@ -80,10 +89,11 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar }) => {
 
             <div className="form-group">
               <select
-                className="bg-white">
+                className="bg-white"
+                onChange={handleSelectChange}>
                 <option className="text-gray-800" value="">Selecciona una Subcategoria</option>
                 {subcategorias.map((subcategoria) => (
-                  <option className="text-gray-800" key={subcategoria.Id} value={subcategoria.Id}>
+                  <option className="text-gray-800" key={subcategoria.Id} value={subcategoria.Nombre}>
                     {subcategoria.Nombre}
                   </option>
                 ))}
