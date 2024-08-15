@@ -6,15 +6,12 @@ const Filtrador = (props) => {
   const [rangeOne, setRangeOne] = useState(0);
   const [rangeTwo, setRangeTwo] = useState(0);
   const Filtrar = (e) => {
-    e.preventDefault();
-    if(e.target.value === "") return;
-    console.log(e.target.value);
     //create a function to filter the cards by tallas, but tallas is an array
     setCardFilter([]);
     const cardsFil = cards.filter((card) => {
       const tallas = card.ListaTallas;
       const tallasFiltered = tallas.filter((talla) => {
-        return talla >= rangeOne && talla <= rangeTwo;
+        return talla.Talla >= rangeOne && talla.Talla <= rangeTwo;
       });
       if (tallasFiltered.length > 0) {
         setCardFilter((prev) => [...prev, card]);
