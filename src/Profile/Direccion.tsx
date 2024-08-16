@@ -33,8 +33,15 @@ export const Direccion = () => {
         >
           <img alt="regresar" src={flecha} className="h-10 w-10" />
         </NavLink>
+        {direcciones.length > 0 && (
+        <div className="w-full flex justify-end">
+          <NavLink to="/guardarDireccion" className="text-gray-800 p-0 px-2 text-sm">
+            Agregar dirección
+          </NavLink>
+        </div>
+      )}
       </div>
-
+      
       {direcciones.length == 0 ? (
         <div className="flex flex-wrap flex-col justify-center w-full">
           <div className="text-center">
@@ -48,16 +55,23 @@ export const Direccion = () => {
         <div className="w-3/4 flex flex-wrap justify-center m-auto">
           {direcciones.map((direccion, idx) => {
             return (
-              <NavLink 
-              to={`/EditarDireccion/${direccion.Id}/${encodeURIComponent(direccion.Calle)}/${encodeURIComponent(direccion.Ciudad)}/${encodeURIComponent(direccion.Estado)}/${encodeURIComponent(direccion.CodigoPostal)}/${encodeURIComponent(direccion.Referencias)}`}
-              className="w-full flex  border-2 mt-2 items-center justify-between p-2 rounded-md"
-              key={`direccion-usuario-${context.user.Id}-${direccion.Id}`}>
+              <NavLink
+                to={`/EditarDireccion/${direccion.Id}/${encodeURIComponent(
+                  direccion.Calle
+                )}/${encodeURIComponent(direccion.Ciudad)}/${encodeURIComponent(
+                  direccion.Estado
+                )}/${encodeURIComponent(
+                  direccion.CodigoPostal
+                )}/${encodeURIComponent(direccion.Referencias)}`}
+                className="w-full flex  border-2 mt-2 items-center justify-between p-2 rounded-md"
+                key={`direccion-usuario-${context.user.Id}-${direccion.Id}`}
+              >
                 <div>
                   <p className="text-gray-500">{direccion.Calle}</p>
                   <p className="text-gray-500">{direccion.Ciudad}</p>
                 </div>
                 <p>{">"}</p>
-              </NavLink> 
+              </NavLink>
             );
           })}
         </div>

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import flecha from "../assets/arrow-back.svg";
 import { useNavigate, NavLink, useParams   } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
-import { editarDireccion } from "./Peticiones";
+import { editarDireccion, eliminarDireccion } from "./Peticiones";
 export const EditarDireccion = () => {
   const navigate = useNavigate();
   const { Id, calle, ciudad, estado, codigoPostal, referencia } = useParams();
@@ -30,13 +30,22 @@ export const EditarDireccion = () => {
 
   return (
     <div className="flex flex-wrap flex-col gap-3  w-full justify-center items-center bg-white text-black">
-      <div className="bg-white p-2 flex items-center w-full">
+      <div className="bg-white p-2 flex items-center w-full justify-between">
         <NavLink
           onClick={() => navigate(-1)}
           className="bg-black  p-2 font-semibold w-10 h-10 flex items-center rounded-full"
         >
           <img alt="regresar" src={flecha} className="h-10 w-10" />
         </NavLink>
+        <button className="text-red-500"
+        onClick={() => {
+          eliminarDireccion(Id || "", context.user.Token);
+          setTimeout(() => {
+            navigate(-1);
+            context.setBandera(!context.bandera);
+          },1000);  
+        }}
+        >Eliminar</button>
       </div>
 
       <label className="form-control w-10/12">
@@ -108,7 +117,7 @@ export const EditarDireccion = () => {
         onClick={() => {
           guardar();
         }}
-        className="btn btn-primary  bg-primary text-gray-50 font-semibold rounded-sm w-2/4 p-2 mb-10"
+        className="btn btn-primary  bg-primary text-gray-50 font-semibold rounded-sm w-9/12 p-2 mb-10"
       >
         Guardar Dirección
       </button>
