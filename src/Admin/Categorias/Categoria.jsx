@@ -12,8 +12,8 @@ import { HeaderCategorias } from "./HeaderCategorias";
 
 export const Categoria = () => {
   const [categorias, setCategorias] = useState([]);
-  const [subcategorias, setSubcategorias] = useState([]);
   const [categoriasFiltradas, setCategoriasFiltradas] = useState([]);
+  const [listaSubcategorias, setListaSubcategorias] = useState([]);
   const [idCategoria, setIdCategoria] = useState(0);
   const [nombre, setNombre] = useState("");
   const [actualizar, setActualizar] = useState(false);
@@ -89,15 +89,15 @@ export const Categoria = () => {
         <ModalAgregarCategoria
           actualizar={actualizar}
           setActualizar={setActualizar}
-          subcategorias={subcategorias}
-          setSubcategorias={setSubcategorias}
+          listaSubcategorias={listaSubcategorias}
+          setListaSubcategorias={setListaSubcategorias}
         />
 
         <ModalEditarCategoria
           actualizar={actualizar}
           setActualizar={setActualizar}
-          subcategorias={subcategorias}
-          setSubcategorias={setSubcategorias}
+          listaSubcategorias={listaSubcategorias}
+          setListaSubcategorias={setListaSubcategorias}
           Id={idCategoria}
           nombre={nombre}
           setNombre={setNombre}
