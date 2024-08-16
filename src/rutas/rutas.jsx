@@ -35,6 +35,7 @@ import { Direccion } from "../Profile/Direccion";
 import { AgregarDireccion } from "../Profile/AgregarDireccion";
 import { EditarDireccion } from "../Profile/EditarDireccion ";
 import { conseguirCategorias } from "./Peticiones";
+import { SubCategoriaMain } from "../SubCategorias/SubCategoriaMain";
 
 export const Rutas = () => {
   const contexto = useContext(AppContext);
@@ -48,8 +49,6 @@ export const Rutas = () => {
       setCategorias(res);
       console.log(res);
     });
-
-
   }, [contexto]);
 
   return (
@@ -192,7 +191,16 @@ export const Rutas = () => {
                 <div className="flex-none">
                   <ul className="menu menu-horizontal px-1">
                     <li>
-                      <NavLink to={'/'} className=' bg-primary'>Inicio</NavLink>
+                      <NavLink
+                        to={"/"}
+                        className={({ isActive }) =>
+                          isActive
+                            ? "active-link text-sm bg-primary text-white"
+                            : "text-white text-sm"
+                        }
+                      >
+                        Inicio
+                      </NavLink>
                     </li>
                     {categorias.map((categoria) => (
                       <li key={`menu-submenu-${carrito.Id}`}>
@@ -201,7 +209,14 @@ export const Rutas = () => {
                           <ul className="bg-primary rounded-t-none p-2 z-20">
                             {categoria.Subcategorias.map((subcategoria) => (
                               <li key={`submenu-${subcategoria.Id}`}>
-                                <NavLink to={`/item/${subcategoria.Id}`}>
+                                <NavLink
+                                  to={`/subCategoria/${subcategoria.Id}`}
+                                  className={({ isActive }) =>
+                                    isActive
+                                      ? "active-link text-sm bg-primary text-white"
+                                      : "text-white text-sm"
+                                  }
+                                >
                                   {subcategoria.Nombre}
                                 </NavLink>
                               </li>
@@ -209,8 +224,19 @@ export const Rutas = () => {
                           </ul>
                         </details>
                       </li>
-                    ))  
-                    }
+                    ))}
+                    <li>
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive
+                            ? "active-link text-sm bg-primary text-white"
+                            : "text-white text-sm"
+                        }
+                        to="/admin/categorias"
+                      >
+                        Categorias
+                      </NavLink>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -221,6 +247,7 @@ export const Rutas = () => {
               <Route path="/login" element={<AuthPage />} />
               <Route path="/item/:id" element={<Item />} />
               <Route path="/item" element={<Item />} />
+              <Route path="/subCategoria/:id" element={<SubCategoriaMain />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/ubication" element={<Ubication />} />
