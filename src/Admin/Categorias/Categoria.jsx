@@ -61,6 +61,7 @@ export const Categoria = () => {
                         .showModal();
                       setNombre(categoria.Nombre);
                       setIdCategoria(categoria.Id);
+                      //setListaSubcategorias("??????");
                     }}
                     className="text-black text-md md:text-lg font-semibold flex justify-between mt-1 w-3/5"
                   >
