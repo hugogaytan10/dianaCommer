@@ -138,7 +138,7 @@ export const Rutas = () => {
                         Ubicación
                       </NavLink>
                     </li>
-                    {contexto.user.TipoUsuario === 0 && (
+                    {contexto.user.TipoUsuario === 1 && (
                       <>
                         <li>
                           <NavLink
@@ -331,7 +331,20 @@ export const Rutas = () => {
                     Ubicación
                   </NavLink>
                 </li>
-                {contexto.user.TipoUsuario == 0 && (
+                <li>
+                  <NavLink
+                    to="/listaDeseos"
+                    className={({ isActive }) =>
+                      isActive ? "active-link text-lg" : "text-white text-lg"
+                    }
+                    onClick={() => {
+                      document.getElementById("my-drawer-3").checked = false;
+                    }}
+                  >
+                    Favoritos
+                  </NavLink>
+                </li>
+                {contexto.user.TipoUsuario == 1 && (
                   <>
                     <li>
                       <NavLink
