@@ -113,8 +113,10 @@
   /*.contenedor-img label:hover {
     background-color: #e0e0e0;
   }*/
-
-.btn-talla{
+#subcategoria{
+    color: #303030;
+}
+.btn-subcategoria{
     background-color: #fff;
     border: 1px solid #303030;
     color: #303030;
@@ -123,13 +125,13 @@
     margin: 0.5em;
     position: relative;
     height: 50px;
-    width: 50px;
-    border-radius: 100%;
+    width: auto;
+    border-radius: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-  .btn-eliminar-talla{
+  .btn-eliminar-subcategoria{
     background-color: #ff0000;
     color: white;
     border: none;

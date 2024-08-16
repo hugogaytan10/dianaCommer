@@ -2,20 +2,26 @@ import React, { useContext, useEffect, useState } from "react";
 import { URL } from "../../Const/Const";
 import { AppContext } from "../../Context/AppContext";
 import { getSubcategorias } from "./Peticiones";
-export const ModalEditarCategoria = ({actualizar, setActualizar, Id, nombre, setNombre }) => {
+export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcategorias, setListaSubcategorias, Id, nombre, setNombre }) => {
   const context = useContext(AppContext);
   const [seEdito, setSeEdito] = useState(false);
+  const [errorSubcategoria, setErrorSubcategoria] = useState(false);
   const [subcategorias, setSubcategorias] = useState([]);
+  const [subcategoriaSeleccionada, setSubcategoriaSeleccionada] = useState("");
 
   const EditarCategoria = async (e) => {
     e.preventDefault();
-    const categoria = {
+    /////aun hay que modificar el back perrillo
+    /*const categoria = {
       Category: {
-        Nombre: nombre
+        Nombre: nombre,
+        Id: Id
       },
-      Subcategories: [{
-        Nombre:nombreSubcategoria,
-      }]
+      Subcategories: listaSubcategorias
+    };*/
+    const categoria = {
+        Nombre: nombre,
+        Id: Id
     };
     console.log(categoria);
     if (nombre != "") {
@@ -40,6 +46,12 @@ export const ModalEditarCategoria = ({actualizar, setActualizar, Id, nombre, set
       }
     }
   };
+  const handleSelectChange = (event) => {
+    console.log('esto es lo que quieres imprimir?', listaSubcategorias)
+    setSubcategoriaSeleccionada(event.target.value);
+    //setNombreSubcategoria(event.target.value);
+  };
+
   const Reset = () => {
     setNombre("");
   };
@@ -84,16 +96,58 @@ export const ModalEditarCategoria = ({actualizar, setActualizar, Id, nombre, set
               <label>Nombre del artículo</label>
             </div>
 
-            <div className="form-group">
+            <div className="form-group w-7/8 mb-0 flex items-center">
               <select
-              className="bg-white">
+                className="bg-white w-2/3 mb-4"
+                id="subcategoria"
+                value={subcategoriaSeleccionada}
+                onChange={handleSelectChange}>
                 <option className="text-gray-800" value="">Selecciona una Subcategoria</option>
                 {subcategorias.map((subcategoria) => (
-                  <option className="text-gray-800" key={subcategoria.Id} value={subcategoria.Id}>
+                  <option className="text-gray-800" key={subcategoria.Id} value={subcategoria.Nombre}>
                     {subcategoria.Nombre}
                   </option>
                 ))}
               </select>
+              <button
+                className="btn-siguiente h-12 text-primary border-none w-1/3 mb-4 ml-2"
+                type="button"
+                onClick={() => {
+                  if (subcategoriaSeleccionada === "") {
+                    console.log('si neta?');
+                    setErrorSubcategoria(true);
+                    return;
+                  }
+                  console.log('nadota')
+                  const nuevaSubcategoria = {
+                    Nombre: subcategoriaSeleccionada
+                  };
+                  setListaSubcategorias([...listaSubcategorias, nuevaSubcategoria]);
+                  setSubcategoriaSeleccionada(""); // Reinicia el valor del select
+                  setErrorSubcategoria(false);
+                }}
+              >
+                Agregar
+              </button>
+
+            </div>
+
+            <div className="flex flex-wrap">
+              {listaSubcategorias &&
+                listaSubcategorias.length > 0 &&
+                listaSubcategorias.map((subcategoria, index) => (
+                  <div className="btn-subcategoria" key={`subcategoria-${subcategoria.id}`}>
+                    <p id='subcategoria'/*{`subcategoria-${subcategoria.id}`}*/>{subcategoria.Nombre}</p>
+                    <button
+                      className="btn-eliminar-subcategoria"
+                      onClick={() => {
+                        setListaSubcategorias(listaSubcategorias.filter((s) => s !== subcategoria));
+                      }}
+                    >
+                      X
+                    </button>
+                  </div>
+                ))}
             </div>
 
             <div className="flex w-full justify-around">
