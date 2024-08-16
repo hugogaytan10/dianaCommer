@@ -12,8 +12,8 @@ import { Profile } from "../Profile/Profile";
 import menu from "../assets/menu.svg";
 import carrito from "../assets/cart-outline.svg";
 import usuario from "../assets/userIcon.svg";
-import configuracion from "../assets/settings.svg"
-import { useContext, useEffect } from "react";
+import configuracion from "../assets/settings.svg";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../Context/AppContext";
 import { Ubication } from "../Ubication/Ubication";
 import { InicioAdmin } from "../Admin/InicioAdmin";
@@ -34,13 +34,22 @@ import { Ordenes } from "../Admin/Ordenes/Ordenes";
 import { Direccion } from "../Profile/Direccion";
 import { AgregarDireccion } from "../Profile/AgregarDireccion";
 import { EditarDireccion } from "../Profile/EditarDireccion ";
+import { conseguirCategorias } from "./Peticiones";
 
 export const Rutas = () => {
   const contexto = useContext(AppContext);
+  const [categorias, setCategorias] = useState([]);
 
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem("items")) || [];
     contexto.setCart(cart.length);
+
+    conseguirCategorias().then((res) => {
+      setCategorias(res);
+      console.log(res);
+    });
+
+
   }, [contexto]);
 
   return (
@@ -50,7 +59,8 @@ export const Rutas = () => {
           <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content flex flex-col h-full min-w-full">
             <HeaderWrapper>
-              <div className="w-full navbar bg-primary">
+              {/*
+                  <div className="w-full navbar bg-primary">
                 <div className="flex-none lg:hidden">
                   <label
                     htmlFor="my-drawer-3"
@@ -173,6 +183,37 @@ export const Rutas = () => {
                   </ul>
                 </div>
               </div>
+                */}
+
+              <div className="navbar bg-primary">
+                <div className="flex-1">
+                  <NavLink className=" btn-ghost text-xl">Calzado Díaz</NavLink>
+                </div>
+                <div className="flex-none">
+                  <ul className="menu menu-horizontal px-1">
+                    <li>
+                      <NavLink to={'/'} className=' bg-primary'>Inicio</NavLink>
+                    </li>
+                    {categorias.map((categoria) => (
+                      <li key={`menu-submenu-${carrito.Id}`}>
+                        <details>
+                          <summary>{categoria.Nombre}</summary>
+                          <ul className="bg-primary rounded-t-none p-2 z-20">
+                            {categoria.Subcategorias.map((subcategoria) => (
+                              <li key={`submenu-${subcategoria.Id}`}>
+                                <NavLink to={`/item/${subcategoria.Id}`}>
+                                  {subcategoria.Nombre}
+                                </NavLink>
+                              </li>
+                            ))}
+                          </ul>
+                        </details>
+                      </li>
+                    ))  
+                    }
+                  </ul>
+                </div>
+              </div>
             </HeaderWrapper>
 
             <Routes>
@@ -191,7 +232,10 @@ export const Rutas = () => {
               <Route path="/listaDeseos" element={<ListaDeseos />} />
               <Route path="/direcciones" element={<Direccion />} />
               <Route path="/guardarDireccion" element={<AgregarDireccion />} />
-              <Route path="/EditarDireccion/:Id/:calle/:ciudad/:estado/:codigoPostal/:referencia" element={<EditarDireccion />} />
+              <Route
+                path="/EditarDireccion/:Id/:calle/:ciudad/:estado/:codigoPostal/:referencia"
+                element={<EditarDireccion />}
+              />
               <Route
                 path="/admin"
                 element={
