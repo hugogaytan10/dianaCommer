@@ -51,6 +51,7 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
 
   const Reset = () => {
     setNombre("");
+    document.getElementById("nombreArticulo").value = "";
     setListaSubcategorias([]);
   };
 
@@ -161,7 +162,9 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
               >
                 Cancelar
               </button>
-              <button className="btn-siguiente">Guardar</button>
+              <button className="btn-siguiente">
+                Guardar
+              </button>
             </div>
           </form>
         </div>
