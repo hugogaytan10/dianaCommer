@@ -94,11 +94,22 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
                 id="subcategoria"
                 onChange={handleSelectChange}>
                 <option className="text-gray-800" value="">Selecciona una Subcategoria</option>
-                {subcategorias.map((subcategoria) => (
-                  <option className="text-gray-800" key={subcategoria.Id} value={subcategoria.Nombre}>
-                    {subcategoria.Nombre}
-                  </option>
-                ))}
+                {subcategorias
+                  .filter(
+                    (subcategoria) =>
+                      !listaSubcategorias.some(
+                        (item) => item.Nombre === subcategoria.Nombre
+                      )
+                  )
+                  .map((subcategoria) => (
+                    <option
+                      className="text-gray-800"
+                      key={subcategoria.Id}
+                      value={subcategoria.Nombre}
+                    >
+                      {subcategoria.Nombre}
+                    </option>
+                  ))}
               </select>
               <button
                 className="btn-siguiente h-12 text-primary border-none w-1/3 mb-4 ml-2"
@@ -109,7 +120,8 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
                     return;
                   }
                   const nuevaSubcategoria = {
-                    Nombre: document.getElementById("subcategoria").value
+                    Nombre: document.getElementById("subcategoria").value//,
+                    //Id: document.getElementById("subcategoria").key
                   };
                   setListaSubcategorias([...listaSubcategorias, nuevaSubcategoria]);
                   document.getElementById("subcategoria").value = "";

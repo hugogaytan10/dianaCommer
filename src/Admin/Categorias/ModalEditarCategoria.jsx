@@ -20,8 +20,8 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
       Subcategories: listaSubcategorias
     };*/
     const categoria = {
-        Nombre: nombre,
-        Id: Id
+      Nombre: nombre,
+      Id: Id
     };
     console.log(categoria);
     if (nombre != "") {
@@ -54,6 +54,8 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
 
   const Reset = () => {
     setNombre("");
+
+    setListaSubcategorias([]);
   };
   useEffect(() => {
     if (seEdito) {
@@ -103,11 +105,22 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
                 value={subcategoriaSeleccionada}
                 onChange={handleSelectChange}>
                 <option className="text-gray-800" value="">Selecciona una Subcategoria</option>
-                {subcategorias.map((subcategoria) => (
-                  <option className="text-gray-800" key={subcategoria.Id} value={subcategoria.Nombre}>
-                    {subcategoria.Nombre}
-                  </option>
-                ))}
+                {subcategorias
+                  .filter(
+                    (subcategoria) =>
+                      !listaSubcategorias.some(
+                        (item) => item.Nombre === subcategoria.Nombre
+                      )
+                  )
+                  .map((subcategoria) => (
+                    <option
+                      className="text-gray-800"
+                      key={subcategoria.Id}
+                      value={subcategoria.Nombre}
+                    >
+                      {subcategoria.Nombre}
+                    </option>
+                  ))}
               </select>
               <button
                 className="btn-siguiente h-12 text-primary border-none w-1/3 mb-4 ml-2"
