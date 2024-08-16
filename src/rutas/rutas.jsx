@@ -36,19 +36,30 @@ import { AgregarDireccion } from "../Profile/AgregarDireccion";
 import { EditarDireccion } from "../Profile/EditarDireccion ";
 import { conseguirCategorias } from "./Peticiones";
 import { SubCategoriaMain } from "../SubCategorias/SubCategoriaMain";
+import { NavBarDesktop } from "./NavBarDesktop";
+import { NavBarMobile } from "./NavBarMobile";
 
 export const Rutas = () => {
   const contexto = useContext(AppContext);
   const [categorias, setCategorias] = useState([]);
+  //hacer una varibale que escuche cuando la pantalla sea mayor a 768px
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 768);
+
+  const handleResize = () => {
+    setIsLargeScreen(window.innerWidth > 768);
+  };
 
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem("items")) || [];
     contexto.setCart(cart.length);
+    window.addEventListener("resize", handleResize);
 
     conseguirCategorias().then((res) => {
       setCategorias(res);
-      console.log(res);
     });
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, [contexto]);
 
   return (
@@ -183,63 +194,11 @@ export const Rutas = () => {
                 </div>
               </div>
                 */}
-
-              <div className="navbar bg-primary">
-                <div className="flex-1">
-                  <NavLink className=" btn-ghost text-xl">Calzado Díaz</NavLink>
-                </div>
-                <div className="flex-none">
-                  <ul className="menu menu-horizontal px-1">
-                    <li>
-                      <NavLink
-                        to={"/"}
-                        className={({ isActive }) =>
-                          isActive
-                            ? "active-link text-sm bg-primary text-white"
-                            : "text-white text-sm"
-                        }
-                      >
-                        Inicio
-                      </NavLink>
-                    </li>
-                    {categorias.map((categoria) => (
-                      <li key={`menu-submenu-${carrito.Id}`}>
-                        <details>
-                          <summary>{categoria.Nombre}</summary>
-                          <ul className="bg-primary rounded-t-none p-2 z-20">
-                            {categoria.Subcategorias.map((subcategoria) => (
-                              <li key={`submenu-${subcategoria.Id}`}>
-                                <NavLink
-                                  to={`/subCategoria/${subcategoria.Id}`}
-                                  className={({ isActive }) =>
-                                    isActive
-                                      ? "active-link text-sm bg-primary text-white"
-                                      : "text-white text-sm"
-                                  }
-                                >
-                                  {subcategoria.Nombre}
-                                </NavLink>
-                              </li>
-                            ))}
-                          </ul>
-                        </details>
-                      </li>
-                    ))}
-                    <li>
-                      <NavLink
-                        className={({ isActive }) =>
-                          isActive
-                            ? "active-link text-sm bg-primary text-white"
-                            : "text-white text-sm"
-                        }
-                        to="/admin/categorias"
-                      >
-                        Categorias
-                      </NavLink>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+              {isLargeScreen ? (
+                <NavBarDesktop categorias={categorias} />
+              ) : (
+                <NavBarMobile categorias={categorias} />
+              )}
             </HeaderWrapper>
 
             <Routes>
@@ -308,6 +267,9 @@ export const Rutas = () => {
               <Route path="/blog/intro" element={<Intro />} />
             </Routes>
           </div>
+
+{
+  /*
 
           <HeaderWrapper>
             <div className="drawer-side z-30">
@@ -444,6 +406,9 @@ export const Rutas = () => {
               </ul>
             </div>
           </HeaderWrapper>
+
+*/}
+          
         </div>
         <FooterWrapper />
       </BrowserRouter>
