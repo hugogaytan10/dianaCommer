@@ -55,7 +55,7 @@ export const Cart = () => {
 
   return (
     <div>
-      <div className="bg-white p-2">
+      <div className=" p-2">
         <NavLink
           to={"/"}
           className="bg-black  p-2 font-semibold w-10 h-10 flex items-center rounded-full"
@@ -63,7 +63,7 @@ export const Cart = () => {
           <img alt="regresar" src={flecha} className="h-10 w-10" />
         </NavLink>
       </div>
-      <div className="flex flex-wrap contenedor-cart overflow-auto bg-white pb-20">
+      <div className="flex flex-wrap contenedor-cart overflow-auto  pb-20">
         {cart.length > 0 ? (
           cart?.map((item) => {
             return (
@@ -132,7 +132,7 @@ export const Cart = () => {
         )}
       </div>
       {cart.length > 0 && (
-        <div className="modal-abajo text-black">
+        <div className="modal-abajo text-black ">
           <div className="flex w-full justify-around mt-4">
             <p className="font-semibold">Total:</p>
             <p className="font-semibold">
