@@ -29,6 +29,10 @@ import { ProtectedRoute } from "./RutasProtegidas";
 import { AuthPage } from "../Login/AuthPage";
 import { Caliz } from "../caliz/Caliz";
 import { ListaDeseos } from "../ListaDeseos/ListaDeseos";
+import { Ordenes } from "../Admin/Ordenes/Ordenes";
+import { Direccion } from "../Profile/Direccion";
+import { AgregarDireccion } from "../Profile/AgregarDireccion";
+import { EditarDireccion } from "../Profile/EditarDireccion ";
 
 export const Rutas = () => {
   const contexto = useContext(AppContext);
@@ -42,7 +46,6 @@ export const Rutas = () => {
     <div>
       <BrowserRouter>
         <div className="drawer overflow-hidden">
-
           <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content flex flex-col h-full min-w-full">
             <HeaderWrapper>
@@ -53,11 +56,7 @@ export const Rutas = () => {
                     aria-label="open sidebar"
                     className="btn btn-square btn-ghost"
                   >
-                    <img
-                      src={menu}
-                      alt="menu"
-                      className="h-10 w-10"
-                    />
+                    <img src={menu} alt="menu" className="h-10 w-10" />
                   </label>
                 </div>
                 <div className="flex-1 px-2 mx-2 text-gray-50 font-bold justify-center md:justify-start">
@@ -70,9 +69,15 @@ export const Rutas = () => {
                   </NavLink>
                 </div>
                 <div className="contenedor-carrito">
-                  <NavLink to="/login">
-                    <img src={usuario} alt="usuario" className="w-8 h-8"/>
-                  </NavLink>
+                  {contexto.user.Correo != "" ? (
+                    <NavLink to="/perfil">
+                      <img src={usuario} alt="usuario" className="w-8 h-8" />
+                    </NavLink>
+                  ) : (
+                    <NavLink to="/login">
+                      <img src={usuario} alt="usuario" className="w-8 h-8" />
+                    </NavLink>
+                  )}
                 </div>
                 <div className="flex-none hidden lg:block">
                   <ul className="menu menu-horizontal">
@@ -112,48 +117,58 @@ export const Rutas = () => {
                         Ubicación
                       </NavLink>
                     </li>
-                    {
-                      contexto.user.TipoUsuario === 0 && (
-                        <>
-                          <li>
-                            <NavLink
-                              className={({ isActive }) =>
-                                isActive
-                                  ? "active-link text-lg bg-primary text-white"
-                                  : "text-white text-lg"
-                              }
-                              to="/admin"
-                            >
-                              Productos
-                            </NavLink>
-                          </li>
-                          <li>
-                            <NavLink
-                              className={({ isActive }) =>
-                                isActive
-                                  ? "active-link text-lg bg-primary text-white"
-                                  : "text-white text-lg"
-                              }
-                              to="/admin/categorias"
-                            >
-                              Categorias
-                            </NavLink>
-                          </li>
-                          <li>
-                            <NavLink
-                              className={({ isActive }) =>
-                                isActive
-                                  ? "active-link text-lg bg-primary text-white"
-                                  : "text-white text-lg"
-                              }
-                              to="/admin/Reporte"
-                            >
-                              Reportes
-                            </NavLink>
-                          </li>
-                        </>
-                      )
-                    }
+                    {contexto.user.TipoUsuario === 0 && (
+                      <>
+                        <li>
+                          <NavLink
+                            className={({ isActive }) =>
+                              isActive
+                                ? "active-link text-lg bg-primary text-white"
+                                : "text-white text-lg"
+                            }
+                            to="/admin"
+                          >
+                            Productos
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink
+                            className={({ isActive }) =>
+                              isActive
+                                ? "active-link text-lg bg-primary text-white"
+                                : "text-white text-lg"
+                            }
+                            to="/admin/categorias"
+                          >
+                            Categorias
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink
+                            className={({ isActive }) =>
+                              isActive
+                                ? "active-link text-lg bg-primary text-white"
+                                : "text-white text-lg"
+                            }
+                            to="/admin/Ordenes"
+                          >
+                            Ordenes
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink
+                            className={({ isActive }) =>
+                              isActive
+                                ? "active-link text-lg bg-primary text-white"
+                                : "text-white text-lg"
+                            }
+                            to="/admin/Reporte"
+                          >
+                            Reportes
+                          </NavLink>
+                        </li>
+                      </>
+                    )}
                   </ul>
                 </div>
               </div>
@@ -171,7 +186,11 @@ export const Rutas = () => {
               <Route path="/pago" element={<MainStripe />} />
               <Route path="/pagoCompletado" element={<PagoCompletado />} />
               <Route path="/caliz" element={<Caliz />} />
+              <Route path="/perfil" element={<Profile />} />
               <Route path="/listaDeseos" element={<ListaDeseos />} />
+              <Route path="/direcciones" element={<Direccion />} />
+              <Route path="/guardarDireccion" element={<AgregarDireccion />} />
+              <Route path="/EditarDireccion/:Id/:calle/:ciudad/:estado/:codigoPostal/:referencia" element={<EditarDireccion />} />
               <Route
                 path="/admin"
                 element={
@@ -185,6 +204,14 @@ export const Rutas = () => {
                 element={
                   <ProtectedRoute>
                     <Categoria />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/Ordenes"
+                element={
+                  <ProtectedRoute>
+                    <Ordenes />
                   </ProtectedRoute>
                 }
               />
@@ -270,57 +297,78 @@ export const Rutas = () => {
                     Ubicación
                   </NavLink>
                 </li>
-                {
-                  contexto.user.TipoUsuario == 0 && (
-                    <>
-                      <li>
-                        <NavLink
-                          className={({ isActive }) =>
-                            isActive
-                              ? "active-link text-lg bg-primary text-white"
-                              : "text-white text-lg"
-                          }
-                          to="/admin"
-                          onClick={() => {
-                            document.getElementById("my-drawer-3").checked = false;
-                          }}
-                        >
-                          Productos
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink
-                          className={({ isActive }) =>
-                            isActive
-                              ? "active-link text-lg bg-primary text-white"
-                              : "text-white text-lg"
-                          }
-                          to="/admin/categorias"
-                          onClick={() => {
-                            document.getElementById("my-drawer-3").checked = false;
-                          }}
-                        >
-                          Categorias
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink
-                          className={({ isActive }) =>
-                            isActive
-                              ? "active-link text-lg bg-primary text-white"
-                              : "text-white text-lg"
-                          }
-                          to="/admin/Reporte"
-                          onClick={() => {
-                            document.getElementById("my-drawer-3").checked = false;
-                          }}
-                        >
-                          Reportes
-                        </NavLink>
-                      </li>
-                    </>
-                  )
-                }
+                {contexto.user.TipoUsuario == 0 && (
+                  <>
+                    <li>
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive
+                            ? "active-link text-lg bg-primary text-white"
+                            : "text-white text-lg"
+                        }
+                        to="/admin"
+                        onClick={() => {
+                          document.getElementById(
+                            "my-drawer-3"
+                          ).checked = false;
+                        }}
+                      >
+                        Productos
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive
+                            ? "active-link text-lg bg-primary text-white"
+                            : "text-white text-lg"
+                        }
+                        to="/admin/categorias"
+                        onClick={() => {
+                          document.getElementById(
+                            "my-drawer-3"
+                          ).checked = false;
+                        }}
+                      >
+                        Categorias
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive
+                            ? "active-link text-lg bg-primary text-white"
+                            : "text-white text-lg"
+                        }
+                        to="/admin/Ordenes"
+                        onClick={() => {
+                          document.getElementById(
+                            "my-drawer-3"
+                          ).checked = false;
+                        }}
+                      >
+                        Ordenes
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive
+                            ? "active-link text-lg bg-primary text-white"
+                            : "text-white text-lg"
+                        }
+                        to="/admin/Reporte"
+                        onClick={() => {
+                          document.getElementById(
+                            "my-drawer-3"
+                          ).checked = false;
+                        }}
+                      >
+                        Reportes
+                      </NavLink>
+                    </li>
+                  </>
+                )}
               </ul>
             </div>
           </HeaderWrapper>
