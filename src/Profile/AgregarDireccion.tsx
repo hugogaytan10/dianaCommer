@@ -3,6 +3,7 @@ import flecha from "../assets/arrow-back.svg";
 import { useNavigate, NavLink } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 import { guardarDireccion } from "./Peticiones";
+import { set } from "@cloudinary/url-gen/actions/variable";
 export const AgregarDireccion = () => {
   const navigate = useNavigate();
   const context = useContext(AppContext);
@@ -23,8 +24,10 @@ export const AgregarDireccion = () => {
         Referencias: referencia
     }
     guardarDireccion(body, context.user.Token);
-    context.setBandera(!context.bandera);
-    navigate(-1);
+    setTimeout(() => {
+      context.setBandera(!context.bandera);
+      navigate(-1);
+    }, 1000);
   };
 
   return (

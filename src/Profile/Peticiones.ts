@@ -51,3 +51,22 @@ export const editarDireccion = async(direccion: any, token: string) => {
         return false;
     }
 }
+
+export const eliminarDireccion = async(id: string, token: string) => {
+    try{
+        const url = `${URL}/direccion/eliminar/${id}`;
+        const response = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'token': `${token}`
+            }
+        });
+        const data = await response.json();
+        if(data)
+            return true;
+        return false;
+    }catch(e){
+        return false;
+    }
+}

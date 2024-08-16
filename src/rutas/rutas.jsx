@@ -12,6 +12,7 @@ import { Profile } from "../Profile/Profile";
 import menu from "../assets/menu.svg";
 import carrito from "../assets/cart-outline.svg";
 import usuario from "../assets/userIcon.svg";
+import configuracion from "../assets/settings.svg"
 import { useContext, useEffect } from "react";
 import { AppContext } from "../Context/AppContext";
 import { Ubication } from "../Ubication/Ubication";
@@ -71,7 +72,7 @@ export const Rutas = () => {
                 <div className="contenedor-carrito">
                   {contexto.user.Correo != "" ? (
                     <NavLink to="/perfil">
-                      <img src={usuario} alt="usuario" className="w-8 h-8" />
+                      <img src={configuracion} alt="perfil" className="w-8 h-8" />
                     </NavLink>
                   ) : (
                     <NavLink to="/login">
