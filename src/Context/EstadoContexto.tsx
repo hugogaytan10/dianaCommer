@@ -9,4 +9,6 @@ export type AppContextState = {
     setCart: Dispatch<React.SetStateAction<number>>;
     user: User;
     setUser: Dispatch<React.SetStateAction<User>>;
+    bandera: boolean;
+    setBandera: Dispatch<React.SetStateAction<boolean>>;
 }

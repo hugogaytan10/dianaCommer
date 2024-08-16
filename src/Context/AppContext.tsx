@@ -22,6 +22,7 @@ const AppProvider: React.FC<Props> = ({ children }) => {
     ListaTallas: [],
   });
   const [cart, setCart] = useState(0);
+  const [bandera, setBandera] = useState(false);
   const [user, setUser] = useState<User>({
     Apellido: "",
     Correo: "",
@@ -61,8 +62,10 @@ const AppProvider: React.FC<Props> = ({ children }) => {
       setCart: setCart,
       user: user,
       setUser: setUser,
+      bandera: bandera,
+      setBandera: setBandera
     }),
-    [card, setCard, cart, setCart, user, setUser]
+    [card, setCard, cart, setCart, user, setUser, bandera, setBandera]
   );
   return (
     <AppContext.Provider value={memoizedValue}>{children}</AppContext.Provider>
