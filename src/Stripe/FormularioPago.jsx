@@ -5,10 +5,11 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import "./FormularioStripe.css";
+import { useNavigate } from "react-router-dom";
 export default function FormularioPago() {
   const stripe = useStripe();
   const elements = useElements();
-
+  const navigate = useNavigate();
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   
@@ -31,7 +32,7 @@ export default function FormularioPago() {
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
-          setMessage("Payment succeeded!");
+          navigate("/pagoCompletado");
           break;
         case "processing":
           setMessage("Your payment is processing.");
