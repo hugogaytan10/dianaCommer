@@ -1,9 +1,10 @@
 import { URL } from "../Const/Const";
-export const crearOrden = async (cart: any, token: string, UsuarioId: string, total: number) => {
+export const crearOrden = async (cart: any, token: string, UsuarioId: string, total: number, idDireccion: string) => {
    
    const orden = {
         UsuarioId: UsuarioId,
         Total: total,
+        DireccionId: idDireccion,
     };
    
     const details = cart.map((item: any) => {

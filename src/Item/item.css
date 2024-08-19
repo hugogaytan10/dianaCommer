@@ -7,7 +7,7 @@
     font-weight: bold;
 }
 .talla{
-    border: 0.5px solid #000;
+    border: 0.5px solid #e8e8e8;
 }
 .contador{
     width: 100%;
@@ -27,7 +27,7 @@
     font-weight: 600;
     border-radius: 25px;
 }
-.aviso{
+.aviso, .aviso-item{
     position: fixed;
     top: 50%;
     right: 15px;

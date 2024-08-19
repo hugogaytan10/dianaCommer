@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { CardOrden } from "./CardOrden";
 
 export const Ordenes = () => {
   return (
-    <div>Ordenes</div>
-  )
-}
+    <div className="min-h-screen">
+      <CardOrden />
+    </div>
+  );
+};
