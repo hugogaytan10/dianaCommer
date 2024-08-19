@@ -120,14 +120,15 @@ export const AuthPage: React.FC = () => {
       const token = response.credential;
       try {
         const decoded: DecodedToken = jwtDecode(token);
-        const dataLogin = await loginToServer(decoded.email, "");
+        const dataLogin = await loginToServer(decoded.email, null);
         if (!dataLogin) {
           const dataSignUp = await signUpToServer(
             decoded.name,
             decoded.email,
             ""
           );
-          context.setUser(dataSignUp);
+          const user = await loginToServer(decoded.email, null);
+          context.setUser(user);
         }
         context.setUser(dataLogin);
         navigate("/");

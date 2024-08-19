@@ -45,7 +45,8 @@ export const Cart = () => {
     if (!context.user.Correo) {
       setShowModal(true);
     } else {
-      navigate("/metodoPago");
+      navigate("/seleccionarDireccion");
+      //navigate("/metodoPago");
     }
   };
   useEffect(() => {
@@ -140,22 +141,24 @@ export const Cart = () => {
               MXN
             </p>
           </div>
-          {/*
+        
           <div
             onClick={metodoPago}
             className="mt-2 m-auto w-2/4 p-1 block bg-primary text-center text-gray-50 font-semibold rounded-sm"
           >
             Pedir
           </div>
-           */}
-          {cart?.length > 0 && (
+         
+          {/*
+              {cart?.length > 0 && (
             <NavLink
-              to={"/metodoPago"}
+              //to={"/metodoPago"}
               className="mt-2 m-auto w-2/4 p-1 block bg-primary text-center text-gray-50 font-semibold rounded-sm"
             >
               Pedir
             </NavLink>
           )}
+            */}
         </div>
       )}
       <Modal show={showModal} onClose={() => setShowModal(false)}>

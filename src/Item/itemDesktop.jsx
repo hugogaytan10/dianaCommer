@@ -193,10 +193,10 @@ export const ItemDesktop = ({ id }) => {
                       <button
                         key={index}
                         onClick={() => {
-                          setTalla(tallaMap.Talla);
+                          setTalla(tallaMap.IdTalla);
                         }}
                         className={`${
-                          talla === tallaMap.Talla
+                          talla === tallaMap.IdTalla
                             ? "bg-black text-gray-200"
                             : "bg-white text-black"
                         } w-1/4 h-10 text-center rounded-md border-gray-200 text-xs talla text-black font-semibold`}

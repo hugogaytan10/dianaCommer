@@ -38,6 +38,7 @@ import { conseguirCategorias } from "./Peticiones";
 import { SubCategoriaMain } from "../SubCategorias/SubCategoriaMain";
 import { NavBarDesktop } from "./NavBarDesktop";
 import { NavBarMobile } from "./NavBarMobile";
+import { SeleccionarDireccion } from "../MetodoPago/SeleccionarDireccion";
 
 export const Rutas = () => {
   const contexto = useContext(AppContext);
@@ -217,6 +218,7 @@ export const Rutas = () => {
               <Route path="/perfil" element={<Profile />} />
               <Route path="/listaDeseos" element={<ListaDeseos />} />
               <Route path="/direcciones" element={<Direccion />} />
+              <Route path="/seleccionarDireccion" element={<SeleccionarDireccion />} />
               <Route path="/guardarDireccion" element={<AgregarDireccion />} />
               <Route
                 path="/EditarDireccion/:Id/:calle/:ciudad/:estado/:codigoPostal/:referencia"

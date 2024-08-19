@@ -17,6 +17,12 @@ export const SeleccionarDireccion = () => {
   const context = useContext(AppContext);
   const [direcciones, setDirecciones] = useState<Direccion[]>([]);
 
+
+  const direccionClick = async(direccion: Direccion) => {
+    context.setDireccion(direccion);
+    navigate('/pago');
+  }
+
   useEffect(() => {
     const direcciones = conseguirDireccionPorUsuario(
       context.user.Id + "" || "0"
@@ -52,26 +58,19 @@ export const SeleccionarDireccion = () => {
           </div>
         </div>
       ) : (
-        <div className="w-3/4 flex flex-wrap justify-center m-auto">
+        <div className="w-3/4 flex flex-wrap justify-center m-auto flex-col">
           {direcciones.map((direccion, idx) => {
             return (
-              <NavLink
-                to={`/EditarDireccion/${direccion.Id}/${encodeURIComponent(
-                  direccion.Calle
-                )}/${encodeURIComponent(direccion.Ciudad)}/${encodeURIComponent(
-                  direccion.Estado
-                )}/${encodeURIComponent(
-                  direccion.CodigoPostal
-                )}/${encodeURIComponent(direccion.Referencias)}`}
-                className="w-full flex  border-2 mt-2 items-center justify-between p-2 rounded-md"
+              <button
+              onClick={() => {direccionClick(direccion) }}
+                className="w-full md:w-1/2 flex border-2 mt-2 items-center self-center justify-between p-2 rounded-md"
                 key={`direccion-usuario-${context.user.Id}-${direccion.Id}`}
               >
-                <div>
+                <div className="flex flex-col justify-start items-start">
                   <p className="text-gray-500">{direccion.Calle}</p>
                   <p className="text-gray-500">{direccion.Ciudad}</p>
                 </div>
-                <p>{">"}</p>
-              </NavLink>
+              </button>
             );
           })}
         </div>

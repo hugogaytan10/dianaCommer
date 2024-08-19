@@ -94,7 +94,7 @@ export const NavBarDesktop = (categorias: NavBarDesktopProps) => {
                   </NavLink>
                 </div>
                 <div className="contenedor-carrito">
-                  {contexto.user.Correo != "" ? (
+                  {contexto.user?.Correo != "" ? (
                     <NavLink to="/perfil">
                       <img src={configuracion} alt="perfil" className="w-6 h-6" />
                     </NavLink>
