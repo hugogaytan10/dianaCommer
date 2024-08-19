@@ -7,16 +7,24 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
   const [nombre, setNombre] = useState("");
   //const [nombreSubcategoria, setNombreSubcategoria] = useState("");
   const [subcategorias, setSubcategorias] = useState([]);
+  const [listaSubcategoriasID, setListaSubcategoriasID] = useState([]);
   const [errorSubcategoria, setErrorSubcategoria] = useState(false);
   const context = useContext(AppContext);
 
   const InsertarCategoria = async (e) => {
     e.preventDefault();
+    const subcategories = []
+    listaSubcategoriasID.forEach(element => {
+      const sb={
+        Id:element
+      }
+      subcategories.push(sb);
+    });
     const categoria = {
       Category: {
         Nombre: nombre
       },
-      Subcategories: listaSubcategorias
+      Subcategories: subcategories
     };
     if (
       nombre != ""
@@ -106,7 +114,7 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
                     <option
                       className="text-gray-800"
                       key={subcategoria.Id}
-                      value={subcategoria.Nombre}
+                      value={JSON.stringify({ Id: subcategoria.Id, Nombre: subcategoria.Nombre })}
                     >
                       {subcategoria.Nombre}
                     </option>
@@ -116,15 +124,28 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
                 className="btn-siguiente h-12 text-primary border-none w-1/3 mb-4 ml-2"
                 type="button"
                 onClick={() => {
-                  if (document.getElementById("subcategoria").value === "") {
+                  const selectElement = document.getElementById("subcategoria");
+                  const selectedValue = selectElement.value ? JSON.parse(selectElement.value) : null;
+
+                  if (!selectedValue) {
+                    setErrorSubcategoria(true);
+                    return;
+                  }
+
+                  const nuevaSubcategoria = {
+                    Nombre: selectedValue.Nombre,
+                    Id: selectedValue.Id,
+                  };
+                  /*if (document.getElementById("subcategoria").value === "") {
                     setErrorSubcategoria(true);
                     return;
                   }
                   const nuevaSubcategoria = {
-                    Nombre: document.getElementById("subcategoria").value//,
-                    //Id: document.getElementById("subcategoria").key
-                  };
+                    Nombre: document.getElementById("subcategoria").value,
+                    Id: 
+                  };*/
                   setListaSubcategorias([...listaSubcategorias, nuevaSubcategoria]);
+                  setListaSubcategoriasID([...listaSubcategoriasID, nuevaSubcategoria.Id]);
                   document.getElementById("subcategoria").value = "";
                   setErrorSubcategoria(false);
                 }}
