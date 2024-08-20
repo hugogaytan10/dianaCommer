@@ -67,11 +67,10 @@ export const Rutas = () => {
     <div>
       <BrowserRouter>
         <div className="drawer overflow-hidden">
-          <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+          {/*<input id="my-drawer-3" type="checkbox" className="drawer-toggle" />*/}
           <div className="drawer-content flex flex-col h-full min-w-full">
             <HeaderWrapper>
-              {/*
-                  <div className="w-full navbar bg-primary">
+              {/*<div className="w-full navbar bg-primary">
                 <div className="flex-none lg:hidden">
                   <label
                     htmlFor="my-drawer-3"
@@ -193,8 +192,7 @@ export const Rutas = () => {
                     )}
                   </ul>
                 </div>
-              </div>
-                */}
+              </div>*/}
               {isLargeScreen ? (
                 <NavBarDesktop categorias={categorias} />
               ) : (
@@ -270,7 +268,7 @@ export const Rutas = () => {
             </Routes>
           </div>
 
-{
+          {
   /*
 
           <HeaderWrapper>
@@ -423,7 +421,7 @@ export const Rutas = () => {
           </HeaderWrapper>
 
 */}
-          
+
         </div>
         <FooterWrapper />
       </BrowserRouter>
