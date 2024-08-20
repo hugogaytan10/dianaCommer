@@ -15,9 +15,9 @@ export const NavBarMobile = (categorias: NavBarMobileProps) => {
     <div className="navbar bg-primary">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle h-16 w-16 hidden" />
       <label htmlFor="my-drawer-3" className="hamburger-menu">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span className="my-1"></span>
+        <span className="mb-1"></span>
+        <span className=""></span>
       </label>
 
       <div className="flex-1 ml-4" >
