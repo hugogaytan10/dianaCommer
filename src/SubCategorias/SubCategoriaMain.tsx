@@ -20,7 +20,7 @@ export const SubCategoriaMain = () => {
     });
   }, [id]);
   return (
-    <div>
+    <div className="min-h-screen">
       <div className="w-11/12 flex flex-wrap justify-between p-2 items-center m-auto">
         {cardFilter.length > 0 ? (
           cardFilter.map((card) => {

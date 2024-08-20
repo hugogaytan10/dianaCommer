@@ -34,7 +34,7 @@ export const Subcategoria = () => {
     });
   };
   return (
-    <div>
+    <div className="min-h-screen">
       <HeaderSubcategorias
         subcategorias={subcategorias}
         setSubcategoriasFiltradas={setSubcategoriasFiltradas}

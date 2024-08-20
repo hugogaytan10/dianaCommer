@@ -337,7 +337,7 @@ export const ModalEditarAdmin = ({
                     {subCategoriaSeleccionada.Subcategoria || `Selecciona una subcategoría`}
                   </option>
                   {subCategorias.map((subcategoria) => (
-                    <option key={subcategoria.Id} value={subcategoria.Id}>
+                    <option key={subcategoria.Id} value={subcategoria.Id} onClick={()=>{setSubCategoriaSeleccionada(subcategoria)}}>
                       {subcategoria.Nombre}
                     </option>
                   ))}

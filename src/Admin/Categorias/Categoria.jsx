@@ -35,7 +35,7 @@ export const Categoria = () => {
     });
   };
   return (
-    <div>
+    <div className="min-h-screen">
       <HeaderCategorias
         categorias={categorias}
         setCategoriasFiltradas={setCategoriasFiltradas}
