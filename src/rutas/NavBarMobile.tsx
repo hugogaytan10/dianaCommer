@@ -27,141 +27,113 @@ export const NavBarMobile = (categorias: NavBarMobileProps) => {
         <ul className="menu p-4 w-80 min-h-full bg-primary">
           <li>
             <NavLink
-              to="/"
+              to={"/"}
               className={({ isActive }) =>
-                isActive ? "active-link text-lg" : "text-white text-lg"
+                isActive
+                  ? "active-link text-sm bg-primary text-white"
+                  : "text-white text-sm"
               }
-              onClick={() => {
-                document.getElementById("my-drawer-3").checked = false;
-              }}
             >
               Inicio
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/listaDeseos"
-              className={({ isActive }) =>
-                isActive ? "active-link text-lg" : "text-white text-lg"
-              }
-              onClick={() => {
-                document.getElementById("my-drawer-3").checked = false;
-              }}
-            >
-              Favoritos
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "active-link text-lg" : "text-white text-lg"
-              }
-              to="/cart"
-              onClick={() => {
-                document.getElementById("my-drawer-3").checked = false;
-              }}
-            >
-              Carrito
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "active-link text-lg" : "text-white text-lg"
-              }
-              to="/ubication"
-              onClick={() => {
-                document.getElementById("my-drawer-3").checked = false;
-              }}
-            >
-              Ubicación
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/listaDeseos"
-              className={({ isActive }) =>
-                isActive ? "active-link text-lg" : "text-white text-lg"
-              }
-              onClick={() => {
-                document.getElementById("my-drawer-3").checked = false;
-              }}
-            >
-              Favoritos
-            </NavLink>
-          </li>
-          {contexto.user.TipoUsuario == 1 && (
-            <>
+          {categorias.categorias.map((categoria) => (
+            <li key={`menu-submenu-${categoria.Id}`}>
+              <details>
+                <summary>{categoria.Nombre}</summary>
+                <ul className="bg-primary rounded-t-none p-2 z-20">
+                  {categoria.Subcategorias &&
+                    categoria.Subcategorias.map((subcategoria) => (
+                      <li key={`submenu-${subcategoria.Id}`}>
+                        <NavLink
+                          to={`/subCategoria/${subcategoria.Id}`}
+                          className={({ isActive }) =>
+                            isActive
+                              ? "active-link text-sm bg-primary text-white"
+                              : "text-white text-sm"
+                          }
+                        >
+                          {subcategoria.Nombre}
+                        </NavLink>
+                      </li>
+                    ))}
+                </ul>
+              </details>
+            </li>
+          ))}
+
+          {
+            contexto.user?.TipoUsuario == "0" && (
               <li>
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive
-                      ? "active-link text-lg bg-primary text-white"
-                      : "text-white text-lg"
-                  }
-                  to="/admin"
-                  onClick={() => {
-                    document.getElementById(
-                      "my-drawer-3"
-                    ).checked = false;
-                  }}
-                >
-                  Productos
-                </NavLink>
+                <details>
+                  <summary>Administrador</summary>
+                  <ul className="bg-primary rounded-t-none p-2 z-20">
+                    <li>
+                      <NavLink
+                        to={`/admin`}
+                        className={({ isActive }) =>
+                          isActive
+                            ? "active-link text-sm bg-primary text-white"
+                            : "text-white text-sm"
+                        }
+                      >
+                        Productos
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/admin/categorias"
+                        className={({ isActive }) =>
+                          isActive
+                            ? "active-link text-sm bg-primary text-white"
+                            : "text-white text-sm"
+                        }
+                      >
+                        Categorías
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/admin/ordenes"
+                        className={({ isActive }) =>
+                          isActive
+                            ? "active-link text-sm bg-primary text-white"
+                            : "text-white text-sm"
+                        }
+                      >
+                        Ordenes
+                      </NavLink>
+                    </li>
+                  </ul>
+                </details>
               </li>
-              <li>
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive
-                      ? "active-link text-lg bg-primary text-white"
-                      : "text-white text-lg"
-                  }
-                  to="/admin/categorias"
-                  onClick={() => {
-                    document.getElementById(
-                      "my-drawer-3"
-                    ).checked = false;
-                  }}
-                >
-                  Categorias
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive
-                      ? "active-link text-lg bg-primary text-white"
-                      : "text-white text-lg"
-                  }
-                  to="/admin/Ordenes"
-                  onClick={() => {
-                    document.getElementById(
-                      "my-drawer-3"
-                    ).checked = false;
-                  }}
-                >
-                  Ordenes
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive
-                      ? "active-link text-lg bg-primary text-white"
-                      : "text-white text-lg"
-                  }
-                  to="/admin/Reporte"
-                  onClick={() => {
-                    document.getElementById(
-                      "my-drawer-3"
-                    ).checked = false;
-                  }}
-                >
-                  Reportes
-                </NavLink>
-              </li>
-            </>
-          )}
+            )
+          }
+
+
+          <div className="contenedor-carrito flex items-center justify-start space-x-2 mt-4">
+            <span>{contexto.cart}</span>
+            <NavLink to="/cart" className="flex items-center space-x-2">
+              <img src={carrito} alt="carrito" className="w-6 h-6 -ml-2" />
+              <span>Carrito</span>
+            </NavLink>
+          </div>
+          <div className="contenedor-carrito flex items-center justify-start space-x-2 mt-4">
+            {contexto.user?.Correo !== "" ? (
+              <NavLink to="/perfil" className="flex items-center space-x-2">
+                <img src={configuracion} alt="perfil" className="w-6 h-6" />
+                <span>Usuario</span>
+              </NavLink>
+            ) : (
+              <NavLink to="/login" className="flex items-center space-x-2 mt-4">
+                <img src={usuario} alt="usuario" className="w-6 h-6" />
+                <span>Inicio de sesión</span>
+              </NavLink>
+            )}
+          </div>
+
+
+
         </ul>
       </div>
     </div>
