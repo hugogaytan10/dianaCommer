@@ -41,7 +41,6 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
           },
           body: JSON.stringify(categoria),
         });
-        console.log(categoria)
         if (response.status === 200) {
           setActualizar(!actualizar);
           Reset();
@@ -53,7 +52,7 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
   };
 
   const handleSelectChange = (event) => {
-    console.log('esto es lo que quieres imprimir?', listaSubcategorias)
+    //console.log('esto es lo que quieres imprimir?', listaSubcategorias)
     //setNombreSubcategoria(event.target.value);
   };
 
@@ -61,6 +60,7 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
     setNombre("");
     document.getElementById("nombreArticulo").value = "";
     setListaSubcategorias([]);
+    setListaSubcategoriasID([]);
   };
 
   useEffect(() => {

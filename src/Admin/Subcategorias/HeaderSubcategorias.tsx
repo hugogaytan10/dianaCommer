@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import lupa from "../../assets/search.svg";
+import arrowBack from "../../assets/arrow-back.svg";
 import subcategory from "../../assets/subcategory.svg";
 import "./HeaderAdmin.css";
+import { NavLink } from "react-router-dom";
 
 type HeaderAdminProps = {
   subcategoriasFiltradas: any[]; // Replace 'any' with the actual type of 'productosFiltrados'
@@ -29,6 +31,15 @@ export const HeaderSubcategorias = ({
 
   return (
     <div className="flex w-full justify-end gap-2 mt-4">
+      <NavLink className="h-8 w-8 rounded-full bg-primary border-primary border-2 cursor-pointer flex items-center justify-center" 
+      to="/admin/categorias">
+         <img
+          src={arrowBack}
+          alt="Regresar a categorias"
+          className="z-10 h-8 w-8 rounded-full bg-white border-primary border-2 cursor-pointer flex items-center justify-center"
+        />
+      </NavLink>
+
       <button
         className="h-8 w-8 rounded-full bg-primary border-primary border-2 cursor-pointer flex items-center justify-center"
         onClick={() =>
