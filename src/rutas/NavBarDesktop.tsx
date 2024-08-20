@@ -55,37 +55,55 @@ export const NavBarDesktop = (categorias: NavBarDesktopProps) => {
               </details>
             </li>
           ))}
-          <li>
-            <details>
-              <summary>Administrador</summary>
-              <ul className="bg-primary rounded-t-none p-2 z-20">
-                <li>
-                  <NavLink
-                    to={`/admin`}
-                    className={({ isActive }) =>
-                      isActive
-                        ? "active-link text-sm bg-primary text-white"
-                        : "text-white text-sm"
-                    }
-                  >
-                    Productos
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/admin/categorias"
-                    className={({ isActive }) =>
-                      isActive
-                        ? "active-link text-sm bg-primary text-white"
-                        : "text-white text-sm"
-                    }
-                  >
-                    Categorías
-                  </NavLink>
-                </li>
-              </ul>
-            </details>
-          </li>
+
+          {
+            contexto.user?.TipoUsuario == "0" && (
+              <li>
+              <details>
+                <summary>Administrador</summary>
+                <ul className="bg-primary rounded-t-none p-2 z-20">
+                  <li>
+                    <NavLink
+                      to={`/admin`}
+                      className={({ isActive }) =>
+                        isActive
+                          ? "active-link text-sm bg-primary text-white"
+                          : "text-white text-sm"
+                      }
+                    >
+                      Productos
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/admin/categorias"
+                      className={({ isActive }) =>
+                        isActive
+                          ? "active-link text-sm bg-primary text-white"
+                          : "text-white text-sm"
+                      }
+                    >
+                      Categorías
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/admin/ordenes"
+                      className={({ isActive }) =>
+                        isActive
+                          ? "active-link text-sm bg-primary text-white"
+                          : "text-white text-sm"
+                      }
+                    >
+                      Ordenes
+                    </NavLink>
+                  </li>
+                </ul>
+              </details>
+              </li>
+            )
+          }
+      
 
           <div className="contenedor-carrito">
                   <span className="mt-1">{contexto.cart}</span>

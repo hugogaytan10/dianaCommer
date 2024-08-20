@@ -45,7 +45,7 @@ export const ItemDesktop = ({ id }) => {
         });
         contexto.setCart(newCart.length);
         localStorage.setItem("items", JSON.stringify(newCart));
-        const aviso = document.querySelector(".aviso");
+        const aviso = document.querySelector(".aviso-item");
         aviso.classList.add("mostrar");
         setTimeout(() => {
           aviso.classList.remove("mostrar");
@@ -56,7 +56,7 @@ export const ItemDesktop = ({ id }) => {
         contexto.setCart(oldItems.length);
         localStorage.setItem("items", JSON.stringify(oldItems));
       }
-      const aviso = document.querySelector(".aviso");
+      const aviso = document.querySelector(".aviso-item");
       aviso.classList.add("mostrar");
       setTimeout(() => {
         aviso.classList.remove("mostrar");
@@ -146,7 +146,7 @@ export const ItemDesktop = ({ id }) => {
             <img
               src={mainImage}
               alt="Shoe"
-              className="w-1/2 h-full object-cover rounded-sm bg-gray-100"
+              className="w-1/2 h-80 object-contain rounded-sm bg-white"
             />
             <div className="w-1/2 pl-4">
               <div className="flex justify-between items-center mt-2">
@@ -197,9 +197,9 @@ export const ItemDesktop = ({ id }) => {
                         }}
                         className={`${
                           talla === tallaMap.IdTalla
-                            ? "bg-black text-gray-200"
+                            ? "bg-primary text-gray-200"
                             : "bg-white text-black"
-                        } w-1/4 h-10 text-center rounded-md border-gray-200 text-xs talla text-black font-semibold`}
+                        } w-1/4 h-10 text-center rounded-md text-xs talla text-black font-semibold`}
                       >
                         CM {tallaMap.Talla}
                       </button>
@@ -253,7 +253,7 @@ export const ItemDesktop = ({ id }) => {
         <CarruselRelacionados item={ImagenesCarrusel} />
       </div>
 
-      <div className="aviso">
+      <div className="aviso-item">
         <div className="texto-aviso">
           <span>Artículo Agregado</span>
         </div>

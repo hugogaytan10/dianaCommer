@@ -182,9 +182,9 @@ export const ItemMobile = ({id}) => {
                   }}
                   className={`${
                     talla === tallaMap.IdTalla
-                      ? "bg-black text-gray-200"
+                      ? "bg-primary text-gray-200"
                       : "bg-white text-black"
-                  } w-1/4 h-10 text-center rounded-lg border-black text-xs  talla text-black font-semibold`}
+                  } w-1/4 h-10 text-center rounded-lg  text-xs  talla text-black font-semibold`}
                 >
                   CM {tallaMap.Talla}
                 </button>

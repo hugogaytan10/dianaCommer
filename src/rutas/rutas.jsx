@@ -39,6 +39,7 @@ import { SubCategoriaMain } from "../SubCategorias/SubCategoriaMain";
 import { NavBarDesktop } from "./NavBarDesktop";
 import { NavBarMobile } from "./NavBarMobile";
 import { SeleccionarDireccion } from "../MetodoPago/SeleccionarDireccion";
+import { DetallesOrden } from "../Admin/Ordenes/DetallesOrden";
 
 export const Rutas = () => {
   const contexto = useContext(AppContext);
@@ -243,6 +244,14 @@ export const Rutas = () => {
                 element={
                   <ProtectedRoute>
                     <Ordenes />
+                  </ProtectedRoute>
+                }
+              />
+                 <Route
+                path="/admin/Ordenes/:id"
+                element={
+                  <ProtectedRoute>
+                    <DetallesOrden />
                   </ProtectedRoute>
                 }
               />
