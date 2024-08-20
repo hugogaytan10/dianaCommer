@@ -86,8 +86,8 @@ export const AuthPage: React.FC = () => {
         //como un objeto user
         localStorage.setItem("user", JSON.stringify({ email, password }));
         context.setUser(dataSignUp);
-        console.log("data inicio: ", dataSignUp);
-        console.log("setUser: ", context.user);
+        /*console.log("data inicio: ", dataSignUp);
+        console.log("setUser: ", context.user);*/
         navigate("/");
       } 
     }

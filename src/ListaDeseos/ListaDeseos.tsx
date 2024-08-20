@@ -23,7 +23,7 @@ export const ListaDeseos = () => {
     const data = getListaDeseos(context.user.Id || 0, context.user.Token || "");
     data.then((res) => {
       setListaDeseos(res);
-      console.log(res);
+      //console.log(res);
     });
   }, [actualizar]);
   if (listaDeseos.length === 0) {

@@ -23,7 +23,7 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
       Nombre: nombre,
       Id: Id
     };
-    console.log(categoria);
+    //console.log(categoria);
     if (nombre != "") {
       document.getElementById("modal_editar_categoria").close();
       try {
@@ -47,7 +47,7 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
     }
   };
   const handleSelectChange = (event) => {
-    console.log('esto es lo que quieres imprimir?', listaSubcategorias)
+    //console.log('esto es lo que quieres imprimir?', listaSubcategorias)
     setSubcategoriaSeleccionada(event.target.value);
     //setNombreSubcategoria(event.target.value);
   };
