@@ -23,7 +23,7 @@ export const MainStripe = () => {
     setCart(cart);
     setAmount(amount);
     //insertar Orden
-    crearOrden(cart, context.user.Token, context.user.Id, amount, context.direccion.Id);
+    //crearOrden(cart, context.user.Token, context.user.Id, amount, context.direccion.Id);
 
     const getClientSecret = async () => {
       fetch(`${URL}/pago`, {
