@@ -25,6 +25,16 @@ export const NavBarMobile = (categorias: NavBarMobileProps) => {
           Calzado Díaz
         </NavLink>
       </div>
+      <div className="contenedor-carrito flex items-center justify-start space-x-2 mt-4">
+            <span>{contexto.cart}</span>
+            <NavLink to="/cart" className="flex items-center space-x-2"
+              onClick={() => {
+                document.getElementById("my-drawer-3").checked = false;
+              }}
+            >
+              <img src={carrito} alt="carrito" className="w-6 h-6 -ml-2" />
+            </NavLink>
+          </div>
       <div className="drawer-side z-30">
         <label
           htmlFor="my-drawer-3"
@@ -137,18 +147,6 @@ export const NavBarMobile = (categorias: NavBarMobileProps) => {
             )
           }
 
-
-          <div className="contenedor-carrito flex items-center justify-start space-x-2 mt-4">
-            <span>{contexto.cart}</span>
-            <NavLink to="/cart" className="flex items-center space-x-2"
-              onClick={() => {
-                document.getElementById("my-drawer-3").checked = false;
-              }}
-            >
-              <img src={carrito} alt="carrito" className="w-6 h-6 -ml-2" />
-              <span>Carrito</span>
-            </NavLink>
-          </div>
           <div className="contenedor-carrito flex items-center justify-start space-x-2 mt-4">
             {contexto.user?.Correo !== "" ? (
               <NavLink to="/perfil" className="flex items-center space-x-2"
