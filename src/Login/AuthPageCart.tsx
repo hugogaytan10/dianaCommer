@@ -97,7 +97,7 @@ export const AuthPageCart: React.FC<AuthPageCartProps> = ({
     const password = e.target[1].value;
     const dataLogin = await loginToServer(email, password);
     if (dataLogin) {
-      console.log("entro al login", dataLogin);
+      //console.log("entro al login", dataLogin);
       localStorage.setItem("user", JSON.stringify({ email, password }));
       context.setUser(dataLogin);
       onClose(); // Mover aquí para cerrar solo si el inicio de sesión fue exitoso

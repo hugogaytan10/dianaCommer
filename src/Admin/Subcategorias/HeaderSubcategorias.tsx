@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import lupa from "../../assets/search.svg";
+import flecha from "../../assets/arrow-back.svg";
 import subcategory from "../../assets/subcategory.svg";
 import "./HeaderAdmin.css";
+import { NavLink } from "react-router-dom";
 
 type HeaderAdminProps = {
   subcategoriasFiltradas: any[]; // Replace 'any' with the actual type of 'productosFiltrados'
@@ -29,6 +31,13 @@ export const HeaderSubcategorias = ({
 
   return (
     <div className="flex w-full justify-end gap-2 mt-4">
+      <NavLink
+        to={"/"}
+        className="bg-white  p-2 font-semibold w-10 h-10 flex items-center rounded-full"
+      >
+        <img alt="regresar" src={flecha} className="h-10 w-10" />
+      </NavLink>
+
       <button
         className="h-8 w-8 rounded-full bg-primary border-primary border-2 cursor-pointer flex items-center justify-center"
         onClick={() =>
@@ -40,7 +49,7 @@ export const HeaderSubcategorias = ({
       >
         <p className="text-2xl text-gray-200">+</p>
       </button>
-      <div className="relative flex items-center">
+      <div className="relative flex items-center -mt-2">
         <img
           src={lupa}
           alt="Buscar"

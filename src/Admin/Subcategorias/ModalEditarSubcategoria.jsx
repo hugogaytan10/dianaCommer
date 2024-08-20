@@ -10,7 +10,7 @@ export const ModalEditarSubcategoria = ({actualizar, setActualizar, Id, nombre, 
       Id: Id,
       Nombre: nombre,
     };
-    console.log(subcategoria);
+    //console.log(subcategoria);
     if (nombre != "") {
       document.getElementById("modal_editar_subcategoria").close();
       try {
