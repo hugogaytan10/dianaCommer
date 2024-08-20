@@ -34,7 +34,7 @@ export const NavBarDesktop = (categorias: NavBarDesktopProps) => {
           {categorias.categorias.map((categoria) => (
             <li key={`menu-submenu-${categoria.Id}`}>
               <details>
-                <summary>{categoria.Nombre}</summary>
+                <summary className="text-white">{categoria.Nombre}</summary>
                 <ul className="bg-primary rounded-t-none p-2 z-20">
                   {categoria.Subcategorias &&
                     categoria.Subcategorias.map((subcategoria) => (
@@ -60,7 +60,7 @@ export const NavBarDesktop = (categorias: NavBarDesktopProps) => {
             contexto.user?.TipoUsuario == "0" && (
               <li>
                 <details>
-                  <summary>Administrador</summary>
+                  <summary className="text-white">Administrador</summary>
                   <ul className="bg-primary rounded-t-none p-2 z-20">
                     <li>
                       <NavLink

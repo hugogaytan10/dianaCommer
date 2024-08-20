@@ -14,6 +14,7 @@ export const NavBarMobile = (categorias: NavBarMobileProps) => {
   return (
     <div className="navbar bg-primary">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle h-16 w-16 hidden" />
+      
       <label htmlFor="my-drawer-3" className="hamburger-menu">
         <span className="my-1"></span>
         <span className="mb-1"></span>
@@ -21,18 +22,18 @@ export const NavBarMobile = (categorias: NavBarMobileProps) => {
       </label>
 
       <div className="flex-1 ml-4" >
-        <NavLink className=" btn-ghost text-xl" to={"/"}>
+        <NavLink className=" btn-ghost text-sm text-gray-300" to={"/"}>
           Calzado Díaz
         </NavLink>
       </div>
-      <div className="contenedor-carrito flex items-center justify-start space-x-2 mt-4">
+      <div className="contenedor-carrito flex items-center justify-start">
             <span>{contexto.cart}</span>
             <NavLink to="/cart" className="flex items-center space-x-2"
               onClick={() => {
                 document.getElementById("my-drawer-3").checked = false;
               }}
             >
-              <img src={carrito} alt="carrito" className="w-6 h-6 -ml-2" />
+              <img src={carrito} alt="carrito" className="w-8 h-8 -ml-2" />
             </NavLink>
           </div>
       <div className="drawer-side z-30">
@@ -61,11 +62,11 @@ export const NavBarMobile = (categorias: NavBarMobileProps) => {
           {categorias.categorias.map((categoria) => (
             <li key={`menu-submenu-${categoria.Id}`}>
               <details>
-                <summary>{categoria.Nombre}</summary>
+                <summary className="text-white">{categoria.Nombre}</summary>
                 <ul className="bg-primary rounded-t-none p-2 z-20">
                   {categoria.Subcategorias &&
                     categoria.Subcategorias.map((subcategoria) => (
-                      <li key={`submenu-${subcategoria.Id}`}>
+                      <li key={`submenu-${subcategoria.Id}`} className="text-white">
                         <NavLink
                           to={`/subCategoria/${subcategoria.Id}`}
                           className={({ isActive }) =>
@@ -155,7 +156,7 @@ export const NavBarMobile = (categorias: NavBarMobileProps) => {
                 }}
               >
                 <img src={configuracion} alt="perfil" className="w-6 h-6" />
-                <span>Usuario</span>
+                <span className="text-white">Usuario</span>
               </NavLink>
             ) : (
               <NavLink to="/login" className="flex items-center space-x-2 mt-4"
@@ -163,8 +164,8 @@ export const NavBarMobile = (categorias: NavBarMobileProps) => {
                   document.getElementById("my-drawer-3").checked = false;
                 }}
               >
-                <img src={usuario} alt="usuario" className="w-6 h-6" />
-                <span>Inicio de sesión</span>
+                <img src={usuario} alt="usuario" className="w-6 h-6 text-white" />
+                <span className="text-white">Inicio de sesión</span>
               </NavLink>
             )}
           </div>
