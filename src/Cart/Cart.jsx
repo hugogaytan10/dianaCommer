@@ -45,7 +45,8 @@ export const Cart = () => {
     if (!context.user.Correo) {
       setShowModal(true);
     } else {
-      navigate("/metodoPago");
+      navigate("/seleccionarDireccion");
+      //navigate("/metodoPago");
     }
   };
   useEffect(() => {
@@ -55,7 +56,7 @@ export const Cart = () => {
 
   return (
     <div>
-      <div className="bg-white p-2">
+      <div className=" p-2">
         <NavLink
           to={"/"}
           className="bg-black  p-2 font-semibold w-10 h-10 flex items-center rounded-full"
@@ -63,7 +64,7 @@ export const Cart = () => {
           <img alt="regresar" src={flecha} className="h-10 w-10" />
         </NavLink>
       </div>
-      <div className="flex flex-wrap contenedor-cart overflow-auto bg-white pb-20">
+      <div className="flex flex-wrap contenedor-cart overflow-auto  pb-20">
         {cart.length > 0 ? (
           cart?.map((item) => {
             return (
@@ -132,7 +133,7 @@ export const Cart = () => {
         )}
       </div>
       {cart.length > 0 && (
-        <div className="modal-abajo text-black">
+        <div className="modal-abajo text-black ">
           <div className="flex w-full justify-around mt-4">
             <p className="font-semibold">Total:</p>
             <p className="font-semibold">
@@ -140,22 +141,24 @@ export const Cart = () => {
               MXN
             </p>
           </div>
-          {/*
+        
           <div
             onClick={metodoPago}
             className="mt-2 m-auto w-2/4 p-1 block bg-primary text-center text-gray-50 font-semibold rounded-sm"
           >
             Pedir
           </div>
-           */}
-          {cart?.length > 0 && (
+         
+          {/*
+              {cart?.length > 0 && (
             <NavLink
-              to={"/metodoPago"}
+              //to={"/metodoPago"}
               className="mt-2 m-auto w-2/4 p-1 block bg-primary text-center text-gray-50 font-semibold rounded-sm"
             >
               Pedir
             </NavLink>
           )}
+            */}
         </div>
       )}
       <Modal show={showModal} onClose={() => setShowModal(false)}>

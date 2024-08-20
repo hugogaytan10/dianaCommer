@@ -12,7 +12,8 @@ import { Profile } from "../Profile/Profile";
 import menu from "../assets/menu.svg";
 import carrito from "../assets/cart-outline.svg";
 import usuario from "../assets/userIcon.svg";
-import { useContext, useEffect } from "react";
+import configuracion from "../assets/settings.svg";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../Context/AppContext";
 import { Ubication } from "../Ubication/Ubication";
 import { InicioAdmin } from "../Admin/InicioAdmin";
@@ -29,35 +30,55 @@ import { ProtectedRoute } from "./RutasProtegidas";
 import { AuthPage } from "../Login/AuthPage";
 import { Caliz } from "../caliz/Caliz";
 import { ListaDeseos } from "../ListaDeseos/ListaDeseos";
+import { Ordenes } from "../Admin/Ordenes/Ordenes";
+import { Direccion } from "../Profile/Direccion";
+import { AgregarDireccion } from "../Profile/AgregarDireccion";
+import { EditarDireccion } from "../Profile/EditarDireccion ";
+import { conseguirCategorias } from "./Peticiones";
+import { SubCategoriaMain } from "../SubCategorias/SubCategoriaMain";
+import { NavBarDesktop } from "./NavBarDesktop";
+import { NavBarMobile } from "./NavBarMobile";
+import { SeleccionarDireccion } from "../MetodoPago/SeleccionarDireccion";
+import { DetallesOrden } from "../Admin/Ordenes/DetallesOrden";
 
 export const Rutas = () => {
   const contexto = useContext(AppContext);
+  const [categorias, setCategorias] = useState([]);
+  //hacer una varibale que escuche cuando la pantalla sea mayor a 768px
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 768);
+
+  const handleResize = () => {
+    setIsLargeScreen(window.innerWidth > 768);
+  };
 
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem("items")) || [];
     contexto.setCart(cart.length);
+    window.addEventListener("resize", handleResize);
+
+    conseguirCategorias().then((res) => {
+      setCategorias(res);
+    });
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, [contexto]);
 
   return (
     <div>
       <BrowserRouter>
         <div className="drawer overflow-hidden">
-
-          <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+          {/*<input id="my-drawer-3" type="checkbox" className="drawer-toggle" />*/}
           <div className="drawer-content flex flex-col h-full min-w-full">
             <HeaderWrapper>
-              <div className="w-full navbar bg-primary">
+              {/*<div className="w-full navbar bg-primary">
                 <div className="flex-none lg:hidden">
                   <label
                     htmlFor="my-drawer-3"
                     aria-label="open sidebar"
                     className="btn btn-square btn-ghost"
                   >
-                    <img
-                      src={menu}
-                      alt="menu"
-                      className="h-10 w-10"
-                    />
+                    <img src={menu} alt="menu" className="h-10 w-10" />
                   </label>
                 </div>
                 <div className="flex-1 px-2 mx-2 text-gray-50 font-bold justify-center md:justify-start">
@@ -70,9 +91,15 @@ export const Rutas = () => {
                   </NavLink>
                 </div>
                 <div className="contenedor-carrito">
-                  <NavLink to="/login">
-                    <img src={usuario} alt="usuario" className="w-8 h-8"/>
-                  </NavLink>
+                  {contexto.user.Correo != "" ? (
+                    <NavLink to="/perfil">
+                      <img src={configuracion} alt="perfil" className="w-8 h-8" />
+                    </NavLink>
+                  ) : (
+                    <NavLink to="/login">
+                      <img src={usuario} alt="usuario" className="w-8 h-8" />
+                    </NavLink>
+                  )}
                 </div>
                 <div className="flex-none hidden lg:block">
                   <ul className="menu menu-horizontal">
@@ -112,51 +139,66 @@ export const Rutas = () => {
                         Ubicación
                       </NavLink>
                     </li>
-                    {
-                      contexto.user.TipoUsuario === 0 && (
-                        <>
-                          <li>
-                            <NavLink
-                              className={({ isActive }) =>
-                                isActive
-                                  ? "active-link text-lg bg-primary text-white"
-                                  : "text-white text-lg"
-                              }
-                              to="/admin"
-                            >
-                              Productos
-                            </NavLink>
-                          </li>
-                          <li>
-                            <NavLink
-                              className={({ isActive }) =>
-                                isActive
-                                  ? "active-link text-lg bg-primary text-white"
-                                  : "text-white text-lg"
-                              }
-                              to="/admin/categorias"
-                            >
-                              Categorias
-                            </NavLink>
-                          </li>
-                          <li>
-                            <NavLink
-                              className={({ isActive }) =>
-                                isActive
-                                  ? "active-link text-lg bg-primary text-white"
-                                  : "text-white text-lg"
-                              }
-                              to="/admin/Reporte"
-                            >
-                              Reportes
-                            </NavLink>
-                          </li>
-                        </>
-                      )
-                    }
+                    {contexto.user.TipoUsuario === 1 && (
+                      <>
+                        <li>
+                          <NavLink
+                            className={({ isActive }) =>
+                              isActive
+                                ? "active-link text-lg bg-primary text-white"
+                                : "text-white text-lg"
+                            }
+                            to="/admin"
+                          >
+                            Productos
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink
+                            className={({ isActive }) =>
+                              isActive
+                                ? "active-link text-lg bg-primary text-white"
+                                : "text-white text-lg"
+                            }
+                            to="/admin/categorias"
+                          >
+                            Categorias
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink
+                            className={({ isActive }) =>
+                              isActive
+                                ? "active-link text-lg bg-primary text-white"
+                                : "text-white text-lg"
+                            }
+                            to="/admin/Ordenes"
+                          >
+                            Ordenes
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink
+                            className={({ isActive }) =>
+                              isActive
+                                ? "active-link text-lg bg-primary text-white"
+                                : "text-white text-lg"
+                            }
+                            to="/admin/Reporte"
+                          >
+                            Reportes
+                          </NavLink>
+                        </li>
+                      </>
+                    )}
                   </ul>
                 </div>
-              </div>
+              </div>*/}
+              {isLargeScreen ? (
+                <NavBarDesktop categorias={categorias} />
+              ) : (
+                <NavBarMobile categorias={categorias} />
+              )}
             </HeaderWrapper>
 
             <Routes>
@@ -164,6 +206,7 @@ export const Rutas = () => {
               <Route path="/login" element={<AuthPage />} />
               <Route path="/item/:id" element={<Item />} />
               <Route path="/item" element={<Item />} />
+              <Route path="/subCategoria/:id" element={<SubCategoriaMain />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/ubication" element={<Ubication />} />
@@ -171,7 +214,15 @@ export const Rutas = () => {
               <Route path="/pago" element={<MainStripe />} />
               <Route path="/pagoCompletado" element={<PagoCompletado />} />
               <Route path="/caliz" element={<Caliz />} />
+              <Route path="/perfil" element={<Profile />} />
               <Route path="/listaDeseos" element={<ListaDeseos />} />
+              <Route path="/direcciones" element={<Direccion />} />
+              <Route path="/seleccionarDireccion" element={<SeleccionarDireccion />} />
+              <Route path="/guardarDireccion" element={<AgregarDireccion />} />
+              <Route
+                path="/EditarDireccion/:Id/:calle/:ciudad/:estado/:codigoPostal/:referencia"
+                element={<EditarDireccion />}
+              />
               <Route
                 path="/admin"
                 element={
@@ -185,6 +236,22 @@ export const Rutas = () => {
                 element={
                   <ProtectedRoute>
                     <Categoria />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/Ordenes"
+                element={
+                  <ProtectedRoute>
+                    <Ordenes />
+                  </ProtectedRoute>
+                }
+              />
+                 <Route
+                path="/admin/Ordenes/:id"
+                element={
+                  <ProtectedRoute>
+                    <DetallesOrden />
                   </ProtectedRoute>
                 }
               />
@@ -209,6 +276,9 @@ export const Rutas = () => {
               <Route path="/blog/intro" element={<Intro />} />
             </Routes>
           </div>
+
+          {
+  /*
 
           <HeaderWrapper>
             <div className="drawer-side z-30">
@@ -270,60 +340,97 @@ export const Rutas = () => {
                     Ubicación
                   </NavLink>
                 </li>
-                {
-                  contexto.user.TipoUsuario == 0 && (
-                    <>
-                      <li>
-                        <NavLink
-                          className={({ isActive }) =>
-                            isActive
-                              ? "active-link text-lg bg-primary text-white"
-                              : "text-white text-lg"
-                          }
-                          to="/admin"
-                          onClick={() => {
-                            document.getElementById("my-drawer-3").checked = false;
-                          }}
-                        >
-                          Productos
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink
-                          className={({ isActive }) =>
-                            isActive
-                              ? "active-link text-lg bg-primary text-white"
-                              : "text-white text-lg"
-                          }
-                          to="/admin/categorias"
-                          onClick={() => {
-                            document.getElementById("my-drawer-3").checked = false;
-                          }}
-                        >
-                          Categorias
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink
-                          className={({ isActive }) =>
-                            isActive
-                              ? "active-link text-lg bg-primary text-white"
-                              : "text-white text-lg"
-                          }
-                          to="/admin/Reporte"
-                          onClick={() => {
-                            document.getElementById("my-drawer-3").checked = false;
-                          }}
-                        >
-                          Reportes
-                        </NavLink>
-                      </li>
-                    </>
-                  )
-                }
+                <li>
+                  <NavLink
+                    to="/listaDeseos"
+                    className={({ isActive }) =>
+                      isActive ? "active-link text-lg" : "text-white text-lg"
+                    }
+                    onClick={() => {
+                      document.getElementById("my-drawer-3").checked = false;
+                    }}
+                  >
+                    Favoritos
+                  </NavLink>
+                </li>
+                {contexto.user.TipoUsuario == 1 && (
+                  <>
+                    <li>
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive
+                            ? "active-link text-lg bg-primary text-white"
+                            : "text-white text-lg"
+                        }
+                        to="/admin"
+                        onClick={() => {
+                          document.getElementById(
+                            "my-drawer-3"
+                          ).checked = false;
+                        }}
+                      >
+                        Productos
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive
+                            ? "active-link text-lg bg-primary text-white"
+                            : "text-white text-lg"
+                        }
+                        to="/admin/categorias"
+                        onClick={() => {
+                          document.getElementById(
+                            "my-drawer-3"
+                          ).checked = false;
+                        }}
+                      >
+                        Categorias
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive
+                            ? "active-link text-lg bg-primary text-white"
+                            : "text-white text-lg"
+                        }
+                        to="/admin/Ordenes"
+                        onClick={() => {
+                          document.getElementById(
+                            "my-drawer-3"
+                          ).checked = false;
+                        }}
+                      >
+                        Ordenes
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive
+                            ? "active-link text-lg bg-primary text-white"
+                            : "text-white text-lg"
+                        }
+                        to="/admin/Reporte"
+                        onClick={() => {
+                          document.getElementById(
+                            "my-drawer-3"
+                          ).checked = false;
+                        }}
+                      >
+                        Reportes
+                      </NavLink>
+                    </li>
+                  </>
+                )}
               </ul>
             </div>
           </HeaderWrapper>
+
+*/}
+
         </div>
         <FooterWrapper />
       </BrowserRouter>

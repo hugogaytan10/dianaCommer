@@ -2,6 +2,7 @@ import React, { useState, createContext, useMemo } from "react";
 import { AppContextState } from "./EstadoContexto";
 import { Card } from "../models/Card";
 import { User } from "../models/User";
+import { Direccion } from "../models/Direccion";
 
 type Props = {
   children: React.ReactNode;
@@ -22,6 +23,16 @@ const AppProvider: React.FC<Props> = ({ children }) => {
     ListaTallas: [],
   });
   const [cart, setCart] = useState(0);
+  const [bandera, setBandera] = useState(false);
+  const [direccion, setDireccion] = useState<Direccion>({
+    Id: 0,
+    Calle: "",
+    Ciudad: "",
+    Estado: "",
+    CodigoPostal: "",
+    UsuarioId: 0,
+    Referencias: "",
+  });
   const [user, setUser] = useState<User>({
     Apellido: "",
     Correo: "",
@@ -61,8 +72,23 @@ const AppProvider: React.FC<Props> = ({ children }) => {
       setCart: setCart,
       user: user,
       setUser: setUser,
+      direccion: direccion,
+      setDireccion: setDireccion,
+      bandera: bandera,
+      setBandera: setBandera,
     }),
-    [card, setCard, cart, setCart, user, setUser]
+    [
+      card,
+      setCard,
+      cart,
+      setCart,
+      user,
+      setUser,
+      direccion,
+      setDireccion,
+      bandera,
+      setBandera,
+    ]
   );
   return (
     <AppContext.Provider value={memoizedValue}>{children}</AppContext.Provider>

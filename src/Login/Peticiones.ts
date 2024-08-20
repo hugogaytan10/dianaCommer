@@ -1,6 +1,6 @@
 import {URL} from '../Const/Const'
 
-export const loginToServer = async (email: string, password: string) => {
+export const loginToServer = async (email: string, password: any) => {
     const response = await fetch(`${URL}/login`, {
         method: 'POST',
         headers: {

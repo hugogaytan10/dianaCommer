@@ -3,21 +3,28 @@ import { URL } from '../../Const/Const'
 import { AppContext } from "../../Context/AppContext";
 import { getSubcategorias } from "./Peticiones";
 
-export const ModalAgregarCategoria = ({ actualizar, setActualizar }) => {
+export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcategorias, setListaSubcategorias }) => {
   const [nombre, setNombre] = useState("");
-  const [nombreSubcategoria, setNombreSubcategoria] = useState("");
+  //const [nombreSubcategoria, setNombreSubcategoria] = useState("");
   const [subcategorias, setSubcategorias] = useState([]);
+  const [listaSubcategoriasID, setListaSubcategoriasID] = useState([]);
+  const [errorSubcategoria, setErrorSubcategoria] = useState(false);
   const context = useContext(AppContext);
 
   const InsertarCategoria = async (e) => {
     e.preventDefault();
+    const subcategories = []
+    listaSubcategoriasID.forEach(element => {
+      const sb={
+        Id:element
+      }
+      subcategories.push(sb);
+    });
     const categoria = {
       Category: {
         Nombre: nombre
       },
-      Subcategories: [{
-        Nombre:nombreSubcategoria,
-      }]
+      Subcategories: subcategories
     };
     if (
       nombre != ""
@@ -34,6 +41,7 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar }) => {
           },
           body: JSON.stringify(categoria),
         });
+        console.log(categoria)
         if (response.status === 200) {
           setActualizar(!actualizar);
           Reset();
@@ -45,12 +53,14 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar }) => {
   };
 
   const handleSelectChange = (event) => {
-    console.log(nombreSubcategoria)
-    setNombreSubcategoria(event.target.value);
+    console.log('esto es lo que quieres imprimir?', listaSubcategorias)
+    //setNombreSubcategoria(event.target.value);
   };
 
   const Reset = () => {
     setNombre("");
+    document.getElementById("nombreArticulo").value = "";
+    setListaSubcategorias([]);
   };
 
   useEffect(() => {
@@ -87,17 +97,79 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar }) => {
               <label>Nombre del artículo</label>
             </div>
 
-            <div className="form-group">
+            <div className="form-group w-7/8 mb-0 flex items-center">
               <select
-                className="bg-white"
+                className="bg-white w-2/3 mb-4"
+                id="subcategoria"
                 onChange={handleSelectChange}>
                 <option className="text-gray-800" value="">Selecciona una Subcategoria</option>
-                {subcategorias.map((subcategoria) => (
-                  <option className="text-gray-800" key={subcategoria.Id} value={subcategoria.Nombre}>
-                    {subcategoria.Nombre}
-                  </option>
-                ))}
+                {subcategorias
+                  .filter(
+                    (subcategoria) =>
+                      !listaSubcategorias.some(
+                        (item) => item.Nombre === subcategoria.Nombre
+                      )
+                  )
+                  .map((subcategoria) => (
+                    <option
+                      className="text-gray-800"
+                      key={subcategoria.Id}
+                      value={JSON.stringify({ Id: subcategoria.Id, Nombre: subcategoria.Nombre })}
+                    >
+                      {subcategoria.Nombre}
+                    </option>
+                  ))}
               </select>
+              <button
+                className="btn-siguiente h-12 text-primary border-none w-1/3 mb-4 ml-2"
+                type="button"
+                onClick={() => {
+                  const selectElement = document.getElementById("subcategoria");
+                  const selectedValue = selectElement.value ? JSON.parse(selectElement.value) : null;
+
+                  if (!selectedValue) {
+                    setErrorSubcategoria(true);
+                    return;
+                  }
+
+                  const nuevaSubcategoria = {
+                    Nombre: selectedValue.Nombre,
+                    Id: selectedValue.Id,
+                  };
+                  /*if (document.getElementById("subcategoria").value === "") {
+                    setErrorSubcategoria(true);
+                    return;
+                  }
+                  const nuevaSubcategoria = {
+                    Nombre: document.getElementById("subcategoria").value,
+                    Id: 
+                  };*/
+                  setListaSubcategorias([...listaSubcategorias, nuevaSubcategoria]);
+                  setListaSubcategoriasID([...listaSubcategoriasID, nuevaSubcategoria.Id]);
+                  document.getElementById("subcategoria").value = "";
+                  setErrorSubcategoria(false);
+                }}
+              >
+                Agregar
+              </button>
+            </div>
+
+            <div className="flex flex-wrap">
+              {listaSubcategorias &&
+                listaSubcategorias.length > 0 &&
+                listaSubcategorias.map((subcategoria, index) => (
+                  <div className="btn-subcategoria" key={`subcategoria-${subcategoria.id}`}>
+                    <p id='subcategoria'/*{`subcategoria-${subcategoria.id}`}*/>{subcategoria.Nombre}</p>
+                    <button
+                      className="btn-eliminar-subcategoria"
+                      onClick={() => {
+                        setListaSubcategorias(listaSubcategorias.filter((s) => s !== subcategoria));
+                      }}
+                    >
+                      X
+                    </button>
+                  </div>
+                ))}
             </div>
 
             <div className="flex w-full justify-around">
@@ -111,7 +183,9 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar }) => {
               >
                 Cancelar
               </button>
-              <button className="btn-siguiente">Guardar</button>
+              <button className="btn-siguiente">
+                Guardar
+              </button>
             </div>
           </form>
         </div>

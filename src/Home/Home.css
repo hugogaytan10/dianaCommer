@@ -61,12 +61,12 @@
     margin-left: 15px;
 }
 .contenedor-carrito > span{
-    width: 20px;
-    height: 20px;
+    width: 14px;
+    height: 14px;
     position: absolute;
     background-color: #fff;
     border-radius: 100%;
-    top: -10px;
+    top: -5px;
     right: 0%;
     display: flex;
     align-items: center;
@@ -111,5 +111,8 @@
     .banner{
         height: 600px;
        background-image: url('../assets/BannerGrande.png');
+    }
+    .contenedor-carrito > span{
+        top:-12px;
     }
 }

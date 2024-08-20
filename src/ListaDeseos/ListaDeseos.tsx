@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../Context/AppContext";
 import { deleteListaDeseos, getListaDeseos } from "./Peticiones";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import flecha from "../assets/arrow-back.svg";
 interface IFavorito {
   Id: number;
   Titulo: string;
@@ -15,6 +16,7 @@ interface IFavorito {
 }
 export const ListaDeseos = () => {
   const context = useContext(AppContext);
+  const navigate = useNavigate();
   const [listaDeseos, setListaDeseos] = useState<IFavorito[]>([]);
   const [actualizar, setActualizar] = useState(false);
   useEffect(() => {
@@ -27,6 +29,12 @@ export const ListaDeseos = () => {
   if (listaDeseos.length === 0) {
     return (
       <div className="h-screen">
+        <NavLink
+        to={'/perfil'}
+        className="bg-black  p-2 font-semibold w-10 h-10 flex items-center rounded-full"
+      >
+        <img alt="regresar" src={flecha} className="h-10 w-10" />
+      </NavLink>
         <div className="flex justify-center items-center h-full">
           <div className="w-3/4 border-2 rounded-lg md:w-1/2">
             <div className="card-body">
@@ -44,6 +52,12 @@ export const ListaDeseos = () => {
   }
   return (
     <div className="flex flex-wrap contenedor-cart overflow-auto bg-white pb-20 min-h-screen">
+      <NavLink
+        to={"/perfil"}
+        className="bg-black  p-2 font-semibold w-10 h-10 flex items-center rounded-full"
+      >
+        <img alt="regresar" src={flecha} className="h-10 w-10" />
+      </NavLink>
       {listaDeseos.map((favorito, idx) => {
         return (
           <div

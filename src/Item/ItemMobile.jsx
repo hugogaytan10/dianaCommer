@@ -178,13 +178,13 @@ export const ItemMobile = ({id}) => {
                 <button
                   key={index}
                   onClick={() => {
-                    setTalla(tallaMap.Talla);
+                    setTalla(tallaMap.IdTalla);
                   }}
                   className={`${
-                    talla === tallaMap.Talla
-                      ? "bg-black text-gray-200"
+                    talla === tallaMap.IdTalla
+                      ? "bg-primary text-gray-200"
                       : "bg-white text-black"
-                  } w-1/4 h-10 text-center rounded-lg border-black text-xs  talla text-black font-semibold`}
+                  } w-1/4 h-10 text-center rounded-lg  text-xs  talla text-black font-semibold`}
                 >
                   CM {tallaMap.Talla}
                 </button>

@@ -1,8 +1,15 @@
 import React from "react";
-
+import { NavLink } from "react-router-dom";
+import flecha from "../assets/arrow-back.svg";
 export const Politica = () => {
   return (
     <div className="space-y-4 p-4">
+        <NavLink
+          to={"/"}
+          className="bg-black  p-2 font-semibold w-10 h-10 flex items-center rounded-full"
+        >
+          <img alt="regresar" src={flecha} className="h-10 w-10" />
+        </NavLink>
       <p className="text-lg font-semibold">Política de Privacidad de Calzado Díaz</p>
       <p><span className="font-bold">Última actualización:</span> 3/28/2024</p>
       <p>
