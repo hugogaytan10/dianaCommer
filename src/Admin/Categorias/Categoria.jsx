@@ -46,9 +46,8 @@ export const Categoria = () => {
       >
         {categoriasFiltradas.map((categoria) => (
           <div
-            className={`contenedor-card border-b-2 w-full md:w-7/12 h-20  mx-auto ${
-              categoria.Id % 2 === 0 ? "mt-6" : "mt-6"
-            }`}
+            className={`contenedor-card border-b-2 w-full md:w-7/12 h-20  mx-auto ${categoria.Id % 2 === 0 ? "mt-6" : "mt-6"
+              }`}
             key={`producto-${categoria.Id}`}
           >
             <div className="card" id="a">
@@ -94,16 +93,6 @@ export const Categoria = () => {
           setListaSubcategorias={setListaSubcategorias}
         />
 
-        <ModalEditarCategoria
-          actualizar={actualizar}
-          setActualizar={setActualizar}
-          listaSubcategorias={listaSubcategorias}
-          setListaSubcategorias={setListaSubcategorias}
-          Id={idCategoria}
-          nombre={nombre}
-          setNombre={setNombre}
-        />
-
         <dialog
           id="modal_eliminar_categoria"
           className="modal modal-bottom sm:modal-middle"
@@ -146,7 +135,18 @@ export const Categoria = () => {
             </div>
           </div>
         </dialog>
+
+
       </div>
+      <ModalEditarCategoria
+        actualizar={actualizar}
+        setActualizar={setActualizar}
+        listaSubcategorias={listaSubcategorias}
+        setListaSubcategorias={setListaSubcategorias}
+        Id={idCategoria}
+        nombre={nombre}
+        setNombre={setNombre}
+      />
     </div>
   );
 };

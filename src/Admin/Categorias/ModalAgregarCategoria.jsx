@@ -10,6 +10,7 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
   const [listaSubcategoriasID, setListaSubcategoriasID] = useState([]);
   const [errorSubcategoria, setErrorSubcategoria] = useState(false);
   const context = useContext(AppContext);
+  const [subcategoriaSeleccionada, setSubcategoriaSeleccionada] = useState("");
 
   const InsertarCategoria = async (e) => {
     e.preventDefault();
@@ -26,6 +27,9 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
       },
       Subcategories: subcategories
     };
+    if (subcategories.length===0) {
+      return
+    }
     if (
       nombre != ""
     ) {
@@ -53,6 +57,7 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
 
   const handleSelectChange = (event) => {
     //console.log('esto es lo que quieres imprimir?', listaSubcategorias)
+    setSubcategoriaSeleccionada(event.target.value);
     //setNombreSubcategoria(event.target.value);
   };
 
@@ -67,6 +72,7 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
     getSubcategorias().then((data) => {
       setSubcategorias(data);
     });
+    console.log("hey: ", subcategorias)
   }, [actualizar]);
 
   return (
@@ -82,7 +88,6 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
               InsertarCategoria(e);
             }}
           >
-
             <div className="form-group">
               <input
                 type="text"
@@ -126,7 +131,7 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
                 onClick={() => {
                   const selectElement = document.getElementById("subcategoria");
                   const selectedValue = selectElement.value ? JSON.parse(selectElement.value) : null;
-
+                  console.log(selectedValue)
                   if (!selectedValue) {
                     setErrorSubcategoria(true);
                     return;
