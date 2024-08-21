@@ -32,8 +32,8 @@ export const HeaderSubcategorias = ({
   return (
     <div className="flex w-full justify-end gap-2 mt-4">
       <NavLink
-        to={"/"}
-        className="bg-white  p-2 font-semibold w-10 h-10 flex items-center rounded-full"
+        to={"/admin/categorias"}
+        className="bg-primary  p-2 font-semibold w-8 h-8 flex items-center rounded-full"
       >
         <img alt="regresar" src={flecha} className="h-10 w-10" />
       </NavLink>
