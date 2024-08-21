@@ -71,7 +71,7 @@ export const ModalEditarAdmin = ({
       setPaso((prevPaso) => prevPaso + 1);
     }
   };
-  const handlerSubmitCuatro = async(e) => {
+  const handlerSubmitCuatro = async (e) => {
     e.preventDefault();
     if (tallas.length === 0) {
       setErrorTalla(true);
@@ -326,23 +326,29 @@ export const ModalEditarAdmin = ({
                 <select
                   className="select select-bordered bg-white"
                   onChange={(e) => {
+                    const selectedSubcategoria = subCategorias.find(
+                      (subcategoria) => subcategoria.Id == e.target.value
+                    );
                     setSubCategoriaSeleccionada({
-                      subcategoriaId: e.target.value,
+                      subcategoriaId: selectedSubcategoria.Id,
+                      subcategoriaNombre: selectedSubcategoria.Nombre,
                     });
                   }}
-                  value={subCategoriaSeleccionada.SubcategoriaId || ""}
+                  value={subCategoriaSeleccionada.subcategoriaId || ""}
                   defaultValue=""
                 >
                   <option disabled value="">
-                    {subCategoriaSeleccionada.Subcategoria || `Selecciona una subcategoría`}
+                    {subCategoriaSeleccionada.subcategoriaNombre ||
+                      `Selecciona una subcategoría`}
                   </option>
                   {subCategorias.map((subcategoria) => (
-                    <option key={subcategoria.Id} value={subcategoria.Id} onClick={()=>{setSubCategoriaSeleccionada(subcategoria)}}>
+                    <option key={subcategoria.Id} value={subcategoria.Id}>
                       {subcategoria.Nombre}
                     </option>
                   ))}
                 </select>
               </label>
+
               <NavLink
                 to="/admin/categorias"
                 className="text-gray-800 text-sm md:text-base mb-6"
@@ -500,7 +506,7 @@ export const ModalEditarAdmin = ({
               <button
                 type="button"
                 onClick={() => {
-                  if(document.getElementById("tallaEditar").value === "") {
+                  if (document.getElementById("tallaEditar").value === "") {
                     setErrorTalla(true);
                     return;
                   }
