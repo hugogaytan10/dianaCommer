@@ -7,7 +7,11 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
   const [seEdito, setSeEdito] = useState(false);
   const [errorSubcategoria, setErrorSubcategoria] = useState(false);
   const [subcategorias, setSubcategorias] = useState([]);
-  const [listaSubcategoriasID, setListaSubcategoriasID] = useState([]);
+  const [listaSubcategoriasID, setListaSubcategoriasID] = useState([
+    { Id: 1 },
+    { Id: 2 },
+    { Id: 3 }
+  ]);
   const [subcategoriaSeleccionada, setSubcategoriaSeleccionada] = useState("");
 
   const EditarCategoria = async (e) => {
@@ -18,7 +22,7 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
         Nombre: nombre,
         Id: Id
       },
-      Subcategories: listaSubcategorias
+      Subcategories: listaSubcategoriasID
     };
     /*const categoria = {
       Nombre: nombre,
