@@ -7,22 +7,23 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
   const [seEdito, setSeEdito] = useState(false);
   const [errorSubcategoria, setErrorSubcategoria] = useState(false);
   const [subcategorias, setSubcategorias] = useState([]);
+  const [listaSubcategoriasID, setListaSubcategoriasID] = useState([]);
   const [subcategoriaSeleccionada, setSubcategoriaSeleccionada] = useState("");
 
   const EditarCategoria = async (e) => {
     e.preventDefault();
     /////aun hay que modificar el back perrillo
-    /*const categoria = {
+    const categoria = {
       Category: {
         Nombre: nombre,
         Id: Id
       },
       Subcategories: listaSubcategorias
-    };*/
-    const categoria = {
+    };
+    /*const categoria = {
       Nombre: nombre,
       Id: Id
-    };
+    };*/
     //console.log(categoria);
     if (nombre != "") {
       document.getElementById("modal_editar_categoria").close();
@@ -126,17 +127,30 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
                 className="btn-siguiente h-12 text-primary border-none w-1/3 mb-4 ml-2"
                 type="button"
                 onClick={() => {
-                  if (subcategoriaSeleccionada === "") {
-                    console.log('si neta?');
+                  const selectElement = document.getElementById("subcategoria");
+                  const selectedValue = selectElement.value ? JSON.parse(selectElement.value) : null;
+
+                  if (!selectedValue) {
                     setErrorSubcategoria(true);
                     return;
                   }
-                  console.log('nadota')
+
+                  const nuevaSubcategoria = {
+                    Nombre: selectedValue.Nombre,
+                    Id: selectedValue.Id,
+                  };
+                  /*if (subcategoriaSeleccionada === "") {
+                    //console.log('si neta?');
+                    setErrorSubcategoria(true);
+                    return;
+                  }
+                  //console.log('nadota')
                   const nuevaSubcategoria = {
                     Nombre: subcategoriaSeleccionada
-                  };
+                  };*/
                   setListaSubcategorias([...listaSubcategorias, nuevaSubcategoria]);
-                  setSubcategoriaSeleccionada(""); // Reinicia el valor del select
+                  setListaSubcategoriasID([...listaSubcategoriasID, nuevaSubcategoria.Id]);
+                  document.getElementById("subcategoria").value = "";
                   setErrorSubcategoria(false);
                 }}
               >
