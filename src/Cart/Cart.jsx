@@ -101,7 +101,6 @@ export const Cart = () => {
                 </div>
                 <div className="flex flex-col justify-around">
                   <p className="text-xs">${item.price} MXN</p>
-                  <p className="text-sm">talla: {item.talla}</p>
                   <p
                     className="text-red-500 "
                     onClick={() => {

@@ -12,13 +12,23 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
 
   const EditarCategoria = async (e) => {
     e.preventDefault();
-    /////aun hay que modificar el back perrillo
+    const subcategories = []
+    listaSubcategoriasID.forEach(element => {
+      const sb={
+        Id:element
+      }
+      subcategories.push(sb);
+    });
+    console.log('lista de subcategorias', subcategories)
+    if (subcategories.length===0) {
+      return
+    }
     const categoria = {
       Category: {
         Nombre: nombre,
         Id: Id
       },
-      Subcategories: listaSubcategorias
+      Subcategories: subcategories
     };
     /*const categoria = {
       Nombre: nombre,
@@ -41,12 +51,30 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
         if (response.status === 200) {
           setSeEdito(true);
           setActualizar(!actualizar);
+          subcategories = [];
         }
       } catch (e) {
         console.log(e);
       }
     }
   };
+
+  const getSubcategoriasByCategoryId = async (Id) => {
+    try {
+      const url = `${URL}/subcategoria/conseguir/categoria/${Id}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      setListaSubcategorias(data)
+      console.log('hola', data)
+      console.log('hola', url)
+
+      return data;
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      return [];
+    }
+  };
+
   const handleSelectChange = (event) => {
     //console.log('esto es lo que quieres imprimir?', listaSubcategorias)
     setSubcategoriaSeleccionada(event.target.value);
@@ -55,8 +83,9 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
 
   const Reset = () => {
     setNombre("");
-
+    document.getElementById("nombreArticulo").value = "";
     setListaSubcategorias([]);
+    setListaSubcategoriasID([]);
   };
   useEffect(() => {
     if (seEdito) {
@@ -69,8 +98,9 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
     getSubcategorias().then((data) => {
       setSubcategorias(data);
     });
-  }, [actualizar]);
-
+    getSubcategoriasByCategoryId(Id);
+    console.log('modal editar: ')
+  }, [actualizar, Id]);
   return (
     <dialog id="modal_editar_categoria" className="modal">
       <div className="modal-box w-11/12  bg-white">
@@ -111,13 +141,13 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
                     (subcategoria) =>
                       !listaSubcategorias.some(
                         (item) => item.Nombre === subcategoria.Nombre
-                      )
+                      ),
                   )
                   .map((subcategoria) => (
                     <option
                       className="text-gray-800"
                       key={subcategoria.Id}
-                      value={subcategoria.Nombre}
+                      value={JSON.stringify({ Id: subcategoria.Id, Nombre: subcategoria.Nombre })}
                     >
                       {subcategoria.Nombre}
                     </option>
@@ -127,27 +157,21 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
                 className="btn-siguiente h-12 text-primary border-none w-1/3 mb-4 ml-2"
                 type="button"
                 onClick={() => {
-                  const selectElement = document.getElementById("subcategoria");
-                  const selectedValue = selectElement.value ? JSON.parse(selectElement.value) : null;
-
+                  /*const selectElement = document.getElementById("subcategoria");
+                  const selectedValue = selectElement.value ? JSON.parse(selectElement.value) : 'hey';
+                  console.log(selectedValue);
                   if (!selectedValue) {
                     setErrorSubcategoria(true);
                     return;
-                  }
-
-                  const nuevaSubcategoria = {
-                    Nombre: selectedValue.Nombre,
-                    Id: selectedValue.Id,
-                  };
-                  /*if (subcategoriaSeleccionada === "") {
-                    //console.log('si neta?');
+                  }*/
+                  if (subcategoriaSeleccionada === "") {
                     setErrorSubcategoria(true);
                     return;
                   }
-                  //console.log('nadota')
                   const nuevaSubcategoria = {
-                    Nombre: subcategoriaSeleccionada
-                  };*/
+                    Nombre: JSON.parse(subcategoriaSeleccionada).Nombre,
+                    Id: JSON.parse(subcategoriaSeleccionada).Id,
+                  };
                   setListaSubcategorias([...listaSubcategorias, nuevaSubcategoria]);
                   setListaSubcategoriasID([...listaSubcategoriasID, nuevaSubcategoria.Id]);
                   document.getElementById("subcategoria").value = "";
@@ -156,7 +180,6 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
               >
                 Agregar
               </button>
-
             </div>
 
             <div className="flex flex-wrap">

@@ -11,7 +11,7 @@ type HeaderAdminProps = {
 export const HeaderAdmin = ({
   productosFiltrados,
   productos,
-  setProductosFiltrados
+  setProductosFiltrados,
 }: HeaderAdminProps) => {
   const [showInput, setShowInput] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -19,6 +19,7 @@ export const HeaderAdmin = ({
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
+    console.log(event.target.value);
     //vamos a iterar sobre los productos y vamos a filtrar los que contengan el texto que estamos buscando
     const filtro = productos.filter((producto) =>
       producto.Titulo.toLowerCase().includes(event.target.value.toLowerCase())

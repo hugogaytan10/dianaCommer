@@ -39,6 +39,8 @@ export const InicioAdmin = () => {
     SubCategoriaId: 0,
     SubCategoria: "",
   });
+  //CONTRALADOR DE BUSCADOR
+  const [estaAbierto, setEstaAbierto] = useState(false);
 
   useEffect(() => {
     const getProductos = async () => {
@@ -136,9 +138,18 @@ export const InicioAdmin = () => {
         className={
           pdfLoader
             ? "none"
-            : `w-11/12 flex flex-wrap justify-between p-2 items-center m-auto `
+            : `w-11/12 flex flex-wrap justify-between p-2 items-center m-auto relative `
         }
       >
+
+        <div className="fixed bg-transparent z-10 top-14 right-0">
+          <HeaderAdmin
+            productosFiltrados={productosFiltrados}
+            productos={productos}
+            setProductosFiltrados={setProductosFiltrados}
+          />
+        </div>
+
         {productosFiltrados.map((producto, idx) => {
           return (
             <div
@@ -147,16 +158,6 @@ export const InicioAdmin = () => {
                 producto.Id % 2 === 0 ? "mt-8" : "mt-0"
               }`}
             >
-              {idx === 0 && (
-                <div className="fixed bg-transparent z-10  right-0">
-                  <HeaderAdmin
-                    productosFiltrados={productosFiltrados}
-                    productos={productos}
-                    setProductosFiltrados={setProductosFiltrados}
-                  />
-                </div>
-              )}
-
               <div>
                 <div className="card">
                   <figure className="h-3/4">
