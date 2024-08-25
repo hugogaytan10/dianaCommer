@@ -230,7 +230,7 @@ export const ModalAgregarAdmin = ({
         <div
           className={`h-80 modal-action ${
             paso === 0 ? "block" : "hidden"
-          } m-auto bg-white mt-10 transition-all md:w-2/4 text-gray-600`}
+          } m-auto bg-white mt-10 transition-all md:w-3/4 text-gray-600`}
         >
           <form
             method="dialog w-full"
@@ -315,7 +315,7 @@ export const ModalAgregarAdmin = ({
         </div>
 
         <div
-          className={`h-80 modal-action ${
+          className={`h-80 md:w-3/4 modal-action ${
             paso === 1 ? "block" : "hidden"
           } m-auto bg-white mt-10 transition-all  text-gray-600`}
         >
@@ -367,7 +367,7 @@ export const ModalAgregarAdmin = ({
         <div
           className={`h-80 modal-action ${
             paso === 2 ? "block" : "hidden"
-          } m-auto bg-white mt-10 transition-all md:w-2/4 text-gray-600`}
+          } m-auto bg-white mt-10 transition-all md:w-3/4 text-gray-600`}
         >
           <form
             method="dialog w-full"
@@ -458,7 +458,7 @@ export const ModalAgregarAdmin = ({
         <div
           className={`h-80 modal-action ${
             paso === 3 ? "block" : "hidden"
-          } m-auto bg-white mt-10 transition-all md:w-2/4 text-gray-600`}
+          } m-auto bg-white mt-10 transition-all md:w-3/4 text-gray-600`}
         >
           <form
             method="dialog w-full"
