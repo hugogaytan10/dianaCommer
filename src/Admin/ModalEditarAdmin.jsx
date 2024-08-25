@@ -42,7 +42,6 @@ export const ModalEditarAdmin = ({
   const [errorPrecioAdquisicion, setErrorPrecioAdquisicion] = useState(false);
   const [errorPrecioVenta, setErrorPrecioVenta] = useState(false);
   const [errorTalla, setErrorTalla] = useState(false);
-
   const handlerSubmitUno = (e) => {
     e.preventDefault();
     if (nombre === "") {
@@ -225,7 +224,7 @@ export const ModalEditarAdmin = ({
         <div
           className={`h-80 modal-action ${
             paso === 0 ? "block" : "hidden"
-          } m-auto bg-white mt-10 transition-all md:w-2/4 text-gray-600`}
+          } m-auto bg-white mt-10 transition-all md:w-3/4 text-gray-600`}
           id="divstepOneEdit"
         >
           <form
@@ -248,7 +247,7 @@ export const ModalEditarAdmin = ({
               <label htmlFor="imagenTennis">+</label>
             </div>
 
-            <div className={`${errorTitulo ? " mb-0" : "mb-4"} form-group`}>
+            <div className={`${errorTitulo ? " mb-0" : "mb-4"} form-group `}>
               <input
                 type="text"
                 placeholder=" "
@@ -311,7 +310,7 @@ export const ModalEditarAdmin = ({
         </div>
 
         <div
-          className={`h-80 modal-action ${
+          className={`h-80 md:w-3/4  modal-action ${
             paso === 1 ? "block" : "hidden"
           } m-auto bg-white mt-10 transition-all  text-gray-600`}
         >
@@ -334,11 +333,11 @@ export const ModalEditarAdmin = ({
                       subcategoriaNombre: selectedSubcategoria.Nombre,
                     });
                   }}
-                  value={subCategoriaSeleccionada.subcategoriaId || ""}
+                  value={subCategoriaSeleccionada.SubcategoriaId || ""}
                   defaultValue=""
                 >
                   <option disabled value="">
-                    {subCategoriaSeleccionada.subcategoriaNombre ||
+                    {subCategoriaSeleccionada.SubcategoriaNombre ||
                       `Selecciona una subcategoría`}
                   </option>
                   {subCategorias.map((subcategoria) => (
@@ -374,7 +373,7 @@ export const ModalEditarAdmin = ({
         <div
           className={`h-80 modal-action ${
             paso === 2 ? "block" : "hidden"
-          } m-auto bg-white mt-10 transition-all md:w-2/4 text-gray-600`}
+          } m-auto bg-white mt-10 transition-all md:w-3/4 text-gray-600`}
           id="divstepTwoEdit"
         >
           <form
@@ -467,7 +466,7 @@ export const ModalEditarAdmin = ({
         <div
           className={`h-80 modal-action ${
             paso === 3 ? "block" : "hidden"
-          } m-auto bg-white mt-10 transition-all md:w-2/4 text-gray-600`}
+          } m-auto bg-white mt-10 transition-all md:w-3/4 text-gray-600`}
           id="divStepThreeEdit"
         >
           <form
