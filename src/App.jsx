@@ -27,10 +27,13 @@ function App() {
     }, 2800);
     return () => clearTimeout(timer);
   }, []);
+  if(loading){
+    return <Carga />
+  }
   return (
     <GoogleOAuthProvider clientId="976511984237-e0tpe248r6f9hn9vkk70k940fmb8rmc3.apps.googleusercontent.com">
       <AppProvider>
-      {loading ? <Carga /> : <Rutas />}
+       <Rutas />
       </AppProvider>
     </GoogleOAuthProvider>
   );
