@@ -132,7 +132,7 @@
     justify-content: center;
 }
   .btn-eliminar-subcategoria{
-    background-color: #ff0000;
+    background-color: #ff0000 !important;
     color: white;
     border: none;
     padding: 0.1em;
