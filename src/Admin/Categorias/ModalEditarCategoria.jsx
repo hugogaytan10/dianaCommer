@@ -3,24 +3,31 @@ import { URL } from "../../Const/Const";
 import { AppContext } from "../../Context/AppContext";
 import { getSubcategorias } from "./Peticiones";
 export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcategorias, setListaSubcategorias, Id, nombre, setNombre }) => {
+  //console.log('es lo mismo padrino?: ',listaSubcategorias)
   const context = useContext(AppContext);
   const [seEdito, setSeEdito] = useState(false);
   const [errorSubcategoria, setErrorSubcategoria] = useState(false);
   const [subcategorias, setSubcategorias] = useState([]);
   const [listaSubcategoriasID, setListaSubcategoriasID] = useState([]);
   const [subcategoriaSeleccionada, setSubcategoriaSeleccionada] = useState("");
+  //const [subcategories, setSubcategories] = useState([]);
 
   const EditarCategoria = async (e) => {
     e.preventDefault();
     const subcategories = []
-    listaSubcategoriasID.forEach(element => {
-      const sb={
-        Id:element
-      }
-      subcategories.push(sb);
+
+    console.log('puta perra lista: ', listaSubcategorias)
+    listaSubcategorias.forEach(element => {
+      const sb = {
+        Id: element.Id
+      };
+      console.log('sbs', sb)
+      subcategories.push(sb)
+      // Usando la función de actualización para obtener el valor más reciente de 'subcategories'
+      //setSubcategories([...subcategories, sb]);
     });
-    console.log('lista de subcategorias', subcategories)
-    if (subcategories.length===0) {
+    console.log('lista de subcategorias linea 26', subcategories)
+    if (subcategories.length === 0) {
       return
     }
     const categoria = {
@@ -36,6 +43,7 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
     };*/
     //console.log(categoria);
     if (nombre != "") {
+      console.log(categoria.Subcategories)
       document.getElementById("modal_editar_categoria").close();
       try {
         const url = `${URL}/categoria/actualizar`;
@@ -51,7 +59,8 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
         if (response.status === 200) {
           setSeEdito(true);
           setActualizar(!actualizar);
-          subcategories = [];
+          Reset()
+          //subcategories = [];
         }
       } catch (e) {
         console.log(e);
@@ -59,7 +68,22 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
     }
   };
 
-  const getSubcategoriasByCategoryId = async (Id) => {
+  const revisonListaItems = (id) => {
+    console.log('miralo es horrible', id)
+
+    // Remover la subcategoría de las listas
+    const nuevasSubcategorias = listaSubcategorias.filter(
+      (item) => item.Id != id
+
+    );
+    const nuevasSubcategoriasID = listaSubcategoriasID.filter(
+      (ids) => ids != id
+    );
+    setListaSubcategorias(nuevasSubcategorias);
+    setListaSubcategoriasID(nuevasSubcategoriasID);
+  }
+
+  /*const getSubcategoriasByCategoryId = async (Id) => {
     try {
       const url = `${URL}/subcategoria/conseguir/categoria/${Id}`;
       const response = await fetch(url);
@@ -73,7 +97,7 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
       console.error("Error fetching products:", error);
       return [];
     }
-  };
+  };*/
 
   const handleSelectChange = (event) => {
     //console.log('esto es lo que quieres imprimir?', listaSubcategorias)
@@ -95,12 +119,13 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
   }, [nombre, seEdito]);
 
   useEffect(() => {
+    //console.log('lista de subcategorias modal',listaSubcategorias)
     getSubcategorias().then((data) => {
       setSubcategorias(data);
     });
-    getSubcategoriasByCategoryId(Id);
+    //getSubcategoriasByCategoryId(Id);
     console.log('modal editar: ')
-  }, [actualizar, Id]);
+  }, []);
   return (
     <dialog id="modal_editar_categoria" className="modal">
       <div className="modal-box w-11/12  bg-white">
@@ -176,6 +201,7 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
                   setListaSubcategoriasID([...listaSubcategoriasID, nuevaSubcategoria.Id]);
                   document.getElementById("subcategoria").value = "";
                   setErrorSubcategoria(false);
+                  setSubcategoriaSeleccionada();
                 }}
               >
                 Agregar
@@ -183,29 +209,35 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
             </div>
 
             <div className="flex flex-wrap">
-              {listaSubcategorias &&
-                listaSubcategorias.length > 0 &&
-                listaSubcategorias.map((subcategoria, index) => (
-                  <div className="btn-subcategoria" key={`subcategoria-${subcategoria.id}`}>
-                    <p id='subcategoria'/*{`subcategoria-${subcategoria.id}`}*/>{subcategoria.Nombre}</p>
-                    <button
-                      className="btn-eliminar-subcategoria"
-                      onClick={() => {
-                        setListaSubcategorias(listaSubcategorias.filter((s) => s !== subcategoria));
-                      }}
-                    >
-                      X
-                    </button>
-                  </div>
-                ))}
+              {listaSubcategorias.map((subcategoria, index) => (
+                <div
+                  key={subcategoria.Id}
+                  className="btn-subcategoria"
+                >
+                  <p id='subcategoria'>{subcategoria.Nombre}</p>
+                  <button
+                    type="button"
+                    className="btn-eliminar-subcategoria"
+                    onClick={() => {
+                      revisonListaItems(subcategoria.Id)
+                    }}
+                  >
+                    X
+                  </button>
+                </div>
+              ))}
             </div>
 
-            <div className="flex w-full justify-around">
+            <div className="flex w-full justify-around mt-10">
               <button
+                type="button"
                 className="btn-cancelar border-none"
                 onClick={() => {
-                  document.getElementById("modal_editar_categoria").close();
-                  Reset();
+                  const modal = document.getElementById("modal_editar_categoria");
+                  if (modal) {
+                    setListaSubcategorias([])
+                    modal.close();
+                  }
                 }}
               >
                 Cancelar

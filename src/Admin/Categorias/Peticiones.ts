@@ -1,7 +1,7 @@
 import { URL } from "../../Const/Const";
 export const getCategorias = async () => {
   try {
-    const url = `${URL}/categoria/conseguir`;
+    const url = `${URL}/categoria/conseguir/subcategoria`;
     const response = await fetch(url);
     const data = await response.json();
     return data;

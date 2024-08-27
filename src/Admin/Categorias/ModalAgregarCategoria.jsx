@@ -12,12 +12,12 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
   const context = useContext(AppContext);
   const [subcategoriaSeleccionada, setSubcategoriaSeleccionada] = useState("");
 
-  const InsertarCategoria = async (e) => {
+  const insertarCategoria = async (e) => {
     e.preventDefault();
     const subcategories = []
     listaSubcategoriasID.forEach(element => {
-      const sb={
-        Id:element
+      const sb = {
+        Id: element
       }
       subcategories.push(sb);
     });
@@ -27,13 +27,12 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
       },
       Subcategories: subcategories
     };
-    if (subcategories.length===0) {
+    if (subcategories.length === 0) {
       return
     }
     if (
       nombre != ""
     ) {
-      document.getElementById("modal_agregar_categoria").close();
       try {
         const url = `${URL}/categoria/agregar`;
         const response = await fetch(url, {
@@ -47,6 +46,9 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
         });
         if (response.status === 200) {
           setActualizar(!actualizar);
+          document
+          .getElementById("modal_agregar_categoria")
+          .close()
           Reset();
         }
       } catch (e) {
@@ -56,9 +58,7 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
   };
 
   const handleSelectChange = (event) => {
-    //console.log('esto es lo que quieres imprimir?', listaSubcategorias)
     setSubcategoriaSeleccionada(event.target.value);
-    //setNombreSubcategoria(event.target.value);
   };
 
   const Reset = () => {
@@ -73,19 +73,19 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
       setSubcategorias(data);
     });
     console.log("hey: ", subcategorias)
-  }, [actualizar]);
+  }, []);
 
   return (
     <dialog id="modal_agregar_categoria" className="modal">
       <div className="modal-box w-11/12  bg-white">
         <h2 className="text-gray-800">Agregar Categoría</h2>
         <div
-          className={`modal-action block m-auto bg-white mt-10 transition-all  text-gray-600`}
+          className={`modal-action block m-auto bg-white mt-10 transition-all text-gray-600`}
         >
           <form
             method="dialog w-full"
             onSubmit={(e) => {
-              InsertarCategoria(e);
+              insertarCategoria(e);
             }}
           >
             <div className="form-group">
@@ -99,9 +99,8 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
                   setNombre(e.target.value);
                 }}
               />
-              <label>Nombre del artículo</label>
+              <label>Nombre de la categoría</label>
             </div>
-
             <div className="form-group w-7/8 mb-0 flex items-center">
               <select
                 className="bg-white w-2/3 mb-4"
@@ -158,39 +157,49 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
                 Agregar
               </button>
             </div>
-
+            
             <div className="flex flex-wrap">
-              {listaSubcategorias &&
-                listaSubcategorias.length > 0 &&
-                listaSubcategorias.map((subcategoria, index) => (
-                  <div className="btn-subcategoria" key={`subcategoria-${subcategoria.id}`}>
-                    <p id='subcategoria'/*{`subcategoria-${subcategoria.id}`}*/>{subcategoria.Nombre}</p>
-                    <button
-                      className="btn-eliminar-subcategoria"
-                      onClick={() => {
-                        setListaSubcategorias(listaSubcategorias.filter((s) => s !== subcategoria));
-                      }}
-                    >
-                      X
-                    </button>
-                  </div>
-                ))}
+              {listaSubcategorias.map((subcategoria, index) => (
+                <div
+                  key={subcategoria.Id}
+                  className="btn-subcategoria"
+                >
+                  <p id='subcategoria'>{subcategoria.Nombre}</p>
+                  <button
+                    type="button"
+                    className="btn-eliminar-subcategoria"
+                    onClick={() => {
+                      // Remover la subcategoría de las listas
+                      const nuevasSubcategorias = listaSubcategorias.filter(
+                        (item) => item.Id !== subcategoria.Id
+                      );
+                      const nuevasSubcategoriasID = listaSubcategoriasID.filter(
+                        (id) => id !== subcategoria.Id
+                      );
+                      setListaSubcategorias(nuevasSubcategorias);
+                      setListaSubcategoriasID(nuevasSubcategoriasID);
+                    }}
+                  >
+                    X
+                  </button>
+                </div>
+              ))}
             </div>
 
-            <div className="flex w-full justify-around">
+            <div className="flex w-full justify-around mt-10">
               <button
+                type="button"
                 className="btn-cancelar border-none"
                 onClick={() => {
-                  document.getElementById("modal_agregar_categoria").close();
-                  Reset();
-                }
-                }
+                  const modal = document.getElementById("modal_agregar_categoria");
+                  if (modal) {
+                    modal.close();
+                  }
+                }}
               >
-                Cancelar
+                Atras
               </button>
-              <button className="btn-siguiente">
-                Guardar
-              </button>
+              <button className="btn-siguiente">Agregar</button>
             </div>
           </form>
         </div>
