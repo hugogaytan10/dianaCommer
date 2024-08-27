@@ -92,7 +92,7 @@ export const NavBarMobile = (categorias: NavBarMobileProps) => {
             contexto.user?.TipoUsuario == "0" && (
               <li>
                 <details>
-                  <summary>Administrador</summary>
+                  <summary className="text-gray-100">Administrador</summary>
                   <ul className="bg-primary rounded-t-none p-2 z-20">
                     <li>
                       <NavLink

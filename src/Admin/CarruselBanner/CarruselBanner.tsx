@@ -7,6 +7,7 @@ export const CarruselBanner = () => {
   const contexto = useContext(AppContext);
   const [paso, setPaso] = useState(0);
   const [banner, setBanner] = useState(image);
+  const [errorBanner, setErrorBanner] = useState(false);
   const [tituloUno, setTituloUno] = useState("");
   const [descripcionUno, setDescripcionUno] = useState("");
   const [errorTitulo, setErrorTitulo] = useState(false);
@@ -15,6 +16,7 @@ export const CarruselBanner = () => {
   const [tituloDos, setTituloDos] = useState("");
   const [descripcionDos, setDescripcionDos] = useState("");
   const [errorTituloDos, setErrorTituloDos] = useState(false);
+  const [errorBannerDos, setErrorBannerDos] = useState(false);
   const [errorDescripcionDos, setErrorDescripcionDos] = useState(false);
   const [bannerDos, setBannerDos] = useState(image);
  //para la tercera imagen
@@ -22,6 +24,7 @@ export const CarruselBanner = () => {
   const [descripcionTres, setDescripcionTres] = useState("");
   const [errorTituloTres, setErrorTituloTres] = useState(false);
   const [errorDescripcionTres, setErrorDescripcionTres] = useState(false);
+  const [errorBannerTres, setErrorBannerTres] = useState(false);
   const [bannerTres, setBannerTres] = useState(image);
 
   useEffect(() => {
@@ -38,6 +41,10 @@ export const CarruselBanner = () => {
       setErrorDescripcion(true);
       return;
     }
+    if (banner === image) {
+      setErrorBanner(true);
+      return;
+    }
     //aumentar el paso con el paso anterior mas 1
     setPaso(paso + 1);
   };
@@ -51,6 +58,10 @@ export const CarruselBanner = () => {
       setErrorDescripcionDos(true);
       return;
     }
+    if (bannerDos === image) {
+      setErrorBannerDos(true);
+      return;
+    }
     //aumentar el paso con el paso anterior mas 1
     setPaso(paso + 1);
   };
@@ -62,6 +73,10 @@ export const CarruselBanner = () => {
     }
     if (!descripcionDos) {
       setErrorDescripcionTres(true);
+      return;
+    }
+    if (bannerTres === image) {
+      setErrorBannerTres(true);
       return;
     }
     //aumentar el paso con el paso anterior mas 1
@@ -190,6 +205,11 @@ export const CarruselBanner = () => {
               />
               <label htmlFor="imagenBanner1">+</label>
             </div>
+            {errorBanner && (
+              <p className="text-red-500 mb-4 text-xs text-center">
+                La imagen es obligatoria
+              </p>
+            )}
 
             <div className={`${errorTitulo ? " mb-0" : "mb-4"} form-group`}>
               <input
@@ -242,7 +262,8 @@ export const CarruselBanner = () => {
                 type="button"
                 className="btn-cancelar border-none"
                 onClick={() => {
-                  setPaso(paso - 1);
+                  setPaso(0);
+                  (document.getElementById("modal_carrusel") as HTMLDialogElement)?.close?.();
                 }}
               >
                 Atras
@@ -277,6 +298,12 @@ export const CarruselBanner = () => {
               />
               <label htmlFor="imagenBanner2">+</label>
             </div>
+            {errorBannerDos && (
+              <p className="text-red-500 mb-4 text-xs text-center">
+                La imagen es obligatoria
+              </p>
+            )}
+
 
             <div className={`${errorTituloDos ? " mb-0" : "mb-4"} form-group`}>
               <input
@@ -363,6 +390,12 @@ export const CarruselBanner = () => {
               />
               <label htmlFor="imagenBanner3">+</label>
             </div>
+            {errorBannerTres && (
+              <p className="text-red-500 mb-4 text-xs text-center">
+                La imagen es obligatoria
+              </p>
+            )}
+
 
             <div className={`${errorTituloTres ? " mb-0" : "mb-4"} form-group`}>
               <input
