@@ -9,7 +9,6 @@ export const CarruselItem = (props) => {
   const contexto = useContext(AppContext);
   const [loaded, setLoaded] = useState(false);
 
-
   const handleScroll = () => {
     const scrollLeft = carouselRef.current.scrollLeft;
     lastScrollLeft.current = scrollLeft; // Actualiza la última posición de scroll conocida
@@ -36,26 +35,19 @@ export const CarruselItem = (props) => {
     >
       <div className="flex">
         {props.images.map((img, index) => (
-          <div
-            key={index}
-            className={`carousel-item w-full flex-shrink-0 `}
-          >
+          <div key={index} className={`carousel-item w-full flex-shrink-0 `}>
             <img
               src={img}
               alt={`imagen ${index + 1}`}
               className="w-full h-full object-contain object-center"
               style={{ display: loaded ? "block" : "none" }}
               onLoad={() => setLoaded(true)}
-
             />
             {!loaded && (
-            <div className="flex flex-col gap-4 w-52">
-              <div className="skeleton h-32 w-full"></div>
-              <div className="skeleton h-4 w-28"></div>
-              <div className="skeleton h-4 w-full"></div>
-              <div className="skeleton h-4 w-full"></div>
-            </div>
-          )}
+              <div className="w-full h-full flex justify-center items-center ">
+                <div class="skeleton h-40 w-36 self-center"></div>
+              </div>
+            )}
           </div>
         ))}
       </div>

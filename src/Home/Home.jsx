@@ -7,11 +7,13 @@ import { Carrusel } from "./Carrusel/Carrusel";
 import Filtrador from "./Filtrador/Filtrador";
 import { URL } from "../Const/Const";
 import drag from '../assets/drag.gif';
+import { getCarruselBanner } from "./Peticiones";
+import { CarruselBanner } from "./CarruselBanner/CarruselBanner";
 export const Home = () => {
   const contexto = useContext(AppContext);
   const [cards, setCards] = useState([]);
   const [cardFilter, setCardFilter] = useState(cards);
-
+  const [images, setImages] = useState([]);
   const getTennis = async () => {
     const url =
       `${URL}/producto/conseguir`;
@@ -24,6 +26,11 @@ export const Home = () => {
     const itemsCart = JSON.parse(localStorage.getItem("items")) || [];
     contexto.setCart(itemsCart.length);
     getTennis();
+    getCarruselBanner().then((data) => {
+      setImages(data);
+      console.log(data);
+    });
+
   }, []);
   return (
     <div className="block min-h-screen w-full bg-white">
@@ -42,7 +49,13 @@ export const Home = () => {
         </div>
       </div>
        */}
-      <Carrusel />
+       {
+        images.length > 0 ?
+        <CarruselBanner images={images} />
+        :
+        <Carrusel/>
+       }
+  
       <h1 className="text-center font-thin m-4 text-gray-500 text-sm">
         Todo tipo de calzado (zapato, tennis deportivos, hombre, mujer, niño) en
         Moroleón, Guanajuato{" "}

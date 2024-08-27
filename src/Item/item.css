@@ -27,7 +27,7 @@
     font-weight: 600;
     border-radius: 25px;
 }
-.aviso, .aviso-item{
+.aviso, .aviso-item, .aviso-movil{
     position: fixed;
     top: 50%;
     right: 15px;

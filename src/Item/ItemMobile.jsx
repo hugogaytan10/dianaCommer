@@ -43,7 +43,8 @@ export const ItemMobile = ({id}) => {
         contexto.setCart(newCart.length);
         localStorage.setItem("items", JSON.stringify(newCart));
         //mostramos aviso
-        const aviso = document.querySelector(".aviso");
+        const aviso = document.querySelector(".aviso-movil");
+        console.log(aviso);
         aviso.classList.add("mostrar");
         setTimeout(() => {
           aviso.classList.remove("mostrar");
@@ -55,7 +56,8 @@ export const ItemMobile = ({id}) => {
         localStorage.setItem("items", JSON.stringify(oldItems));
       }
       //mostramos aviso
-      const aviso = document.querySelector(".aviso");
+      const aviso = document.querySelector(".aviso-movil");
+      console.log(aviso);
       aviso.classList.add("mostrar");
       setTimeout(() => {
         aviso.classList.remove("mostrar");
@@ -66,17 +68,7 @@ export const ItemMobile = ({id}) => {
   };
 
   useEffect(() => {
-    if (contexto.card.Descuento != 0) {
-      const precioVenta = Number(contexto.card.PrecioVenta);
-      const oldPriceCalculate = Number(
-        (precioVenta * ((contexto.card.Descuento / 100) + 1)).toFixed(2)
-      );
-      setOldPrice(oldPriceCalculate);
-    } else {
-      const precioVenta = Number(contexto.card.PrecioVenta);
-      const oldPriceCalculate = Number((precioVenta * 1.15).toFixed(2));
-      setOldPrice(oldPriceCalculate);
-    }
+   let priceBd = 0;
 
     const cart = JSON.parse(localStorage.getItem("items")) || [];
     contexto.setCart(cart.length);
@@ -87,6 +79,7 @@ export const ItemMobile = ({id}) => {
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
+          priceBd = data.PrecioVenta;
           contexto.setCard({
             Descripcion: data.Descripcion,
             Titulo: data.Titulo,
@@ -105,6 +98,7 @@ export const ItemMobile = ({id}) => {
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
+          priceBd = data.PrecioVenta;
           contexto.setCard({
             Descripcion: data.Descripcion,
             Titulo: data.Titulo,
@@ -118,6 +112,19 @@ export const ItemMobile = ({id}) => {
           });
         });
     }
+    //CALCULATE OLD PRICE IF THERE IS A DISCOUNT
+    if (contexto.card.Descuento != 0) {
+      const precioVenta = Number(contexto.card.PrecioVenta);
+      const oldPriceCalculate = Number(
+        (precioVenta * ((contexto.card.Descuento / 100) + 1)).toFixed(2)
+      );
+      setOldPrice(oldPriceCalculate);
+    } else {
+      const precioVenta = Number(contexto.card.PrecioVenta || priceBd);
+      const oldPriceCalculate = Number((precioVenta * 1.15).toFixed(2));
+      setOldPrice(oldPriceCalculate);
+    }
+
     const url = `${URL}/producto/conseguir/aleatorio`;
     fetch(url)
       .then((response) => response.json())
@@ -168,8 +175,8 @@ export const ItemMobile = ({id}) => {
           </span>
         </div>
 
-        <p className="mt-4 ml-4">Talla</p>
-        <div className="flex flex-wrap gap-2  w-full overflow-x-auto">
+        <p className="mt-4 ml-4 text-gray-600">Talla</p>
+        <div className="flex flex-wrap justify-between gap-1  w-full overflow-x-auto">
           {contexto.card &&
             contexto.card.ListaTallas &&
             contexto.card.ListaTallas.length > 0 &&
@@ -230,7 +237,7 @@ export const ItemMobile = ({id}) => {
         <CarruselRelacionados item={ImagenesCarrusel} />
       </div>
 
-      <div className="aviso">
+      <div className="aviso-movil">
         <div className="texto-aviso">
           <span>Artículo Agregado</span>
         </div>
@@ -242,7 +249,7 @@ export const ItemMobile = ({id}) => {
 
       <dialog
         id="modalAviso"
-        className="fixed inset-0 z-50  bg-white left-1/2 top-1/2  -translate-x-1/2 -translate-y-1/2 w-30 h-30 p-4 rounded-lg "
+        className="fixed inset-0 z-50  bg-white left-1/2 top-1/2  -translate-x-1/2 -translate-y-1/2  h-40 p-4 rounded-lg "
       >
         <div className="flex items-center justify-center h-full w-full">
           <div className="bg-white rounded-lg">

@@ -29,6 +29,12 @@ export const HeaderAdmin = ({
 
   return (
     <div className="flex w-full justify-end gap-2 mt-4 sticky top-0">
+      <button 
+      className="bg-primary px-4 rounded-md text-white"
+      onClick={() => {
+        (document.getElementById("modal_carrusel") as HTMLDialogElement)?.showModal?.();
+      }}
+      >Carrusel</button>
       <button
         className= "h-8 w-8 rounded-full bg-primary border-primary border-2 cursor-pointer flex items-center justify-center"
         onClick={() =>

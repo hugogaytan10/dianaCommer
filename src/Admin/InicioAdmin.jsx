@@ -8,6 +8,7 @@ import { ModalEditarAdmin } from "./ModalEditarAdmin";
 import { URL } from "../Const/Const";
 import { HeaderAdmin } from "./HeaderAdmin";
 import { AppContext } from "../Context/AppContext";
+import { CarruselBanner } from "./CarruselBanner/CarruselBanner";
 
 export const InicioAdmin = () => {
   const context = useContext(AppContext);
@@ -141,7 +142,6 @@ export const InicioAdmin = () => {
             : `w-11/12 flex flex-wrap justify-between p-2 items-center m-auto relative `
         }
       >
-
         <div className="fixed bg-transparent z-10 top-14 right-0">
           <HeaderAdmin
             productosFiltrados={productosFiltrados}
@@ -226,6 +226,7 @@ export const InicioAdmin = () => {
           <span>Nuevo Cambio</span>
         </div>
       </div>
+      <CarruselBanner />
 
       <ModalAgregarAdmin
         paso={paso}
