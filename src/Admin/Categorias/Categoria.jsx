@@ -40,6 +40,8 @@ export const Categoria = () => {
         categorias={categorias}
         setCategoriasFiltradas={setCategoriasFiltradas}
         categoriasFiltradas={categoriasFiltradas}
+        listaSubcategorias={listaSubcategorias}
+        setListaSubcategorias={setListaSubcategorias}
       />
       <div
         className={`w-11/12 flex flex-wrap justify-between p-2 items-center m-auto`}
@@ -60,6 +62,12 @@ export const Categoria = () => {
                         .showModal();
                       setNombre(categoria.Nombre);
                       setIdCategoria(categoria.Id);
+                      //setListaSubcategorias([])
+                      //console.log('wachaaaaaa: ',listaSubcategorias)
+                      setListaSubcategorias(categoria.Subcategorias)
+                      //console.log('mire padrino: ')
+                      console.log('categorias a modal', categoria.Subcategorias);
+                      //setListaSubcategorias(categoria.Subcategoria)
                       //setListaSubcategorias("??????");
                     }}
                     className="text-black text-md md:text-lg font-semibold flex justify-between mt-1 w-3/5"
