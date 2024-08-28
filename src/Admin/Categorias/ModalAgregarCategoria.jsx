@@ -125,12 +125,12 @@ export const ModalAgregarCategoria = ({ actualizar, setActualizar, listaSubcateg
                   ))}
               </select>
               <button
-                className="btn-siguiente h-12 text-primary border-none w-1/3 mb-4 ml-2"
+                className="bg-white h-12 text-primary border-none w-1/3 mb-4 ml-2"
                 type="button"
                 onClick={() => {
                   const selectElement = document.getElementById("subcategoria");
                   const selectedValue = selectElement.value ? JSON.parse(selectElement.value) : null;
-                  console.log(selectedValue)
+                
                   if (!selectedValue) {
                     setErrorSubcategoria(true);
                     return;

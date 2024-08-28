@@ -508,7 +508,7 @@ export const ModalAgregarAdmin = ({
                   document.getElementById("stock").value = "";
                   setErrorTalla(false);
                 }}
-                className="btn-siguiente h-12 text-primary border-none w-1/4"
+                className="h-12 text-primary border-none w-1/4 bg-white"
               >
                 Agregar
               </button>
@@ -541,40 +541,40 @@ export const ModalAgregarAdmin = ({
                 <img src={banner} alt="" className="img-previa" />
                 <input
                   type="file"
-                  id="imagenBanner1"
-                  name="imagenBanner1"
+                  id="imagenProductoAgregar1"
+                  name="imagenProductoAgregar1"
                   className=""
                   onChange={(e) => {
                     handleFileChange(e);
                   }}
                 />
-                <label htmlFor="imagenBanner1">+</label>
+                <label htmlFor="imagenProductoAgregar1">+</label>
               </div>
               <div className="contenedor-img">
                 <img src={banner2} alt="" className="img-previa" />
                 <input
                   type="file"
-                  id="imagenBanner2"
-                  name="imagenBanner2"
+                  id="imagenProductoAgregar2"
+                  name="imagenProductoAgregar2"
                   className=""
                   onChange={(e) => {
                     handleFileChange2(e);
                   }}
                 />
-                <label htmlFor="imagenBanner2">+</label>
+                <label htmlFor="imagenProductoAgregar2">+</label>
               </div>
               <div className="contenedor-img">
                 <img src={banner3} alt="" className="img-previa" />
                 <input
                   type="file"
-                  id="imagenBanner3"
-                  name="imagenBanner3"
+                  id="imagenProductoAgregar3"
+                  name="imagenProductoAgregar3"
                   className=""
                   onChange={(e) => {
                     handleFileChange3(e);
                   }}
                 />
-                <label htmlFor="imagenBanner3">+</label>
+                <label htmlFor="imagenProductoAgregar3">+</label>
               </div>
             </div>
 

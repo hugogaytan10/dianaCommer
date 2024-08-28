@@ -337,7 +337,7 @@ export const ModalEditarAdmin = ({
                   defaultValue=""
                 >
                   <option disabled value="">
-                    {subCategoriaSeleccionada.SubcategoriaNombre ||
+                    {subCategoriaSeleccionada.subcategoriaNombre ||
                       `Selecciona una subcategoría`}
                   </option>
                   {subCategorias.map((subcategoria) => (
@@ -518,7 +518,7 @@ export const ModalEditarAdmin = ({
                   document.getElementById("stockEditar").value = "";
                   setErrorTalla(false);
                 }}
-                className="btn-siguiente text-primary border-none w-1/4"
+                className="h-12 bg-white text-primary border-none w-1/4"
               >
                 Agregar
               </button>
@@ -554,40 +554,41 @@ export const ModalEditarAdmin = ({
                 <img src={banner} alt="" className="img-previa" />
                 <input
                   type="file"
-                  id="imagenBanner1"
-                  name="imagenBanner1"
+                  id="imagenProducto1"
+                  name="imagenProducto1"
                   className=""
                   onChange={(e) => {
+                    
                     handleFileChange(e);
                   }}
                 />
-                <label htmlFor="imagenBanner1">+</label>
+                <label htmlFor="imagenProducto1">+</label>
               </div>
               <div className="contenedor-img">
                 <img src={banner2} alt="" className="img-previa" />
                 <input
                   type="file"
-                  id="imagenBanner2"
-                  name="imagenBanner2"
+                  id="imagenProducto2"
+                  name="imagenProducto2"
                   className=""
                   onChange={(e) => {
                     handleFileChange2(e);
                   }}
                 />
-                <label htmlFor="imagenBanner2">+</label>
+                <label htmlFor="imagenProducto2">+</label>
               </div>
               <div className="contenedor-img">
                 <img src={banner3} alt="" className="img-previa" />
                 <input
                   type="file"
-                  id="imagenBanner3"
-                  name="imagenBanner3"
+                  id="imagenProducto3"
+                  name="imagenProducto3"
                   className=""
                   onChange={(e) => {
                     handleFileChange3(e);
                   }}
                 />
-                <label htmlFor="imagenBanner3">+</label>
+                <label htmlFor="imagenProducto3">+</label>
               </div>
             </div>
 

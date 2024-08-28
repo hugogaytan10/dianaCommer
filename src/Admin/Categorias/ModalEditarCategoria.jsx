@@ -16,17 +16,14 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
     e.preventDefault();
     const subcategories = []
 
-    console.log('puta perra lista: ', listaSubcategorias)
     listaSubcategorias.forEach(element => {
       const sb = {
         Id: element.Id
       };
-      console.log('sbs', sb)
       subcategories.push(sb)
       // Usando la función de actualización para obtener el valor más reciente de 'subcategories'
       //setSubcategories([...subcategories, sb]);
     });
-    console.log('lista de subcategorias linea 26', subcategories)
     if (subcategories.length === 0) {
       return
     }
@@ -43,7 +40,6 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
     };*/
     //console.log(categoria);
     if (nombre != "") {
-      console.log(categoria.Subcategories)
       document.getElementById("modal_editar_categoria").close();
       try {
         const url = `${URL}/categoria/actualizar`;
@@ -69,7 +65,6 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
   };
 
   const revisonListaItems = (id) => {
-    console.log('miralo es horrible', id)
 
     // Remover la subcategoría de las listas
     const nuevasSubcategorias = listaSubcategorias.filter(
@@ -124,7 +119,6 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
       setSubcategorias(data);
     });
     //getSubcategoriasByCategoryId(Id);
-    console.log('modal editar: ')
   }, []);
   return (
     <dialog id="modal_editar_categoria" className="modal">
@@ -179,7 +173,7 @@ export const ModalEditarCategoria = ({ actualizar, setActualizar, listaSubcatego
                   ))}
               </select>
               <button
-                className="btn-siguiente h-12 text-primary border-none w-1/3 mb-4 ml-2"
+                className="bg-white h-12 text-primary border-none w-1/3 mb-4 ml-2"
                 type="button"
                 onClick={() => {
                   /*const selectElement = document.getElementById("subcategoria");
