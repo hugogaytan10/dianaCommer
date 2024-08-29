@@ -105,8 +105,8 @@ export const NavBarDesktop = (categorias: NavBarDesktopProps) => {
           }
 
 
-          <div className="contenedor-carrito">
-            <span className="mt-1">{contexto.cart}</span>
+          <div className="contenedor-carrito items-center">
+            <span className="mt-3">{contexto.cart}</span>
             <NavLink to="/cart">
               <img src={carrito} alt="carrito" className="w-6 h-6" />
             </NavLink>
