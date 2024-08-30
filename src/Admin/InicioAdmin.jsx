@@ -9,7 +9,7 @@ import { URL } from "../Const/Const";
 import { HeaderAdmin } from "./HeaderAdmin";
 import { AppContext } from "../Context/AppContext";
 import { CarruselBanner } from "./CarruselBanner/CarruselBanner";
-
+import { ProductosEliminados } from "./ProductosEliminados/ProductosEliminados";
 export const InicioAdmin = () => {
   const context = useContext(AppContext);
   let contadorToast = 0;
@@ -40,8 +40,8 @@ export const InicioAdmin = () => {
     SubCategoriaId: 0,
     SubCategoria: "",
   });
-  //CONTRALADOR DE BUSCADOR
-  const [estaAbierto, setEstaAbierto] = useState(false);
+  // mostrar elimandos
+  const [mostrarEliminados, setMostrarEliminados] = useState(false);
 
   useEffect(() => {
     const getProductos = async () => {
@@ -142,83 +142,89 @@ export const InicioAdmin = () => {
             : `w-11/12 flex flex-wrap justify-between p-2 items-center m-auto relative `
         }
       >
-        <div className="fixed bg-transparent z-10 top-14 right-0">
+        <div className="fixed bg-transparent z-10 top-14 right-0 flex items-center justify-center">
+          <button className="h-8 text-red-500 mr-4 mt-4" onClick={()=>{setMostrarEliminados(!mostrarEliminados)}}>Eliminados</button>
           <HeaderAdmin
             productosFiltrados={productosFiltrados}
             productos={productos}
             setProductosFiltrados={setProductosFiltrados}
           />
         </div>
-
-        {productosFiltrados.map((producto, idx) => {
-          return (
-            <div
-              key={`producto-${producto.Id}`}
-              className={`contenedor-card border-b-2  rounded-md ${
-                producto.Id % 2 === 0 ? "mt-8" : "mt-0"
-              }`}
-            >
-              <div>
-                <div className="card">
-                  <figure className="h-3/4">
-                    <img
-                      src={producto.URLImagen}
-                      alt="Shoes"
-                      className="object-contain h-full w-full"
-                      onLoad={() => setLoaded(true)}
-                      style={{ display: loaded ? "block" : "none" }}
-                      onClick={() => {
-                        setIdProducto(producto.Id);
-                        setPreview(producto.URLImagen);
-                        setNombre(producto.Titulo);
-                        setDescripcion(producto.Descripcion);
-                        setPrecioAdquisicion(producto.PrecioAdquisicion);
-                        setPrecioVenta(producto.PrecioVenta);
-                        setStock(producto.Stock);
-                        setDescuento(producto.Descuento);
-                        setTallas(producto.ListaTallas);
-                        setBanner(producto.ImagenesCarrusel[0]);
-                        setBanner2(producto.ImagenesCarrusel[1]);
-                        setBanner3(producto.ImagenesCarrusel[2]);
-                        setSubCategoriaSeleccionada({
-                          SubcategoriaId: producto.SubcategoriaId,
-                          Subcategoria: producto.Subcategoria,
-                        });
-                        document.getElementById("modal_editar").showModal();
-                      }}
-                    />
-                    {!loaded && (
-                      <div className="flex flex-col gap-4 w-52">
-                        <div className="skeleton h-32 w-full"></div>
-                        <div className="skeleton h-4 w-28"></div>
-                        <div className="skeleton h-4 w-full"></div>
-                        <div className="skeleton h-4 w-full"></div>
-                      </div>
-                    )}
-                  </figure>
-                  <div className="card-body p-1">
-                    <div className="card-actions flex justify-between items-end w-full mt-2 ">
-                      <h2 className="text-black text-md md:text-lg font-semibold flex justify-between mt-1">
-                        {producto.Titulo}
-                      </h2>
-                      <img
-                        src={trash}
-                        alt="trash"
-                        className="h-6 w-6"
-                        onClick={() => {
-                          document.getElementById("my_eliminar").showModal();
-                          setPreview(producto.URLImagen);
-                          setNombre(producto.Titulo);
-                          setIdProducto(producto.Id);
-                        }}
-                      />
-                    </div>
-                  </div>
+{
+  mostrarEliminados ?
+  <ProductosEliminados/>
+  :
+  productosFiltrados.map((producto, idx) => {
+    return (
+      <div
+        key={`producto-${producto.Id}`}
+        className={`contenedor-card border-b-2  rounded-md ${
+          producto.Id % 2 === 0 ? "mt-8" : "mt-0"
+        }`}
+      >
+        <div>
+          <div className="card">
+            <figure className="h-3/4">
+              <img
+                src={producto.URLImagen}
+                alt="Shoes"
+                className="object-contain h-full w-full"
+                onLoad={() => setLoaded(true)}
+                style={{ display: loaded ? "block" : "none" }}
+                onClick={() => {
+                  setIdProducto(producto.Id);
+                  setPreview(producto.URLImagen);
+                  setNombre(producto.Titulo);
+                  setDescripcion(producto.Descripcion);
+                  setPrecioAdquisicion(producto.PrecioAdquisicion);
+                  setPrecioVenta(producto.PrecioVenta);
+                  setStock(producto.Stock);
+                  setDescuento(producto.Descuento);
+                  setTallas(producto.ListaTallas);
+                  setBanner(producto.ImagenesCarrusel[0]);
+                  setBanner2(producto.ImagenesCarrusel[1]);
+                  setBanner3(producto.ImagenesCarrusel[2]);
+                  setSubCategoriaSeleccionada({
+                    SubcategoriaId: producto.SubcategoriaId,
+                    Subcategoria: producto.Subcategoria,
+                  });
+                  document.getElementById("modal_editar").showModal();
+                }}
+              />
+              {!loaded && (
+                <div className="flex flex-col gap-4 w-52">
+                  <div className="skeleton h-32 w-full"></div>
+                  <div className="skeleton h-4 w-28"></div>
+                  <div className="skeleton h-4 w-full"></div>
+                  <div className="skeleton h-4 w-full"></div>
                 </div>
+              )}
+            </figure>
+            <div className="card-body p-1">
+              <div className="card-actions flex justify-between items-end w-full mt-2 ">
+                <h2 className="text-black text-md md:text-lg font-semibold flex justify-between mt-1">
+                  {producto.Titulo}
+                </h2>
+                <img
+                  src={trash}
+                  alt="trash"
+                  className="h-6 w-6"
+                  onClick={() => {
+                    document.getElementById("my_eliminar").showModal();
+                    setPreview(producto.URLImagen);
+                    setNombre(producto.Titulo);
+                    setIdProducto(producto.Id);
+                  }}
+                />
               </div>
             </div>
-          );
-        })}
+          </div>
+        </div>
+      </div>
+    );
+  })
+}
+     
       </div>
 
       <div className="toast-admin">
