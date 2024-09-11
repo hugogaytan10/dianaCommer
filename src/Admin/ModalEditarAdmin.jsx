@@ -333,7 +333,7 @@ export const ModalEditarAdmin = ({
                       subcategoriaNombre: selectedSubcategoria.Nombre,
                     });
                   }}
-                  value={subCategoriaSeleccionada.SubcategoriaId || ""}
+                  value={subCategoriaSeleccionada.subcategoriaId || ""}
                   defaultValue=""
                 >
                   <option disabled value="">
