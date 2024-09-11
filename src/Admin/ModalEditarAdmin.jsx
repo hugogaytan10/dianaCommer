@@ -42,6 +42,7 @@ export const ModalEditarAdmin = ({
   const [errorPrecioAdquisicion, setErrorPrecioAdquisicion] = useState(false);
   const [errorPrecioVenta, setErrorPrecioVenta] = useState(false);
   const [errorTalla, setErrorTalla] = useState(false);
+  console.log(subCategoriaSeleccionada);
   const handlerSubmitUno = (e) => {
     e.preventDefault();
     if (nombre === "") {
@@ -85,7 +86,7 @@ export const ModalEditarAdmin = ({
         Descuento: descuento,
         PrecioVenta: precioVenta,
         URLImagen: preview || "",
-        SubcategoriaId: subCategoriaSeleccionada.subcategoriaId || null,
+        SubcategoriaId: subCategoriaSeleccionada.SubcategoriaId || null,
       },
       ImgCarrusel: [banner || "", banner2 || "", banner3 || ""],
       Tallas: tallas,
@@ -329,15 +330,15 @@ export const ModalEditarAdmin = ({
                       (subcategoria) => subcategoria.Id == e.target.value
                     );
                     setSubCategoriaSeleccionada({
-                      subcategoriaId: selectedSubcategoria.Id,
-                      subcategoriaNombre: selectedSubcategoria.Nombre,
+                      SubcategoriaId: selectedSubcategoria.Id,
+                      SubcategoriaNombre: selectedSubcategoria.Nombre,
                     });
                   }}
-                  value={subCategoriaSeleccionada.subcategoriaId || ""}
+                  value={subCategoriaSeleccionada.SubcategoriaId || ""}
                   defaultValue=""
                 >
                   <option disabled value="">
-                    {subCategoriaSeleccionada.subcategoriaNombre ||
+                    {subCategoriaSeleccionada.SubcategoriaNombre ||
                       `Selecciona una subcategoría`}
                   </option>
                   {subCategorias.map((subcategoria) => (
