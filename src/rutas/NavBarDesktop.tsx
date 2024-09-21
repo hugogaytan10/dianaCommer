@@ -98,6 +98,18 @@ export const NavBarDesktop = (categorias: NavBarDesktopProps) => {
                         Ordenes
                       </NavLink>
                     </li>
+                    <li>
+                      <NavLink
+                        to="/admin/Reporte"
+                        className={({ isActive }) =>
+                          isActive
+                            ? "active-link text-sm bg-primary text-white"
+                            : "text-white text-sm"
+                        }
+                      >
+                        PDF
+                      </NavLink>
+                    </li>
                   </ul>
                 </details>
               </li>
