@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import carritoAzul from "../../assets/cart-outline-blue.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 export const CardSub = (props) => {
   const { title, price, img, id } = props;
   const [loaded, setLoaded] = useState(false);
+  const location = useLocation(); // Obtener la ruta actual
   return (
     <div className={`card rounded-none bg-white shadow-sm `}>
       <figure className="h-1/4 h-96">
         <NavLink
           to={`/item/${id}`}
+          state={{ fromSection: location.pathname }} // Pasar la ruta actual como estado
           className="h-full w-full"
         >
           <img

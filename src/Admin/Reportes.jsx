@@ -17,7 +17,7 @@ export const Reportes = () => {
         getProductos();
       }, []);
     return (
-        <div>
+        <div className="min-h-screen justify-center items-center w-full flex">
           <BtnImprimir productos={productos} />
         </div>
     );

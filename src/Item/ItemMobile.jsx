@@ -10,7 +10,7 @@ import { Favoritos } from "./Favoritos/Favoritos";
 import { Modal } from "../utilities/Modal";
 import { AuthPageCart } from "../Login/AuthPageCart";
 import { CarruselRelacionados } from "./CarruselRelacionados/CarruselRelacionados";
-export const ItemMobile = ({id}) => {
+export const ItemMobile = ({ id }) => {
   const contexto = useContext(AppContext);
   const [oldPrice, setOldPrice] = useState(0);
   const [count, setCount] = useState(1);
@@ -68,7 +68,7 @@ export const ItemMobile = ({id}) => {
   };
 
   useEffect(() => {
-   let priceBd = 0;
+    let priceBd = 0;
 
     const cart = JSON.parse(localStorage.getItem("items")) || [];
     contexto.setCart(cart.length);
@@ -91,7 +91,6 @@ export const ItemMobile = ({id}) => {
             URLImagen: data.URLImagen,
             Id: data.Id,
           });
-          
         });
     } else {
       const url = `${URL}/producto/conseguir/${1}`;
@@ -116,7 +115,7 @@ export const ItemMobile = ({id}) => {
     if (contexto.card.Descuento != 0) {
       const precioVenta = Number(contexto.card.PrecioVenta);
       const oldPriceCalculate = Number(
-        (precioVenta * ((contexto.card.Descuento / 100) + 1)).toFixed(2)
+        (precioVenta * (contexto.card.Descuento / 100 + 1)).toFixed(2)
       );
       setOldPrice(oldPriceCalculate);
     } else {
@@ -135,17 +134,12 @@ export const ItemMobile = ({id}) => {
 
   return (
     <div>
-      <div className="p-2 absolute z-10">
-        <NavLink
-          to={"/"}
-          className="bg-black  p-2 font-semibold w-10 h-10 flex items-center rounded-full"
-        >
-          <img alt="regresar" src={flecha} className="h-10 w-10" />
-        </NavLink>
-      </div>
-
       <div className="p-2 absolute z-10 right-0">
-        <Favoritos idProducto={contexto.card.Id} showModal={showModal} setShowModal={setShowModal}/>
+        <Favoritos
+          idProducto={contexto.card.Id}
+          showModal={showModal}
+          setShowModal={setShowModal}
+        />
       </div>
 
       {contexto.card &&
@@ -168,7 +162,9 @@ export const ItemMobile = ({id}) => {
         <div className="mt-4 text-black pl-2 flex flex-wrap items-center justify-between w-full">
           <div className="flex items-center">
             <p className="font-extrabold">${contexto.card.PrecioVenta} MXN</p>
-            <span className="ml-4 descuento">{contexto.card.Descuento > 0 ? contexto.card.Descuento : '15'}%</span>
+            <span className="ml-4 descuento">
+              {contexto.card.Descuento > 0 ? contexto.card.Descuento : "15"}%
+            </span>
           </div>
           <span className="line-through text-sm text-gray-400 mr-4">
             {oldPrice}

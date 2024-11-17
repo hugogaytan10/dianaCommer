@@ -6,7 +6,7 @@ import { AppContext } from "../Context/AppContext";
 import { Carrusel } from "./Carrusel/Carrusel";
 import Filtrador from "./Filtrador/Filtrador";
 import { URL } from "../Const/Const";
-import drag from '../assets/drag.gif';
+import drag from "../assets/drag.gif";
 import { getCarruselBanner } from "./Peticiones";
 import { CarruselBanner } from "./CarruselBanner/CarruselBanner";
 export const Home = () => {
@@ -15,22 +15,38 @@ export const Home = () => {
   const [cardFilter, setCardFilter] = useState(cards);
   const [images, setImages] = useState([]);
   const getTennis = async () => {
-    const url =
-      `${URL}/producto/conseguir`;
+    const url = `${URL}/producto/conseguir`;
     const response = await fetch(url);
     const data = await response.json();
     setCards(data);
     setCardFilter(data);
   };
   useEffect(() => {
+    setTimeout(() => {
+      const lastViewedCard = contexto.lastViewedCard;
+      if (lastViewedCard) {
+        const element = document.querySelector(`[data-id="${lastViewedCard}"]`);
+        if (element) {
+          // Calcula la posición absoluta del elemento
+          const elementRect = element.getBoundingClientRect();
+  
+          // Ajusta el scroll global de la ventana
+          window.scrollTo({
+            top: window.scrollY + elementRect.top - 16, // Ajusta el margen si es necesario
+            behavior: "smooth", // Scroll suave
+          });
+        }
+      }
+    }, 1000);
+  }, [contexto.lastViewedCard]);
+  
+  useEffect(() => {
     const itemsCart = JSON.parse(localStorage.getItem("items")) || [];
     contexto.setCart(itemsCart.length);
     getTennis();
     getCarruselBanner().then((data) => {
       setImages(data);
-      console.log(data);
     });
-
   }, []);
   return (
     <div className="block min-h-screen w-full bg-white">
@@ -49,27 +65,30 @@ export const Home = () => {
         </div>
       </div>
        */}
-       {
-        images.length > 0 ?
-        <CarruselBanner images={images} />
-        :
-        <Carrusel/>
-       }
-  
+      {images.length > 0 ? <CarruselBanner images={images} /> : <Carrusel />}
+
       <h1 className="text-center font-thin m-4 text-gray-500 text-sm">
         Todo tipo de calzado (zapato, tennis deportivos, hombre, mujer, niño) en
         Moroleón, Guanajuato{" "}
       </h1>
       <div className="flex justify-end w-full flex-wrap">
-        <button className="text-gray-600 underline mr-10" onClick={()=>{ document.getElementById("modal_filtrar").showModal();}}>Filtrar</button>
+        <button
+          className="text-gray-600 underline mr-10"
+          onClick={() => {
+            document.getElementById("modal_filtrar").showModal();
+          }}
+        >
+          Filtrar
+        </button>
       </div>
-      <Filtrador cards={cards} setCardFilter={setCardFilter}/>
-  
+      <Filtrador cards={cards} setCardFilter={setCardFilter} />
+
       <div className="w-11/12 flex flex-wrap justify-between p-2 items-center m-auto">
         {cardFilter.length > 0 ? (
           cardFilter.map((card) => {
             return (
               <div
+                data-id={`tennis-home-${card.Id}`}
                 key={`tennis-home-${card.Id}`}
                 className={`contenedor-card rounded-none scroll-content ${
                   card.Id % 2 == 0 ? "mt-16" : "mt-0"
@@ -78,6 +97,7 @@ export const Home = () => {
                   `}
                 onClick={() => {
                   contexto.setCard(card);
+                  contexto.setLastViewedCard(`tennis-home-${card.Id}`);
                 }}
               >
                 <Card

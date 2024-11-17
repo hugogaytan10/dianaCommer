@@ -43,6 +43,8 @@ const AppProvider: React.FC<Props> = ({ children }) => {
     TipoUsuario: "",
     Token: "",
   });
+  const [lastViewedCard, setLastViewedCard] = useState<string>("");
+  const [currentSection, setCurrentSection] = useState<string>("");
 
   // Método para iniciar sesión
   /*const login = (userData: User) => {
@@ -76,6 +78,10 @@ const AppProvider: React.FC<Props> = ({ children }) => {
       setDireccion: setDireccion,
       bandera: bandera,
       setBandera: setBandera,
+      lastViewedCard: lastViewedCard,
+      setLastViewedCard: setLastViewedCard,
+      currentSection: currentSection,
+      setCurrentSection: setCurrentSection,
     }),
     [
       card,
@@ -87,7 +93,9 @@ const AppProvider: React.FC<Props> = ({ children }) => {
       direccion,
       setDireccion,
       bandera,
-      setBandera,
+      lastViewedCard,
+      setLastViewedCard,
+      currentSection,
     ]
   );
   return (

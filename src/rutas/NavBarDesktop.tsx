@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { Categoria } from "../models/Categoria";
 import { AppContext } from "../Context/AppContext";
 import carrito from "../assets/cart-outline.svg";
@@ -10,6 +10,7 @@ interface NavBarDesktopProps {
 }
 export const NavBarDesktop = (categorias: NavBarDesktopProps) => {
   const contexto = useContext(AppContext);
+  const location = useLocation();
   return (
     <div className="navbar bg-primary">
       <div className="flex-1">
@@ -22,6 +23,7 @@ export const NavBarDesktop = (categorias: NavBarDesktopProps) => {
           <li>
             <NavLink
               to={"/"}
+              state={{ from: location.pathname }}
               className={({ isActive }) =>
                 isActive
                   ? "active-link text-sm bg-primary text-white"
@@ -40,6 +42,7 @@ export const NavBarDesktop = (categorias: NavBarDesktopProps) => {
                     categoria.Subcategorias.map((subcategoria) => (
                       <li key={`submenu-${subcategoria.Id}`}>
                         <NavLink
+                          state={{ from: location.pathname }}
                           to={`/subCategoria/${subcategoria.Id}`}
                           className={({ isActive }) =>
                             isActive
@@ -56,54 +59,67 @@ export const NavBarDesktop = (categorias: NavBarDesktopProps) => {
             </li>
           ))}
 
-          {
-            contexto.user?.TipoUsuario == "0" && (
-              <li>
-                <details>
-                  <summary className="text-white">Administrador</summary>
-                  <ul className="bg-primary rounded-t-none p-2 z-20">
-                    <li>
-                      <NavLink
-                        to={`/admin`}
-                        className={({ isActive }) =>
-                          isActive
-                            ? "active-link text-sm bg-primary text-white"
-                            : "text-white text-sm"
-                        }
-                      >
-                        Productos
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        to="/admin/categorias"
-                        className={({ isActive }) =>
-                          isActive
-                            ? "active-link text-sm bg-primary text-white"
-                            : "text-white text-sm"
-                        }
-                      >
-                        Categorías
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        to="/admin/ordenes"
-                        className={({ isActive }) =>
-                          isActive
-                            ? "active-link text-sm bg-primary text-white"
-                            : "text-white text-sm"
-                        }
-                      >
-                        Ordenes
-                      </NavLink>
-                    </li>
-                  </ul>
-                </details>
-              </li>
-            )
-          }
-
+          {contexto.user?.TipoUsuario == "0" && (
+            <li>
+              <details>
+                <summary className="text-white">Administrador</summary>
+                <ul className="bg-primary rounded-t-none p-2 z-20">
+                  <li>
+                    <NavLink
+                      to={`/admin`}
+                      state={{ from: location.pathname }}
+                      className={({ isActive }) =>
+                        isActive
+                          ? "active-link text-sm bg-primary text-white"
+                          : "text-white text-sm"
+                      }
+                    >
+                      Productos
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/admin/categorias"
+                      state={{ from: location.pathname }}
+                      className={({ isActive }) =>
+                        isActive
+                          ? "active-link text-sm bg-primary text-white"
+                          : "text-white text-sm"
+                      }
+                    >
+                      Categorías
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/admin/ordenes"
+                      state={{ from: location.pathname }}
+                      className={({ isActive }) =>
+                        isActive
+                          ? "active-link text-sm bg-primary text-white"
+                          : "text-white text-sm"
+                      }
+                    >
+                      Ordenes
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      state={{ from: location.pathname }}
+                      className={({ isActive }) =>
+                        isActive
+                          ? "active-link text-sm bg-primary text-white"
+                          : "text-white text-lg"
+                      }
+                      to="/admin/Reporte"
+                    >
+                      Reportes
+                    </NavLink>
+                  </li>
+                </ul>
+              </details>
+            </li>
+          )}
 
           <div className="contenedor-carrito items-center">
             <span className="mt-3">{contexto.cart}</span>
@@ -122,7 +138,6 @@ export const NavBarDesktop = (categorias: NavBarDesktopProps) => {
               </NavLink>
             )}
           </div>
-
         </ul>
       </div>
     </div>

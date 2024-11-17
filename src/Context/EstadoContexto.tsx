@@ -14,4 +14,8 @@ export type AppContextState = {
     setDireccion: Dispatch<React.SetStateAction<Direccion>>;
     bandera: boolean;
     setBandera: Dispatch<React.SetStateAction<boolean>>;
+    lastViewedCard: string;
+    setLastViewedCard: Dispatch<React.SetStateAction<string>>;
+    currentSection: string;
+    setCurrentSection: Dispatch<React.SetStateAction<string>>;
 }

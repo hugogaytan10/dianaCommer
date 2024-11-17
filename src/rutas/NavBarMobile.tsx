@@ -1,41 +1,48 @@
 import React, { useContext } from "react";
-import { Categoria } from '../models/Categoria';
-import { NavLink } from "react-router-dom";
+import { Categoria } from "../models/Categoria";
+import { NavLink, useLocation } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 import carrito from "../assets/cart-outline.svg";
 import usuario from "../assets/userIcon.svg";
 import configuracion from "../assets/settings.svg";
-import './rutas.css';
+import "./rutas.css";
 interface NavBarMobileProps {
   categorias: Categoria[];
 }
 export const NavBarMobile = (categorias: NavBarMobileProps) => {
   const contexto = useContext(AppContext);
+  const location = useLocation();
   return (
     <div className="navbar bg-primary">
-      <input id="my-drawer-3" type="checkbox" className="drawer-toggle h-16 w-16 hidden" />
-      
+      <input
+        id="my-drawer-3"
+        type="checkbox"
+        className="drawer-toggle h-16 w-16 hidden"
+      />
+
       <label htmlFor="my-drawer-3" className="hamburger-menu">
         <span className="my-1"></span>
         <span className="mb-1"></span>
         <span className=""></span>
       </label>
 
-      <div className="flex-1 ml-4" >
+      <div className="flex-1 ml-4">
         <NavLink className=" btn-ghost text-sm text-gray-300" to={"/"}>
           Calzado Díaz
         </NavLink>
       </div>
       <div className="contenedor-carrito flex items-center justify-start">
-            <span>{contexto.cart}</span>
-            <NavLink to="/cart" className="flex items-center space-x-2"
-              onClick={() => {
-                document.getElementById("my-drawer-3").checked = false;
-              }}
-            >
-              <img src={carrito} alt="carrito" className="w-8 h-8 -ml-2" />
-            </NavLink>
-          </div>
+        <span>{contexto.cart}</span>
+        <NavLink
+          to="/cart"
+          className="flex items-center space-x-2"
+          onClick={() => {
+            document.getElementById("my-drawer-3").checked = false;
+          }}
+        >
+          <img src={carrito} alt="carrito" className="w-8 h-8 -ml-2" />
+        </NavLink>
+      </div>
       <div className="drawer-side z-30">
         <label
           htmlFor="my-drawer-3"
@@ -46,6 +53,7 @@ export const NavBarMobile = (categorias: NavBarMobileProps) => {
           <li>
             <NavLink
               to={"/"}
+              state={{ from: location.pathname }}
               className={({ isActive }) =>
                 isActive
                   ? "active-link text-sm bg-primary text-white"
@@ -54,7 +62,6 @@ export const NavBarMobile = (categorias: NavBarMobileProps) => {
               onClick={() => {
                 document.getElementById("my-drawer-3").checked = false;
               }}
-
             >
               Inicio
             </NavLink>
@@ -66,18 +73,22 @@ export const NavBarMobile = (categorias: NavBarMobileProps) => {
                 <ul className="bg-primary rounded-t-none p-2 z-20">
                   {categoria.Subcategorias &&
                     categoria.Subcategorias.map((subcategoria) => (
-                      <li key={`submenu-${subcategoria.Id}`} className="text-white">
+                      <li
+                        key={`submenu-${subcategoria.Id}`}
+                        className="text-white"
+                      >
                         <NavLink
                           to={`/subCategoria/${subcategoria.Id}`}
+                          state={{ from: location.pathname }}
                           className={({ isActive }) =>
                             isActive
                               ? "active-link text-sm bg-primary text-white"
                               : "text-white text-sm"
                           }
                           onClick={() => {
-                            document.getElementById("my-drawer-3").checked = false;
+                            document.getElementById("my-drawer-3").checked =
+                              false;
                           }}
-
                         >
                           {subcategoria.Nombre}
                         </NavLink>
@@ -88,69 +99,83 @@ export const NavBarMobile = (categorias: NavBarMobileProps) => {
             </li>
           ))}
 
-          {
-            contexto.user?.TipoUsuario == "0" && (
-              <li>
-                <details>
-                  <summary className="text-gray-100">Administrador</summary>
-                  <ul className="bg-primary rounded-t-none p-2 z-20">
-                    <li>
-                      <NavLink
-                        to={`/admin`}
-                        className={({ isActive }) =>
-                          isActive
-                            ? "active-link text-sm bg-primary text-white"
-                            : "text-white text-sm"
-                        }
-                        onClick={() => {
-                          document.getElementById("my-drawer-3").checked = false;
-                        }}
-
-                      >
-                        Productos
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        to="/admin/categorias"
-                        className={({ isActive }) =>
-                          isActive
-                            ? "active-link text-sm bg-primary text-white"
-                            : "text-white text-sm"
-                        }
-                        onClick={() => {
-                          document.getElementById("my-drawer-3").checked = false;
-                        }}
-
-                      >
-                        Categorías
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        to="/admin/ordenes"
-                        className={({ isActive }) =>
-                          isActive
-                            ? "active-link text-sm bg-primary text-white"
-                            : "text-white text-sm"
-                        }
-                        onClick={() => {
-                          document.getElementById("my-drawer-3").checked = false;
-                        }}
-
-                      >
-                        Ordenes
-                      </NavLink>
-                    </li>
-                  </ul>
-                </details>
-              </li>
-            )
-          }
+          {contexto.user?.TipoUsuario == "0" && (
+            <li>
+              <details>
+                <summary className="text-gray-100">Administrador</summary>
+                <ul className="bg-primary rounded-t-none p-2 z-20">
+                  <li>
+                    <NavLink
+                      to={`/admin`}
+                      state={{ from: location.pathname }}
+                      className={({ isActive }) =>
+                        isActive
+                          ? "active-link text-sm bg-primary text-white"
+                          : "text-white text-sm"
+                      }
+                      onClick={() => {
+                        document.getElementById("my-drawer-3").checked = false;
+                      }}
+                    >
+                      Productos
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/admin/categorias"
+                      state={{ from: location.pathname }}
+                      className={({ isActive }) =>
+                        isActive
+                          ? "active-link text-sm bg-primary text-white"
+                          : "text-white text-sm"
+                      }
+                      onClick={() => {
+                        document.getElementById("my-drawer-3").checked = false;
+                      }}
+                    >
+                      Categorías
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/admin/ordenes"
+                      state={{ from: location.pathname }}
+                      className={({ isActive }) =>
+                        isActive
+                          ? "active-link text-sm bg-primary text-white"
+                          : "text-white text-sm"
+                      }
+                      onClick={() => {
+                        document.getElementById("my-drawer-3").checked = false;
+                      }}
+                    >
+                      Ordenes
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                    state={{ from: location.pathname }}
+                      className={({ isActive }) =>
+                        isActive
+                          ? "active-link text-sm bg-primary text-white"
+                          : "text-white text-lg"
+                      }
+                      to="/admin/Reporte"
+                    >
+                      Reportes
+                    </NavLink>
+                  </li>
+                </ul>
+              </details>
+            </li>
+          )}
 
           <div className="contenedor-carrito flex items-center justify-start space-x-2 mt-4">
             {contexto.user?.Correo !== "" ? (
-              <NavLink to="/perfil" className="flex items-center space-x-2"
+              <NavLink
+                to="/perfil"
+                state={{ from: location.pathname }}
+                className="flex items-center space-x-2"
                 onClick={() => {
                   document.getElementById("my-drawer-3").checked = false;
                 }}
@@ -159,21 +184,25 @@ export const NavBarMobile = (categorias: NavBarMobileProps) => {
                 <span className="text-white">Usuario</span>
               </NavLink>
             ) : (
-              <NavLink to="/login" className="flex items-center space-x-2 mt-4"
+              <NavLink
+                to="/login"
+                state={{ from: location.pathname }}
+                className="flex items-center space-x-2 mt-4"
                 onClick={() => {
                   document.getElementById("my-drawer-3").checked = false;
                 }}
               >
-                <img src={usuario} alt="usuario" className="w-6 h-6 text-white" />
+                <img
+                  src={usuario}
+                  alt="usuario"
+                  className="w-6 h-6 text-white"
+                />
                 <span className="text-white">Inicio de sesión</span>
               </NavLink>
             )}
           </div>
-
-
-
         </ul>
       </div>
     </div>
   );
-}
+};
