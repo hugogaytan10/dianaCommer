@@ -69,7 +69,7 @@ export const Rutas = () => {
       <BrowserRouter>
         <div className="drawer">
           {/*<input id="my-drawer-3" type="checkbox" className="drawer-toggle" />*/}
-          <div className="drawer-content flex flex-col h-full min-w-full">
+          <div className="drawer-content flex flex-col h-full min-w-full overflow-hidden">
             <HeaderWrapper>
               {/*<div className="w-full navbar bg-primary">
                 <div className="flex-none lg:hidden">
